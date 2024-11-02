@@ -6,8 +6,3 @@ body {
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
 }
-
-.title {
-  color: #86cecb;
-  text-align: center; /* Aunque no es necesario aquí, es una buena práctica */
-}

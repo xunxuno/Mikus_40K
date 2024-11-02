@@ -1,11 +1,14 @@
-import './App.css'
+import React from 'react';
+import Router from './router/router';
+import ImageCarousel from './components/ImageCarousel';
 
 function App() {
-  return (
-    <div className='title'>
-        <h1>MIKUS 40k</h1>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router />
+            <ImageCarousel />
+        </div>
+    );
 }
 
 export default App;
