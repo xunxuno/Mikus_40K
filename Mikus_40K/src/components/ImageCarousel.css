@@ -3,6 +3,7 @@
 .carousel {
     width: 100%; /* Ancho del carrusel */
     overflow: hidden; /* Oculta cualquier imagen que desborde */
+    position: relative; /* Para que los controles estén posicionados correctamente */
 }
 
 .carousel-track {
@@ -19,4 +20,35 @@
     width: 100%; /* La imagen ocupa todo el ancho del slide */
     height: auto; /* Mantiene la proporción */
     display: block; /* Elimina espacios en la parte inferior */
+}
+
+/* Controles numerados */
+.carousel-controls {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel-control {
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo transparente */
+    border: none;
+    padding: 5px; /* Menos padding para que sea más pequeño */
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px; /* Forma cuadrada */
+    font-weight: bold;
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    width: 30px; /* Ancho fijo para hacerlos cuadrados */
+    height: 30px; /* Alto fijo para hacerlos cuadrados */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control.active {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para el control activo */
+    color: white;
 }
