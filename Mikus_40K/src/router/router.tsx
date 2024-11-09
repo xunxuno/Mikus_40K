@@ -6,10 +6,8 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Ruta raíz "/" que muestra Home */}
                 <Route path="/" element={<Home />} />
                 
-                {/* Redirige cualquier otra ruta no definida a "/" */}
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </BrowserRouter>
