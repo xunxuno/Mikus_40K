@@ -2,15 +2,32 @@
 .navbar {
   width: 100%;
   height: 60px; /* Altura del navbar */
-  background-color: black;
+  background-color: rgb(109, 109, 109);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Esto distribuye los elementos a los extremos */
+  position: fixed;
+  top: 0;
+  z-index: 1100; /* Asegura que el navbar esté encima de otros elementos */
+  padding: 0 20px; /* Espaciado a los lados */
+}
+
+/* Estilo del botón con el ícono */
+.navbar-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  z-index: 1000; /* Asegura que esté encima de otros elementos */
+  margin-right: 10px; /* Espacio entre el ícono y el texto */
 }
 
+/* Estilo del texto en el navbar */
 .navbar-text {
   color: white;
+  font-size: 1.2rem;
+  text-align: center; /* Alinea el texto al centro */
+  flex-grow: 1; /* Asegura que el texto esté centrado */
 }

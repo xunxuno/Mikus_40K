@@ -42,16 +42,14 @@ function ImageCarousel({ images }: ImageCarouselProps) {
                 ))}
             </div>
 
-            {/* Botones numerados para navegar entre las imágenes */}
+            {/* Botones circulares para navegar entre las imágenes */}
             <div className="carousel-controls">
                 {images.map((_, index) => (
                     <button
                         key={index}
                         className={`carousel-control ${currentIndex === index ? 'active' : ''}`}
                         onClick={() => goToSlide(index)} // Al hacer clic, cambia al índice correspondiente
-                    >
-                        {index + 1}
-                    </button>
+                    />
                 ))}
             </div>
         </div>

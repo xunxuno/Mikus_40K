@@ -1,76 +1,73 @@
 /* Estilo del carrusel */
 .carousel {
-    width: calc(100% - 250px); /* Ajusta el ancho del carrusel para dejar espacio para el sidebar */
-    overflow: hidden;
-    position: relative;
-    margin-top: -43.9vh; /* Agrega un margen superior para que el carrusel esté debajo del navbar */
-    transition: width 0.3s ease; /* Animación para el cambio de tamaño */
-  }
-  
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .carousel-slide {
-    min-width: 100%;
-  }
-  
-  .carousel-slide img {
-    width: 100%;
-    display: block;
-  }
-  
-  .carousel-controls {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .carousel-control {
-    background-color: rgba(255, 255, 255, 0.7);
-    border: none;
-    padding: 5px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .carousel-control.active {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-  }
-  
-  /* Media query para pantallas medianas y pequeñas */
-  @media (max-width: 768px) {
-    .carousel {
+  width: calc(100% - 250px); /* Ajusta el ancho del carrusel para dejar espacio para el sidebar */
+  overflow: hidden;
+  position: relative;
+  margin-top: -43.9vh; /* Agrega un margen superior para que el carrusel esté debajo del navbar */
+  transition: width 0.3s ease; /* Animación para el cambio de tamaño */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+}
+
+.carousel-slide img {
+  width: 100%;
+  display: block;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.carousel-control {
+  background-color: #d3d3d3; /* Gris claro para los círculos */
+  border: none;
+  padding: 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 50%; /* Hace que los botones sean circulares */
+  width: 10px; /* Tamaño del círculo */
+  height: 10px; /* Tamaño del círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.carousel-control.active {
+  background-color: rgba(0, 0, 0, 0.7); /* Color más oscuro cuando está activo */
+}
+
+/* Media query para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+  .carousel {
       width: 100%; /* Ocupa todo el ancho cuando el sidebar está oculto */
       margin-top: -43.9vh; /* Alinea el carrusel debajo del navbar en pantallas pequeñas */
-    }
   }
-  
-  /* Media query para pantallas muy pequeñas o móviles */
-  @media (max-width: 480px) {
-    .carousel {
+}
+
+/* Media query para pantallas muy pequeñas o móviles */
+@media (max-width: 480px) {
+  .carousel {
       width: 100%; /* El carrusel ocupa todo el espacio en pantallas aún más pequeñas */
       margin-top: -43.25vh; /* Alinea el carrusel debajo del navbar en pantallas muy pequeñas */
-    }
   }
-
-  /* Media query para pantallas grandes */
-@media (min-width: 1600px) {
-    .carousel {
-        margin-top: -36.1vh; /* Ajusta el margen superior para pantallas más grandes, evitando que la imagen quede comida */
-    }
 }
-  
+
+/* Media query para pantallas grandes */
+@media (min-width: 1600px) {
+  .carousel {
+      margin-top: -36.1vh; /* Ajusta el margen superior para pantallas más grandes, evitando que la imagen quede comida */
+  }
+}
