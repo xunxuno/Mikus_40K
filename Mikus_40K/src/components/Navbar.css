@@ -26,7 +26,7 @@
 
 /* Estilo del texto en el navbar */
 .navbar-text {
-  color: rgb(255, 255, 255);
+  color: #F5F5F5;
   font-size: 1.2rem;
   text-align: center; /* Alinea el texto al centro */
   flex-grow: 1; /* Asegura que el texto esté centrado */
