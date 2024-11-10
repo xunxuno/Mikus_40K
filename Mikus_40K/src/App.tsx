@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from './router/router';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import SidebarUser from './components/SidebarUser';
 
 function App() {
