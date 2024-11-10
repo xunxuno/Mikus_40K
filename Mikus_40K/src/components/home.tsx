@@ -6,7 +6,7 @@ import image3 from '../images/test.png'
 import ImageCarousel from './ImageCarousel';
 import Sidebar from './Sidebar';
 import ProductComponent from './Product';
-import imageProduct from '../images/is.png'
+import imageProduct from '../images/si2.png'
 
 
 const images = [image1, image2, image3];
