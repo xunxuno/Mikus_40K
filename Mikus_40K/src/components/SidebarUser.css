@@ -1,19 +1,21 @@
 /* Estilo para el sidebar */
 .sidebar-user {
   position: fixed;
+  left: -300px; /* Inicia fuera de la pantalla (para el efecto de aparición) */
   top: 0;
-  left: -300px; /* El sidebar está fuera de la pantalla al principio */
   width: 250px; /* Ancho del sidebar */
-  height: 100%;
+  height: 100%; /* Asegura que el sidebar ocupe toda la altura de la pantalla */
   background-color: #8f8f8f;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: left 0.3s ease; /* Animación suave para el deslizamiento */
+  z-index: 1001; /* Asegúrate de que el sidebar esté encima del overlay */
+  overflow-y: auto; /* Esto permite que el sidebar tenga scroll vertical cuando sea necesario */
+  transition: left 0.3s ease; /* Transición para que el sidebar se deslice */
 }
 
+/* Cuando el sidebar es visible, se posiciona en su lugar */
 .sidebar-user.visible {
-  left: 0; /* Cuando está visible, el sidebar se mueve a la posición 0 */
+  left: 0; /* Mueve el sidebar al centro de la pantalla */
 }
 
 /* Estilo para la superposición oscura (overlay) */
@@ -24,9 +26,10 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
-  z-index: 999; /* Asegúrate de que el overlay esté por debajo del sidebar */
+  z-index: 1000; /* El overlay debe estar justo por debajo del sidebar */
 }
 
+/* Estilo para las secciones dentro del sidebar */
 .sidebar-section {
   margin-bottom: 30px;
 }
@@ -46,6 +49,7 @@
   margin-bottom: 10px;
 }
 
+/* Estilo para los botones del sidebar */
 .sidebar-section button {
   width: 100%;
   padding: 10px;
@@ -55,6 +59,7 @@
   cursor: pointer;
   text-align: left;
   font-size: 1rem;
+  transition: background-color 0.3s, border 0.3s;
 }
 
 .sidebar-section button:hover {
@@ -64,4 +69,23 @@
 
 .sidebar-section button:focus {
   outline: none;
+}
+
+/* Personalización del scrollbar en el sidebar */
+.sidebar-user::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+}
+
+.sidebar-user::-webkit-scrollbar-track {
+  background-color: #636363; /* Color de fondo del track */
+  border-radius: 10px;
+}
+
+.sidebar-user::-webkit-scrollbar-thumb {
+  background-color: #383838; /* Color del thumb */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.sidebar-user::-webkit-scrollbar-thumb:hover {
+  background-color: #00ffff; /* Color del thumb cuando pasa el ratón */
 }
