@@ -1,14 +1,13 @@
 body {
-    background: linear-gradient(to right, #6a0001, #0d407f);
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .title {
-    color: #86cecb;
-    text-align: center;
-  }
-  
+  background: linear-gradient(to right, #6a0001, #0d407f);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: #86cecb;
+  text-align: center;
+}

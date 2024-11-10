@@ -1,0 +1,26 @@
+.sidebar {
+    width: 250px; /* Tamaño del sidebar en pantallas grandes */
+    height: 100vh; /* Ocupa toda la altura de la página */
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: transform 0.3s ease; /* Animación para el cambio de tamaño */
+  }
+  
+  .sidebar-text {
+    font-size: 1.5rem;
+  }
+  
+  /* Media query para pantallas medianas y pequeñas (menos de 768px) */
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(100%); /* Desplaza el sidebar hacia la derecha fuera de la pantalla */
+    }
+  }
+  
