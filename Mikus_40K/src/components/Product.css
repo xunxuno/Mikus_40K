@@ -1,0 +1,57 @@
+/* Estilos para el contenedor de productos */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Media query para pantallas grandes (cuando el sidebar está visible) */
+@media (min-width: 769px) {
+  .products-container {
+    width: calc(100% - 250px); /* Ajusta el ancho cuando el sidebar está presente */
+  }
+}
+
+/* Media query para pantallas pequeñas (cuando el sidebar no está visible) */
+@media (max-width: 768px) {
+  .products-container {
+    width: 100%; /* Ajusta el ancho a 100% cuando el sidebar está oculto */
+  }
+}
+
+/* Estilos para las tarjetas de productos */
+.product-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  width: 200px; /* Define un ancho fijo para las tarjetas */
+}
+
+/* Estilos para las imágenes dentro de las tarjetas */
+.product-card img {
+  width: 75%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Estilo para el título dentro de las tarjetas */
+.product-card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+/* Estilo para el precio dentro de las tarjetas */
+.product-card .price {
+  font-size: 1.4rem;
+  color: #f00;
+}
+
+/* Estilo para la información de envío dentro de las tarjetas */
+.product-card .shipping {
+  font-size: 1rem;
+  color: #666;
+}

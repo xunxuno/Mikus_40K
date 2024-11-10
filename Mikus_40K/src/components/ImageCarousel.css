@@ -1,9 +1,9 @@
 /* Estilo del carrusel */
 .carousel {
-  width: calc(100% - 250px); /* Ajusta el ancho del carrusel para dejar espacio para el sidebar */
+  width: calc(100% - 250px);
   overflow: hidden;
   position: relative;
-  margin-top: -43.9vh; /* Agrega un margen superior para que el carrusel esté debajo del navbar */
+  margin-top: 60px; /* Alinea el carrusel debajo del navbar */
   transition: width 0.3s ease; /* Animación para el cambio de tamaño */
 }
 
@@ -49,25 +49,25 @@
   background-color: rgba(0, 0, 0, 0.7); /* Color más oscuro cuando está activo */
 }
 
-/* Media query para pantallas medianas y pequeñas */
+/* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
   .carousel {
-      width: 100%; /* Ocupa todo el ancho cuando el sidebar está oculto */
-      margin-top: -43.9vh; /* Alinea el carrusel debajo del navbar en pantallas pequeñas */
+    width: 100%; /* El carrusel ocupa todo el ancho */
+    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
   }
 }
 
 /* Media query para pantallas muy pequeñas o móviles */
 @media (max-width: 480px) {
   .carousel {
-      width: 100%; /* El carrusel ocupa todo el espacio en pantallas aún más pequeñas */
-      margin-top: -43.25vh; /* Alinea el carrusel debajo del navbar en pantallas muy pequeñas */
+    width: 100%; /* El carrusel ocupa todo el espacio en pantallas más pequeñas */
+    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
   }
 }
 
 /* Media query para pantallas grandes */
 @media (min-width: 1600px) {
   .carousel {
-      margin-top: -36.1vh; /* Ajusta el margen superior para pantallas más grandes, evitando que la imagen quede comida */
+    margin-top: 60px; /* Alinea el carrusel debajo del navbar en pantallas grandes */
   }
 }

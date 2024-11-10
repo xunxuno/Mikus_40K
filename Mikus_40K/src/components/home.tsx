@@ -5,6 +5,8 @@ import image2 from '../images/HALLOWEEN.png';
 import image3 from '../images/test.png'
 import ImageCarousel from './ImageCarousel';
 import Sidebar from './Sidebar';
+import ProductComponent from './Product';
+import imageProduct from '../images/is.png'
 
 
 const images = [image1, image2, image3];
@@ -12,11 +14,17 @@ const images = [image1, image2, image3];
 
 function Home() {
     return (
-
-        <div>
+        <>
+            <div>
             <ImageCarousel images={images} />
             <Sidebar />
-        </div>
+            </div>
+            <div>
+            <img src={imageProduct} alt="Product" />
+            <ProductComponent />
+            </div>
+        </>
+
     );
 }
 

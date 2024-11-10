@@ -1,13 +1,26 @@
+/* home.css - Si es necesario, usa estilos específicos para la página de inicio aquí */
 body {
-  background: linear-gradient(to right, #6a0001, #0d407f);
-  margin: 0;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Para asegurar que el contenido se alinee al principio */
+  margin: 0;
 }
 
-.title {
-  color: #86cecb;
-  text-align: center;
+img {
+  width: 100%; /* Ajuste para pantallas pequeñas, la imagen ocupará todo el ancho */
+  max-width: 100%; /* Asegura que la imagen no sobrepase el 100% del ancho */
+  height: auto; /* Mantiene la relación de aspecto */
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 769px) {
+  img {
+    width: calc(100% - 250px); /* Solo aplica este cálculo cuando el sidebar está visible */
+  }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  img {
+    width: 100%; /* En pantallas pequeñas, la imagen ocupa todo el ancho */
+  }
 }
