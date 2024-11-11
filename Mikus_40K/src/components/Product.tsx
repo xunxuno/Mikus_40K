@@ -12,9 +12,9 @@ export interface Product {
   price: number;
   imageUrl: string;
   shippingType: string; // Por ejemplo: "Standard", "Express"
-  shippingPrice: number;
-  size: string;
-  weight: string;
+  shippingPrice?: number;
+  size?: string;
+  weight?: string;
 }
 
 // Datos temporales de productos
