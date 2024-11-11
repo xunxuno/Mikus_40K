@@ -1,14 +1,20 @@
+// Product.tsx
+
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Product.css';
 
-// Definimos la interfaz Product dentro del componente
-interface Product {
+// Exportamos la interfaz Product para poder usarla en otros archivos
+export interface Product {
   id: number;
   name: string;
   description: string;
   price: number;
   imageUrl: string;
   shippingType: string; // Por ejemplo: "Standard", "Express"
+  shippingPrice: number;
+  size: string;
+  weight: string;
 }
 
 // Datos temporales de productos
@@ -20,6 +26,10 @@ const products: Product[] = [
     price: 100,
     imageUrl: 'https://via.placeholder.com/150',
     shippingType: 'Estándar',
+    shippingPrice: 90,
+    size: '25cm x 15cm x 10cm',
+    weight: '500g'
+
   },
   {
     id: 2,
@@ -28,6 +38,9 @@ const products: Product[] = [
     price: 200,
     imageUrl: 'https://via.placeholder.com/150',
     shippingType: 'Exprés',
+    shippingPrice: 150,
+    size: '30cm x 18cm x 12cm',
+    weight: '700g'
   },
   {
     id: 3,
@@ -36,6 +49,9 @@ const products: Product[] = [
     price: 150,
     imageUrl: 'https://via.placeholder.com/150',
     shippingType: 'Exprés',
+    shippingPrice: 150,
+    size: '20cm x 12cm x 8cm',
+    weight: '400g'
   },
   {
     id: 4,
@@ -44,24 +60,28 @@ const products: Product[] = [
     price: 800,
     imageUrl: 'https://via.placeholder.com/150',
     shippingType: 'Gratis',
+    shippingPrice: 0,
+    size: '28cm x 16cm x 10cm',
+    weight: '900g'
   },
-  // Agrega más productos si es necesario
 ];
 
-const ProductComponent: React.FC = () => {
+const Product: React.FC = () => {
   return (
     <div className="products-container">
       {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <img src={product.imageUrl} alt={product.name} className="product-image" />
-          <h3>{product.name}</h3>
-          <p className="description">{product.description}</p> {/* Agregamos la clase 'description' */}
-          <p className="price">${product.price}</p>
-          <p className="shipping">Envío: {product.shippingType}</p>
-        </div>
+        <Link key={product.id} to={`/product/${product.id}`} className="product-link">
+          <div className="product-card">
+            <img src={product.imageUrl} alt={product.name} className="product-image" />
+            <h3>{product.name}</h3>
+            <p className="description">{product.description}</p>
+            <p className="price">${product.price}</p>
+            <p className="shipping">Envío: {product.shippingType}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
 };
 
-export default ProductComponent;
+export default Product;
