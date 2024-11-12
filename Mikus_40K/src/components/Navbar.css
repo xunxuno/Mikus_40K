@@ -39,15 +39,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: -10px; /* Espacio entre el ícono y el texto */
-  margin-top: -40px; /* Ajusta este valor para subir el ícono */
+  margin-left: 140px;  /* Ajusta este valor para mover el ícono un poco a la derecha */
+  margin-top: -10px; /* Ajusta este valor para subir el ícono */
 }
 
-/* Estilo del texto en el navbar */
+
+.navbar-container {  /* El contenedor que rodea el .navbar-text */
+  display: flex;
+  justify-content: flex-end;  /* Mueve todos los elementos dentro de este contenedor hacia la derecha */
+}
+
 .navbar-text {
-  color:  #0eeadf;
+  color: #0eeadf;
   font-size: 1.4rem;
   text-align: center; /* Alinea el texto al centro */
-  flex-grow: 1; /* Asegura que el texto esté centrado */
-  margin-top: -20px; /* Ajusta este valor para subir el ícono */
+  margin-top: 10px;   /* Ajusta este valor para subir el texto */
 }
