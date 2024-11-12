@@ -2,15 +2,26 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { toggleSidebar } from '../redux/sidebarSlice'; // Asegúrate de importar la acción
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 import './SidebarUser.css';
 
 function SidebarUser() {
   const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Inicializa el hook de navegación
 
   // Función para ocultar el sidebar cuando se haga clic en el overlay
   const handleOverlayClick = () => {
     dispatch(toggleSidebar()); // Llama a la acción para cambiar el estado
+  };
+
+  // Funciones para manejar la navegación
+  const goToHelpCenter = () => {
+    navigate('/help-center'); // Redirige a la ruta del centro de ayuda
+  };
+
+  const goToContactSupport = () => {
+    navigate('/contact-support'); // Redirige a la ruta de contactar con soporte
   };
 
   return (
@@ -58,8 +69,8 @@ function SidebarUser() {
         <div className="sidebar-section">
           <h3>Soporte y ayuda</h3>
           <ul>
-            <li><button>Centro de ayuda</button></li>
-            <li><button>Contactar con soporte</button></li>
+            <li><button onClick={goToHelpCenter}>Centro de ayuda</button></li>
+            <li><button onClick={goToContactSupport}>Contactar con soporte</button></li>
           </ul>
         </div>
 
