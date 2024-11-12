@@ -1,33 +1,53 @@
 /* Estilo del navbar */
 .navbar {
-  width: 100%;
-  height: 60px; /* Altura del navbar */
+  height: 80px;
   background-color: rgb(36, 36, 36);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Esto distribuye los elementos a los extremos */
+  justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */
   position: fixed;
   top: 0;
-  z-index: 1100; /* Asegura que el navbar esté encima de otros elementos */
-  padding: 0 20px; /* Espaciado a los lados */
+  z-index: 1000;
+  padding: 0 20px;
+  width: 100%; /* Usa ancho completo para mejor responsividad */
+  box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+}
+
+/* Estilos para pantallas medianas */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 15px; /* Reducir padding en pantallas medianas */
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 10px; /* Más espacio en pantallas pequeñas */
+    flex-direction: column; /* Opcional: apilar elementos verticalmente */
+    height: auto; /* Ajusta la altura según el contenido */
+  }
 }
 
 /* Estilo del botón con el ícono */
 .navbar-icon {
   background: none;
-  border: none;
+  border-width: 3px;
+  border-color: #000000;
   cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px; /* Espacio entre el ícono y el texto */
+  margin-right: -10px; /* Espacio entre el ícono y el texto */
+  margin-top: -40px; /* Ajusta este valor para subir el ícono */
 }
 
 /* Estilo del texto en el navbar */
 .navbar-text {
-  color: #F5F5F5;
-  font-size: 1.2rem;
+  color:  #0eeadf;
+  font-size: 1.4rem;
   text-align: center; /* Alinea el texto al centro */
   flex-grow: 1; /* Asegura que el texto esté centrado */
+  margin-top: -20px; /* Ajusta este valor para subir el ícono */
 }
