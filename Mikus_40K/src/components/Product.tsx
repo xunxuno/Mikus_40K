@@ -11,7 +11,7 @@ export interface Product {
   description: string;
   price: number;
   imageUrl: string;
-  shippingType: string; // Por ejemplo: "Standard", "Express"
+  shippingType: string;
   shippingPrice?: number;
   size?: string;
   weight?: string;

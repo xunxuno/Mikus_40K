@@ -4,7 +4,7 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  background: linear-gradient(to right, #1F1F1F, #39C5BB); /* Gradiente que combina Warhammer 40k y Hatsune Miku */
+  background: #39C5BB; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,7 +19,7 @@ body {
   display: flex;
   flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
   font-family: inherit; /* Usando la misma fuente global */
-  background: linear-gradient(to right, #1F1F1F, #39C5BB); /* Gradiente que combina Warhammer 40k y Hatsune Miku */
+  background:#39C5BB; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
 }
 
 /* Contenedor principal de la página */
