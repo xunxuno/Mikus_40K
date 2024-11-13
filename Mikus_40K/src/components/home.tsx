@@ -9,6 +9,7 @@ import ProductComponent from './Product';
 import imageProduct from '../images/si2.png'
 
 
+
 const images = [image1, image2, image3];
 
 
@@ -17,9 +18,9 @@ function Home() {
         <>
             <div>
             <ImageCarousel images={images} />
-            <Sidebar />
             </div>
             <div>
+            <Sidebar />
             <img src={imageProduct} alt="Product" />
             <ProductComponent />
             </div>

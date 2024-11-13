@@ -1,0 +1,171 @@
+/* Estilo del navbar */
+.navbar {
+    height: 80px;
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 0 20px;
+    width: 100%; /* Usa ancho completo para mejor responsividad */
+    box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+  }
+  
+  /* Estilo del botón con el ícono */
+  .navbar-icon {
+    background: none;
+    border-width: 3px;
+    border-color: #000000;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 140px;  /* Ajusta este valor para mover el ícono un poco a la derecha */
+    margin-top: -10px; /* Ajusta este valor para subir el ícono */
+  }
+  
+  
+  .navbar-container {  /* El contenedor que rodea el .navbar-text */
+    display: flex;
+    justify-content: flex-end;  /* Mueve todos los elementos dentro de este contenedor hacia la derecha */
+  }
+  
+  .navbar-text {
+    color: #0eeadf;
+    font-size: 1.4rem;
+    text-align: center; /* Alinea el texto al centro */
+    margin-top: 10px;   /* Ajusta este valor para subir el texto */
+  }
+  /* Estilo de la barra de búsqueda */
+  .search-bar {
+    flex-grow: 1; /* Ocupa espacio disponible entre los elementos */
+    max-width: 900px; /* Limita el ancho máximo */
+    margin-right: 20px;
+  }
+  
+  .search-bar input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #0eeadf;
+    background-color: #1e1e1e;
+    color: white;
+    outline: none;
+  }
+  
+  .search-bar input[type="text"]::placeholder {
+    color: #888;
+  }
+
+  /* Estilo del sub-navbar */
+.sub-navbar {
+    height: 50px;
+    background-color: rgb(50, 50, 50); /* Un poco más claro que el navbar principal */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar elementos dentro del sub-navbar */
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 80px; /* Coloca el sub-navbar justo debajo del navbar principal */
+    z-index: 1000; /* Un índice menor para mantenerlo debajo del navbar principal */
+  }
+  
+  
+  /* Estilo de los enlaces en el sub-navbar */
+  .sub-navbar-links {
+    display: flex;
+    gap: 20px; /* Espacio entre enlaces */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sub-navbar-links li a {
+    color: #0eeadf;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .sub-navbar-links li a:hover {
+    color: white; /* Cambia el color al pasar el mouse */
+    background-color: #333; /* Fondo oscuro al hacer hover */
+  }
+  
+  /* Estilo de la imagen del logo dentro del navbar */
+.navbar-logo {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navbar-logo-img {
+  width: 80px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  object-fit: contain;
+}
+/* Estilo de la imagen del logo dentro del navbar */
+.navbar-logo {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navbar-logo-img {
+  width: 80px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Estilo de la imagen del logo dentro del navbar */
+.navbar-logo {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.navbar-logo-img {
+  width: 80px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .search-bar {
+        display: block; /* Oculta la barra de búsqueda en pantallas pequeñas */
+    }
+
+    .navbar-icon {
+        display: block; /* Muestra el icono de menú en pantallas pequeñas */
+    }
+
+    .sub-navbar-links {
+        display: blocks; /* Ocultamos los enlaces inicialmente */
+    }
+
+    .sub-navbar.active .sub-navbar-links {
+        display: flex; /* Muestra los enlaces cuando está activo */
+        flex-direction: row; /* Organiza los enlaces en una fila horizontal */
+        gap: 10px; /* Añade espacio entre los enlaces */
+        align-items: center; /* Alinea los enlaces al centro verticalmente */
+        justify-content: flex-start; /* Alinea los enlaces a la izquierda */
+        width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
+        flex-wrap: nowrap; /* Evita que los enlaces se vayan a una nueva línea */
+    }
+
+    .sub-navbar-links a {
+        text-decoration: none; /* Asegura que los enlaces no tengan subrayado */
+        color: inherit; /* Hereda el color del contenedor */
+    }
+}
