@@ -5,7 +5,17 @@ import ProductDetail from '../components/product/ProductDetail';
 import HelpCenter from '../components/helpCenter/HelpCenter';
 import ContactSupport from '../components/helpCenter/ContactSupport';
 import AboutUs from '../components/AboutUs/AboutUs';
-import Services from "../components/Services/Services";
+import Services from '../components/Services/Services';
+import Profile from '../components/profile/profile';
+import PurchaseHistory from "../components/profile/PurchaseHistory";
+import Points from "../components/profile/Points";
+import ChangePass from "../components/User/ChangePass";
+import PaymentMethod from "../components/User/Payment";
+import ShippingAddresses from "../components/User/ShippingAddresses";
+import Cart from "../components/User/Cart";
+import WishList from "../components/User/WishList";
+import Orders from "../components/User/Orders";
+import TrackOrder from "../components/User/TrackOrder";
 
 function Router() {
     return (
@@ -16,6 +26,16 @@ function Router() {
             <Route path="/contact-support" element={<ContactSupport />} />
             <Route path="/about-us" element={<AboutUs/>} />
             <Route path="/services" element={<Services/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/purchase-history" element={<PurchaseHistory/>} />
+            <Route path="/user-points" element={<Points/>} />
+            <Route path="/change-password" element={<ChangePass/>} />
+            <Route path="/payment-method" element={<PaymentMethod/>} />
+            <Route path="/shipping-addresses" element={<ShippingAddresses/>} />
+            <Route path="/cart" element={<Cart/>} />
+            <Route path="/wishlist" element={<WishList/>} />
+            <Route path="/orders" element={<Orders/>} />
+            <Route path="/track-order" element={<TrackOrder/>} />
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     );

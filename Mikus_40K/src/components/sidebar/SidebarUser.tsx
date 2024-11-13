@@ -24,6 +24,46 @@ function SidebarUser() {
     navigate('/contact-support'); // Redirige a la ruta de contactar con soporte
   };
 
+  const goToProfile = () => {
+    navigate('/profile');
+  }
+
+  const goToHistory = () => {
+    navigate('/purchase-history');
+  }
+
+  const goToPoints = () => {
+    navigate("/user-points");
+  }
+
+  const chagePassword = () => {
+    navigate("/change-password");
+  }
+
+  const goToPayment = () => {
+    navigate("/payment-method");
+  }
+
+  const ShippingAddressesView = () => {
+    navigate("/shipping-addresses");
+  }
+
+  const goToCart = () => {
+    navigate("/cart");
+  }
+
+  const goToWishList = () => {
+    navigate ("/wishlist");
+  }
+
+  const goToOrders = () => {
+    navigate ("/orders");
+  }
+
+  const trackOrder = () => {
+    navigate ("/track-order");
+  }
+
   return (
     <div>
       {/* Fondo oscuro (overlay) que cubre toda la pantalla cuando el sidebar está visible */}
@@ -34,35 +74,34 @@ function SidebarUser() {
         <div className="sidebar-section">
           <h3>Perfil de usuario</h3>
           <ul>
-            <li><button>Ver perfil</button></li>
-            <li><button>Historial de compras</button></li>
-            <li><button>Puntos de fidelidad</button></li>
+            <li><button onClick={goToProfile}>Perfil</button></li>
+            <li><button onClick={goToHistory}>Historial de compras</button></li>
+            <li><button onClick={goToPoints}>Puntos de fidelidad</button></li>
           </ul>
         </div>
 
         <div className="sidebar-section">
           <h3>Configuración de cuenta</h3>
           <ul>
-            <li><button>Cambiar contraseña</button></li>
-            <li><button>Métodos de pago</button></li>
-            <li><button>Direcciones de envío</button></li>
-            <li><button>Preferencias de notificaciones</button></li>
+            <li><button onClick={chagePassword}>Cambiar contraseña</button></li>
+            <li><button onClick={goToPayment}>Métodos de pago</button></li>
+            <li><button onClick={ShippingAddressesView}>Direcciones de envío</button></li>
           </ul>
         </div>
 
         <div className="sidebar-section">
           <h3>Carrito de compras</h3>
           <ul>
-            <li><button>Ver carrito</button></li>
-            <li><button>Lista de deseos</button></li>
+            <li><button onClick={goToCart}>Ver carrito</button></li>
+            <li><button onClick={goToWishList}>Lista de deseos</button></li>
           </ul>
         </div>
 
         <div className="sidebar-section">
           <h3>Gestión de pedidos</h3>
           <ul>
-            <li><button>Ver pedidos</button></li>
-            <li><button>Rastrear envíos</button></li>
+            <li><button onClick={goToOrders}>Ver pedidos</button></li>
+            <li><button onClick={trackOrder}>Rastrear envíos</button></li>
           </ul>
         </div>
 
@@ -73,20 +112,8 @@ function SidebarUser() {
             <li><button onClick={goToContactSupport}>Contactar con soporte</button></li>
           </ul>
         </div>
-
         <div className="sidebar-section">
-          <h3>Ofertas y promociones</h3>
           <ul>
-            <li><button>Ofertas especiales</button></li>
-            <li><button>Programa de referidos</button></li>
-          </ul>
-        </div>
-
-        <div className="sidebar-section">
-          <h3>Configuración avanzada</h3>
-          <ul>
-            <li><button>Modo oscuro/claro</button></li>
-            <li><button>Idioma y región</button></li>
             <li><button>Cerrar sesión</button></li>
           </ul>
         </div>
