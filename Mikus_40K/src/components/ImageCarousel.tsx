@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+// /components/ImageCarousel.tsx
+
+import React from 'react';
+import { useImageCarouselController } from '../controllers/useImageCarouselController';
 import './ImageCarousel.css';
 
 interface ImageCarouselProps {
@@ -6,31 +9,7 @@ interface ImageCarouselProps {
 }
 
 function ImageCarousel({ images }: ImageCarouselProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isPaused, setIsPaused] = useState(false);
-
-    // Cambiar al siguiente slide de manera automática cada 3 segundos si no está pausado
-    useEffect(() => {
-        if (isPaused) return; // Si está pausado, no cambia automáticamente
-
-        const intervalId = setInterval(() => {
-            setCurrentIndex((prevIndex) =>
-                prevIndex === images.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 3000); // Cambia la imagen cada 3 segundos
-
-        return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
-    }, [images.length, isPaused]); // Dependemos de isPaused para pausar el carrusel
-
-    const goToSlide = (index: number) => {
-        setIsPaused(true); // Pausa el carrusel
-        setCurrentIndex(index); // Cambia al índice de la imagen seleccionada
-
-        // Después de 10 segundos, reanuda el carrusel
-        setTimeout(() => {
-            setIsPaused(false); // Reactiva el carrusel
-        }, 10000); // 10 segundos
-    };
+    const { currentIndex, goToSlide } = useImageCarouselController(images);
 
     return (
         <div className="carousel">

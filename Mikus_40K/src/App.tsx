@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from './router/router';
-import Navbar from './components/navbar';
-import SidebarUser from './components/SidebarUser';
+import Navbar from './components/navbar/navbar';
+import SidebarUser from './components/sidebar/SidebarUser';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {

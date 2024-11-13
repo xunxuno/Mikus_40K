@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 
 // Asegúrate de importar la interfaz Product desde el archivo adecuado si ya la tienes definida
-import { Product } from './Product'; // Asumiendo que esta es la ubicación de tu interfaz Product
+import { Product } from '../../models/ProductModel'; // Asumiendo que esta es la ubicación de tu interfaz Product
 
 const Sidebar: React.FC = () => {
   // Datos temporales de productos (esto normalmente lo traerías de un estado global o API)

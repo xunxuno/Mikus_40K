@@ -1,16 +1,15 @@
 import React from 'react';
 import './NavCont.css';  
-import { MaterialSymbolsMenu } from './icons/MaterialSymbolsMenu'; 
+import { MaterialSymbolsMenu } from '../icons/MaterialSymbolsMenu'; 
 import { useDispatch } from 'react-redux';
-import { toggleSidebar } from '../redux/sidebarSlice';
-import backgroundImage from '../images/logo_temporal.jpg'; 
-
+import { toggleSidebar } from '../../redux/sidebarSlice';
+import backgroundImage from '../../images/logo_temporal.jpg'; 
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleSidebarToggle = () => {
-    dispatch(toggleSidebar());
+    dispatch(toggleSidebar()); // Despacha la acción para cambiar el estado
   };
 
   return (

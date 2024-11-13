@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../redux/store';
-import { toggleSidebar } from '../redux/sidebarSlice'; // Asegúrate de importar la acción
+import { RootState } from '../../redux/store';
+import { toggleSidebar } from '../../redux/sidebarSlice'; // Asegúrate de importar la acción
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 import './SidebarUser.css';
 
