@@ -6,9 +6,6 @@ import image3 from '../../images/test.png'
 import ImageCarousel from '../ImageCarousel';
 import Sidebar from '../sidebar/Sidebar';
 import ProductComponent from '../product/Product';
-import imageProduct from '../../images/si2.png'
-
-
 
 const images = [image1, image2, image3];
 
@@ -21,7 +18,7 @@ function Home() {
             </div>
             <div>
             <Sidebar />
-            <img src={imageProduct} alt="Product" />
+            <h3 className='products'>PRODUCTOS DESTACADOS</h3>
             <ProductComponent />
             </div>
         </>

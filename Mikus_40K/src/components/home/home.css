@@ -8,7 +8,21 @@ body {
 img {
   width: 100%; /* Ajuste para pantallas pequeñas, la imagen ocupará todo el ancho */
   max-width: 100%; /* Asegura que la imagen no sobrepase el 100% del ancho */
-  height: auto; /* Mantiene la relación de aspecto */
+  height: auto;
+}
+
+.products {
+  text-align: center;
+  font-size: 40px;
+  color: #464646;
+  width: calc(100% - 250px); /* Solo aplica este cálculo cuando el sidebar está visible */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .products {
+    width: 100%; /* En pantallas pequeñas, la imagen ocupa todo el ancho */
+  }
 }
 
 /* Media query para pantallas grandes */
@@ -22,5 +36,6 @@ img {
 @media (max-width: 768px) {
   img {
     width: 100%; /* En pantallas pequeñas, la imagen ocupa todo el ancho */
+    margin-top: 70px;
   }
 }

@@ -49,25 +49,10 @@
   background-color: rgba(0, 0, 0, 0.7); /* Color más oscuro cuando está activo */
 }
 
-/* Media query para pantallas pequeñas */
-@media (max-width: 768px) {
-  .carousel {
-    width: 100%; /* El carrusel ocupa todo el ancho */
-    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
-  }
-}
-
-/* Media query para pantallas muy pequeñas o móviles */
-@media (max-width: 480px) {
-  .carousel {
-    width: 100%; /* El carrusel ocupa todo el espacio en pantallas más pequeñas */
-    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
-  }
-}
 
 /* Media query para pantallas grandes */
 @media (min-width: 1600px) {
   .carousel {
-    margin-top: 60px; /* Alinea el carrusel debajo del navbar en pantallas grandes */
+    margin-top: 130px; /* Alinea el carrusel debajo del navbar en pantallas grandes */
   }
 }

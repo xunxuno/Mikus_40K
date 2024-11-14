@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { MaterialSymbolsMenu } from '../icons/MaterialSymbolsMenu'; 
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../../redux/sidebarSlice';
-import backgroundImage from '../../images/logo_temporal.jpg'; 
+import backgroundImage from '../../images/logo_temporal.jpg'; // Asegúrate que esta ruta sea correcta
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,31 +15,38 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <>
+    <div
+      className="navbar"
+      style={{
+        display: 'flex', /* Para alinear los elementos dentro del navbar */
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px 20px',
+      }}
+    >
       <div
-        className="navbar"
         onClick={() => navigate('/')}
         style={{
+          width: '100px', /* Ajusta el tamaño del logo */
+          height: '50px', /* Ajusta el tamaño del logo */
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: '10% 100%',
-          backgroundPosition: 'left',
+          backgroundSize: 'cover', /* Ajusta el tamaño de la imagen al tamaño del div */
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           cursor: 'pointer',
         }}
-      >
-        <button className="navbar-icon" onClick={handleSidebarToggle}>
-          <MaterialSymbolsMenu width="24" height="24" color="white" />
-        </button>
-        
-        <div className="search-bar">
-          <input type="text" placeholder="Buscar..." />
-        </div>
-        
-        <p className="navbar-text">Mikus_40K</p>
+      ></div>
+
+      <button className="navbar-icon" onClick={handleSidebarToggle}>
+        <MaterialSymbolsMenu width="24" height="24" color="white" />
+      </button>
+
+      <div className="search-bar">
+        <input type="text" placeholder="Buscar..." />
       </div>
 
-      {/* Componente SubNavbar */}
-    </>
+      <p className="navbar-text">Mikus_40K</p>
+    </div>
   );
 };
 
