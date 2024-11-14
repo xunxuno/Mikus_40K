@@ -1,13 +1,15 @@
 import React from 'react';
 import './NavCont.css'; 
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+
 const SubNavbar: React.FC = () => {
   return (
     <div className="sub-navbar">
       <ul className="sub-navbar-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#acerca">Acerca de</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/about-us">Acerca de</a></li>
+        <li><a href="/Services">Servicios</a></li>
+        <li><a href="/contact-support">Contacto</a></li>
       </ul>
     </div>
   );

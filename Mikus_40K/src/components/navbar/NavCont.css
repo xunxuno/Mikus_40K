@@ -11,6 +11,7 @@
     padding: 0 20px;
     width: 100%; /* Usa ancho completo para mejor responsividad */
     box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+    
   }
   
   /* Estilo del botón con el ícono */
