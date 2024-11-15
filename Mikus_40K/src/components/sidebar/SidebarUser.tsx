@@ -1,94 +1,62 @@
+// src/components/SidebarUser.tsx
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { toggleSidebar } from '../../redux/sidebarSlice'; // Asegúrate de importar la acción
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { logout } from '../../redux/authSlice';
+import { toggleSidebar } from '../../redux/sidebarSlice';
+import { useNavigate } from 'react-router-dom';
 import './SidebarUser.css';
 
 function SidebarUser() {
   const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
+  const { token, username } = useSelector((state: RootState) => state.auth); // Obtener token y username
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Inicializa el hook de navegación
+  const navigate = useNavigate();
 
-  // Función para ocultar el sidebar cuando se haga clic en el overlay
-  const handleOverlayClick = () => {
-    dispatch(toggleSidebar()); // Llama a la acción para cambiar el estado
-  };
+  const handleOverlayClick = () => dispatch(toggleSidebar());
+  const handleLogout = () => dispatch(logout());
 
-  // Funciones para manejar la navegación
-  const goToHelpCenter = () => {
-    navigate('/help-center'); // Redirige a la ruta del centro de ayuda
-  };
-
-  const goToContactSupport = () => {
-    navigate('/contact-support'); // Redirige a la ruta de contactar con soporte
-  };
-
-  const goToProfile = () => {
-    navigate('/profile');
-  }
-
-  const goToHistory = () => {
-    navigate('/purchase-history');
-  }
-
-  const goToPoints = () => {
-    navigate("/user-points");
-  }
-
-  const chagePassword = () => {
-    navigate("/change-password");
-  }
-
-  const goToPayment = () => {
-    navigate("/payment-method");
-  }
-
-  const ShippingAddressesView = () => {
-    navigate("/shipping-addresses");
-  }
-
-  const goToCart = () => {
-    navigate("/cart");
-  }
-
-  const goToWishList = () => {
-    navigate ("/wishlist");
-  }
-
-  const goToOrders = () => {
-    navigate ("/orders");
-  }
-
-  const trackOrder = () => {
-    navigate ("/track-order");
-  }
+  const goToHelpCenter = () => navigate('/help-center');
+  const goToContactSupport = () => navigate('/contact-support');
+  const goToProfile = () => navigate('/profile');
+  const goToHistory = () => navigate('/purchase-history');
+  const goToPoints = () => navigate('/user-points');
+  const changePassword = () => navigate('/change-password');
+  const goToPayment = () => navigate('/payment-method');
+  const shippingAddressesView = () => navigate('/shipping-addresses');
+  const goToCart = () => navigate('/cart');
+  const goToWishList = () => navigate('/wishlist');
+  const goToOrders = () => navigate('/orders');
+  const trackOrder = () => navigate('/track-order');
+  const goToLogin = () => navigate('/login');
 
   return (
     <div>
-      {/* Fondo oscuro (overlay) que cubre toda la pantalla cuando el sidebar está visible */}
       {isVisible && <div className="overlay" onClick={handleOverlayClick} />}
-
-      {/* Sidebar */}
       <div className={`sidebar-user ${isVisible ? 'visible' : ''}`}>
         <div className="sidebar-section">
           <h3>Perfil de usuario</h3>
           <ul>
+            {token ? (
+              <div>
+                <p>Hola, {username}</p> {/* Mostrar el nombre de usuario si está logueado */}
+              </div>
+            ) : (
+              <li><button onClick={goToLogin}>Iniciar sesión</button></li>
+            )}
             <li><button onClick={goToProfile}>Perfil</button></li>
             <li><button onClick={goToHistory}>Historial de compras</button></li>
             <li><button onClick={goToPoints}>Puntos de fidelidad</button></li>
           </ul>
         </div>
-
         <div className="sidebar-section">
           <h3>Configuración de cuenta</h3>
           <ul>
-            <li><button onClick={chagePassword}>Cambiar contraseña</button></li>
+            <li><button onClick={changePassword}>Cambiar contraseña</button></li>
             <li><button onClick={goToPayment}>Métodos de pago</button></li>
-            <li><button onClick={ShippingAddressesView}>Direcciones de envío</button></li>
+            <li><button onClick={shippingAddressesView}>Direcciones de envío</button></li>
           </ul>
         </div>
-
         <div className="sidebar-section">
           <h3>Carrito de compras</h3>
           <ul>
@@ -96,7 +64,6 @@ function SidebarUser() {
             <li><button onClick={goToWishList}>Lista de deseos</button></li>
           </ul>
         </div>
-
         <div className="sidebar-section">
           <h3>Gestión de pedidos</h3>
           <ul>
@@ -104,7 +71,6 @@ function SidebarUser() {
             <li><button onClick={trackOrder}>Rastrear envíos</button></li>
           </ul>
         </div>
-
         <div className="sidebar-section">
           <h3>Soporte y ayuda</h3>
           <ul>
@@ -114,7 +80,11 @@ function SidebarUser() {
         </div>
         <div className="sidebar-section">
           <ul>
-            <li><button>Cerrar sesión</button></li>
+            {token ? (
+              <li><button onClick={handleLogout}>Cerrar sesión</button></li>
+            ) : (
+              <li><button onClick={goToLogin}>Iniciar sesión</button></li>
+            )}
           </ul>
         </div>
       </div>

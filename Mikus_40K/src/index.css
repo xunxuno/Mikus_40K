@@ -1,25 +1,11 @@
 /* Estilos globales */
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  background: #39C5BB; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Estilos del body (globales para toda la aplicación) */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
   font-family: inherit; /* Usando la misma fuente global */
-  background:#39C5BB; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
+  background: #39C5BB; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
 }
 
 /* Contenedor principal de la página */
@@ -37,6 +23,7 @@ a {
   color: #39C5BB; /* Turquesa (Hatsune Miku) */
   text-decoration: inherit;
 }
+
 a:hover {
   color: #FFD700; /* Amarillo dorado (Warhammer 40k) */
 }
@@ -54,28 +41,115 @@ button {
   cursor: pointer;
   transition: border-color 0.25s, background-color 0.25s;
 }
+
 button:hover {
   border-color: #8B0000; /* Rojo oscuro (Warhammer 40k) */
   background-color: #8B0000; /* Rojo oscuro para efecto hover */
   color: #F5F5F5; /* Blanco para contraste */
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Media query para pantallas pequeñas */
-@media (max-width: 768px) {
-  .carousel {
-    width: 100%; /* El carrusel ocupa todo el ancho */
-    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
-  }
+/* Estilo general para el fondo de la página */
+body {
+  background-color: #39C5BB; /* Color de fondo verde turquesa */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Aseguramos que el body ocupe toda la altura */
 }
 
-/* Media query para pantallas más pequeñas */
-@media (max-width: 480px) {
-  .carousel {
-    width: 100%; /* El carrusel ocupa todo el ancho */
-    margin-top: 60px; /* Alinea el carrusel debajo del navbar */
+/* Contenedor de la página de login */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Estilo general para el login */
+.login {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Título del login */
+.login h3 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los campos de entrada */
+.square_login input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #2c3e50; /* Bordes oscuros para un buen contraste */
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #ecf0f1; /* Fondo suave para los inputs */
+  color: #2c3e50; /* Texto oscuro */
+  transition: all 0.3s ease;
+}
+
+/* Efecto de enfoque (focus) en los campos de entrada */
+.square_login input:focus {
+  border-color: #39C5BB; /* Bordes turquesa al hacer foco */
+  background-color: #ffffff; /* Fondo blanco al hacer foco */
+  outline: none;
+}
+
+/* Estilo para el botón */
+.login button {
+  width: 100%;
+  padding: 12px;
+  background-color: #39C5BB; /* Botón con el color de fondo */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efecto de hover en el botón */
+.login button:hover {
+  background-color: #16A085; /* Cambia el verde a un tono más oscuro al pasar el ratón */
+}
+
+/* Estilo para los párrafos dentro del formulario */
+.square_login p {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .login {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .login h3 {
+    font-size: 1.5rem;
+  }
+
+  .square_login input {
+    padding: 10px;
+  }
+
+  .login button {
+    font-size: 1rem;
+    padding: 10px;
   }
 }

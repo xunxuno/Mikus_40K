@@ -16,6 +16,7 @@ import Cart from "../components/User/Cart";
 import WishList from "../components/User/WishList";
 import Orders from "../components/User/Orders";
 import TrackOrder from "../components/User/TrackOrder";
+import Login from "../components/Login/login";
 
 function Router() {
     return (
@@ -36,6 +37,7 @@ function Router() {
             <Route path="/wishlist" element={<WishList/>} />
             <Route path="/orders" element={<Orders/>} />
             <Route path="/track-order" element={<TrackOrder/>} />
+            <Route path="/login" element={<Login/>} />
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     );
