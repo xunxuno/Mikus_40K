@@ -5,7 +5,7 @@ import ProductDetail from '../components/product/ProductDetail';
 import HelpCenter from '../components/helpCenter/HelpCenter';
 import ContactSupport from '../components/helpCenter/ContactSupport';
 import AboutUs from '../components/AboutUs/AboutUs';
-import Services from '../components/Services/Services';
+import Catalog from '../components/Catalog/Catalog';
 import Profile from '../components/profile/profile';
 import PurchaseHistory from "../components/profile/PurchaseHistory";
 import Points from "../components/profile/Points";
@@ -25,7 +25,7 @@ function Router() {
             <Route path="/help-center" element={<HelpCenter />} />
             <Route path="/contact-support" element={<ContactSupport />} />
             <Route path="/about-us" element={<AboutUs/>} />
-            <Route path="/services" element={<Services/>} />
+            <Route path="/catalog" element={<Catalog/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/purchase-history" element={<PurchaseHistory/>} />
             <Route path="/user-points" element={<Points/>} />

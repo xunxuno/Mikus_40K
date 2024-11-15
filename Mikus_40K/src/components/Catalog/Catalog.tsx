@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Services() {
+function Catalog() {
   return <div>Contamos con estos servicios</div>;
 }
 
-export default Services;
+export default Catalog;

@@ -7,8 +7,8 @@ const SubNavbar: React.FC = () => {
     <div className="sub-navbar">
       <ul className="sub-navbar-links">
         <li><a href="/">Inicio</a></li>
+        <li><a href="/catalog">Catalogo</a></li>
         <li><a href="/about-us">Acerca de</a></li>
-        <li><a href="/Services">Servicios</a></li>
         <li><a href="/contact-support">Contacto</a></li>
       </ul>
     </div>
