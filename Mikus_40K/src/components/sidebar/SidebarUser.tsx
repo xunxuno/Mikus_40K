@@ -29,6 +29,7 @@ function SidebarUser() {
   const goToOrders = () => navigate('/orders');
   const trackOrder = () => navigate('/track-order');
   const goToLogin = () => navigate('/login');
+  const goToRegister = () => navigate('/register');
 
   return (
     <div>
@@ -83,7 +84,10 @@ function SidebarUser() {
             {token ? (
               <li><button onClick={handleLogout}>Cerrar sesión</button></li>
             ) : (
+            <ul>
               <li><button onClick={goToLogin}>Iniciar sesión</button></li>
+              <li><button onClick={goToRegister}>Registrate</button></li>
+            </ul>
             )}
           </ul>
         </div>
