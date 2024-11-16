@@ -23,8 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 140px;  /* Ajusta este valor para mover el ícono un poco a la derecha */
-    margin-top: -10px; /* Ajusta este valor para subir el ícono */
+    position: static;
   }
   
   
@@ -141,7 +140,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 7680px) {
     .search-bar {
         display: block; /* Oculta la barra de búsqueda en pantallas pequeñas */
     }
