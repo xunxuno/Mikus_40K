@@ -1,7 +1,7 @@
 /* Estilo del navbar */
 .navbar {
     height: 80px;
-    background-color: rgb(36, 36, 36);
+    background-color: #1E1E1E;
     display: flex;
     align-items: center;
     justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */

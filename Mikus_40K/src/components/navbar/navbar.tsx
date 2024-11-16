@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { MaterialSymbolsMenu } from '../icons/MaterialSymbolsMenu'; 
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../../redux/sidebarSlice';
-import backgroundImage from '../../images/logo_temporal.jpg'; // Asegúrate que esta ruta sea correcta
+import backgroundImage from '../../images/mikus_logo.png'; // Asegúrate que esta ruta sea correcta
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();

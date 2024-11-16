@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.css';
-import image1 from '../../images/HALLOWEEN(1).png';
+import image1 from '../../images/soooooooooooooooooooo.png';
 import image2 from '../../images/HALLOWEEN.png';
 import image3 from '../../images/test.png'
 import ImageCarousel from '../ImageCarousel';
