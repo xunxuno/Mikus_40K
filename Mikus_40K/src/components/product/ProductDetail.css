@@ -41,7 +41,7 @@
 .product-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #FFD700; /* Color dorado que combina con Warhammer 40k */
+    color: #ffffff !important; /* Color dorado que combina con Warhammer 40k */
 }
 
 .product-description {

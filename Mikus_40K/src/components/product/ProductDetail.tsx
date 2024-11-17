@@ -2,7 +2,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../../controllers/ProductDetailController'; // Importamos el controlador
-import { Product } from '../../models/ProductModel'; // Importamos la interfaz para el tipado
 import './ProductDetail.css';
 
 const ProductDetail: React.FC = () => {
