@@ -37,6 +37,7 @@ function Router() {
             <Route path="/orders" element={<Orders/>} />
             <Route path="/track-order" element={<TrackOrder/>} />
             <Route path="*" element={<Navigate to="/" />} />
+            
         </Routes>
     );
 }
