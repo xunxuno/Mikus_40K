@@ -1,3 +1,4 @@
+/* Estilos para el contenedor de detalles del producto */
 .product-detail-container {
     padding: 20px;
     display: flex;
@@ -41,7 +42,7 @@
 .product-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #ffffff !important; /* Color dorado que combina con Warhammer 40k */
+    color: #FFD700 !important; /* Color dorado que combina con Warhammer 40k */
 }
 
 .product-description {

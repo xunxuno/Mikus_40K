@@ -1,8 +1,8 @@
 // ProductDetail.tsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '../../controllers/ProductDetailController'; // Importamos el controlador
-import './ProductDetail.css';
+import { getProductById } from '../../controllers/ProductDetailController';
+import "./ProductDetail.css";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

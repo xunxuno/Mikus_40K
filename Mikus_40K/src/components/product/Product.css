@@ -57,7 +57,7 @@
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #272727;
   width: 200px; /* Define un ancho fijo para las tarjetas en pantallas grandes */
   color: #333; /* Color del texto en las tarjetas */
 }
@@ -73,7 +73,7 @@
 .product-card h3 {
   font-size: 1.2rem; /* Ajusta el tamaño de la fuente del título */
   margin: 5px 0;
-  color: #3cffff; /* Asegúrate de que el color del título sea visible */
+  color: #FFD700; /* Dorado para resaltar la información más importante */
 }
 
 /* Estilo para el precio dentro de las tarjetas */
@@ -86,13 +86,13 @@
 /* Estilo para la información de envío dentro de las tarjetas */
 .product-card .shipping {
   font-size: 1rem; /* Ajusta el tamaño de la fuente de la información de envío */
-  color: #555; /* Un color más oscuro para el texto de envío */
+  color: #adadad; /* Un color más oscuro para el texto de envío */
   margin-top: 5px;
 }
 
 /* Estilo para la descripción dentro de las tarjetas */
 .product-card .description {
   font-size: 0.9rem; /* Ajusta el tamaño de la fuente de la descripción */
-  color: #777; /* Color gris claro para la descripción */
+  color: #c7c7c7; /* Color gris claro para la descripción */
   margin-top: 5px;
 }
