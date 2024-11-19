@@ -79,7 +79,7 @@
 /* Estilo para el precio dentro de las tarjetas */
 .product-card .price {
   font-size: 1.4rem; /* Ajusta el tamaño de la fuente del precio */
-  color: #e63946; /* Color rojo para el precio, puedes modificarlo si prefieres otro */
+  color: #86ecec; /* Color rojo para el precio, puedes modificarlo si prefieres otro */
   font-weight: bold; /* Resalta el precio */
 }
 
