@@ -1,6 +1,5 @@
 import React from 'react';
 import './NavCont.css'; 
-import { useNavigate } from 'react-router-dom';
 
 const SubNavbar: React.FC = () => {
   return (
@@ -11,10 +10,9 @@ const SubNavbar: React.FC = () => {
         <li><a href="/about-us">Acerca de</a></li>
         <li><a href="/contact-support">Contacto</a></li>
       </ul>
-      {/* Botón de carrito de compras */}
-      <button className="cart-button">
+      <a href="/cart" className="cart-button">
         🛒
-      </button>
+      </a>
     </div>
   );
 };
