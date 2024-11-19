@@ -2,7 +2,7 @@
 .sidebar {
   width: 250px; /* Tamaño del sidebar en pantallas grandes */
   height: 100vh; /* Ocupa toda la altura de la página */
-  background-color: black;
+  background-color: #fffaf0;
   color: white;
   position: fixed;
   top: 0;
@@ -37,7 +37,6 @@
 .falling-image {
   position: absolute;
   animation: fall 6s linear infinite; /* Animación de caída infinita */
-  opacity: 1; /* Empieza visible */
 }
 
 /* Las imágenes con tamaño aleatorio */
@@ -52,10 +51,10 @@
 @keyframes fall {
   0% {
     transform: translateY(-100px); /* Empieza fuera de la pantalla por encima */
-    opacity: 1; /* Totalmente visible */
+    opacity: 100; /* Totalmente visible */
   }
   100% {
     transform: translateY(100vh); /* Caen hasta el final de la pantalla */
-    opacity: 0; /* Se desvanece al final de la caída */
+    opacity: 0.1; /* Se desvanece al final de la caída */
   }
 }

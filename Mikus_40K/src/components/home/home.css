@@ -14,7 +14,7 @@ img {
 .products {
   text-align: center;
   font-size: 40px;
-  color: #464646;
+  color: #86ecec;
   width: calc(100% - 250px); /* Solo aplica este cálculo cuando el sidebar está visible */
 }
 

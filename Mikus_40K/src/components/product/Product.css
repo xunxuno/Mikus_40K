@@ -1,105 +1,93 @@
-/* Estilos para el contenedor de productos */
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Reducir el espacio entre tarjetas */
+  gap: 10px;
   justify-content: center;
 }
 
-/* Media query para pantallas grandes (cuando el sidebar está visible) */
 @media (min-width: 769px) {
   .products-container {
-    width: calc(100% - 250px); /* Ajusta el ancho cuando el sidebar está presente */
+    width: calc(100% - 250px);
   }
 }
 
-/* Media query para pantallas pequeñas (cuando el sidebar no está visible) */
 @media (max-width: 768px) {
   .products-container {
-    width: 100%; /* Ajusta el ancho a 100% cuando el sidebar está oculto */
+    width: 100%;
   }
 
-  /* Ajustes adicionales para las tarjetas en pantallas pequeñas */
   .product-card {
-    width: 100px; /* Reducción significativa del ancho de la tarjeta */
-    padding: 5px; /* Reducir el padding para más espacio */
-    font-size: 0.8rem; /* Reducir el tamaño de la fuente dentro de las tarjetas */
+    width: 100px;
+    padding: 5px;
+    font-size: 0.8rem;
   }
 
   .product-card img {
-    width: 50%; /* Reducir el tamaño de las imágenes aún más */
+    width: 50%;
     height: auto;
   }
 
   .product-card h3 {
-    font-size: 0.9rem; /* Reducir el tamaño del título */
+    font-size: 0.9rem;
     margin: 3px 0;
   }
 
   .product-card .price {
-    font-size: 1rem; /* Reducir el tamaño del precio */
+    font-size: 1rem;
   }
 
   .product-card .shipping {
-    font-size: 0.7rem; /* Reducir el tamaño de la información de envío */
+    font-size: 0.7rem;
   }
 
-  /* Ocultar la descripción en pantallas pequeñas */
   .product-card .description {
-    display: none; /* Elimina la visibilidad de la descripción en dispositivos móviles */
+    display: none;
   }
 }
 
-/* Estilos para las tarjetas de productos */
 .product-card {
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #272727;
-  width: 200px; /* Define un ancho fijo para las tarjetas en pantallas grandes */
-  color: #333; /* Color del texto en las tarjetas */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el hover */
+  background-color: #EFEFEF;
+  width: 200px;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Estilos para las imágenes dentro de las tarjetas */
 .product-card img {
-  width: 75%; /* Imagen más pequeña en pantallas grandes */
+  width: 75%;
   height: auto;
   border-radius: 8px;
 }
 
-/* Estilo para el título dentro de las tarjetas */
 .product-card h3 {
-  font-size: 1.2rem; /* Ajusta el tamaño de la fuente del título */
+  font-size: 1.2rem;
   margin: 5px 0;
-  color: #FFD700; /* Dorado para resaltar la información más importante */
+  color: #9e8600; /* FFD700 */
 }
 
-/* Estilo para el precio dentro de las tarjetas */
 .product-card .price {
-  font-size: 1.4rem; /* Ajusta el tamaño de la fuente del precio */
-  color: #86ecec; /* Color rojo para el precio, puedes modificarlo si prefieres otro */
-  font-weight: bold; /* Resalta el precio */
+  font-size: 1.4rem;
+  color: #007c7c; /* 86ecec */
+  font-weight: bold;
 }
 
-/* Estilo para la información de envío dentro de las tarjetas */
 .product-card .shipping {
-  font-size: 1rem; /* Ajusta el tamaño de la fuente de la información de envío */
-  color: #adadad; /* Un color más oscuro para el texto de envío */
+  font-size: 1rem;
+  color: #979797;
   margin-top: 5px;
 }
 
-/* Estilo para la descripción dentro de las tarjetas */
 .product-card .description {
-  font-size: 0.9rem; /* Ajusta el tamaño de la fuente de la descripción */
-  color: #c7c7c7; /* Color gris claro para la descripción */
+  font-size: 0.9rem;
+  color: #646464; /* c7c7c7 */
   margin-top: 5px;
 }
 
-/* Efecto hover para las tarjetas (se eleva al pasar el mouse) */
 .product-card:hover {
-  transform: translateY(-10px); /* Mueve la tarjeta hacia arriba */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Aumenta la sombra para crear el efecto de elevación */
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
