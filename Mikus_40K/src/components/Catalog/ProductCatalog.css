@@ -1,9 +1,84 @@
-/* Estilos del contenedor del catálogo de productos */
-.product-catalog {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px; /* Aumentamos el espacio entre las tarjetas */
+/* ProductCatalog.css */
+
+/* Contenedor de la lista de productos */
+.catalog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaciado entre los productos */
   padding: 20px;
-  background-color: #39C5BB; /* Fondo turquesa */
-  margin-top: 150px;
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 70vh; /* Asegura que la lista no se estire demasiado */
+  margin-top: 140px;
+}
+
+/* Estilo para cada item/producto */
+.catalog-item {
+  display: flex;
+  flex-direction: row; /* Imagen a la izquierda y detalles a la derecha */
+  background-color: #1e1e1e;
+  border-radius: 1px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sombra ligera y moderna */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 900px; /* Limita el tamaño máximo */
+  padding: 20px;
+  margin: 0 auto;
+  align-items: center; /* Centra verticalmente los contenidos */
+}
+
+/* Efecto hover para el item */
+.catalog-item:hover {
+  transform: translateY(-8px); /* Desplazamiento hacia arriba */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Imagen del producto */
+.item-image {
+  width: 30%; /* Imagen más pequeña comparado con el contenido */
+  height: 20vh;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #FFD700; /* Borde dorado */
+}
+
+
+
+/* Título del producto */
+.item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFD700; /* Tono anaranjado para el título */
+  margin-right: 5vh;
+  line-height: 1.3;
+  text-transform: capitalize;
+  margin-left: 10vh;
+}
+
+/* Precio del producto */
+.item-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #86ecec; /* Color verde hierba para el precio */
+  line-height: 1.4;
+  margin-right: 2.5vh;
+}
+
+/* Información de envío */
+.item-shipping {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #adadad; /* Gris oscuro para el envío */
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

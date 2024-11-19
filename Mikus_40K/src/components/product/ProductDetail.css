@@ -42,12 +42,12 @@
 .product-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #FF6347 !important; /* Un tono anaranjado para el título */
+    color: #FFD700 !important; /* Un tono anaranjado para el título */
 }
 
 .product-description {
     font-size: 1.1rem;
-    color: #B0C4DE; /* Gris claro azulado para la descripción */
+    color: #c7c7c7; /* Gris claro azulado para la descripción */
 }
 
 .product-price,
@@ -56,7 +56,7 @@
 .product-weight {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #3CB371; /* Color verde hierba para los detalles importantes */
+    color: #86ecec; /* Color verde hierba para los detalles importantes */
 }
 
 .product-price strong,

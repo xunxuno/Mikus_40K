@@ -1,20 +1,23 @@
 // components/ProductCatalog.tsx
 import React from 'react';
 import { Product, products } from '../../models/ProductModel';
-import './ProductCatalog.css'; 
+import { Link } from 'react-router-dom'; // Importar Link de react-router-dom
+import './ProductCatalog.css';
 
 const ProductCatalog: React.FC = () => {
   return (
-    <div className="product-catalog">
+    <div className="catalog-container">
       {products.map((product: Product) => (
-        <div key={product.id} className="product-card">
-          <img src={product.imageUrl} alt={product.name} className="product-image" />
-          <h3 className="product-name">{product.name}</h3>
-          <p className="product-price">${product.price.toFixed(2)}</p>
-          <p className="product-shipping">
-            {product.shippingType} {product.shippingPrice !== 0 && `- $${product.shippingPrice}`}
-          </p>
-        </div>
+        <Link key={product.id} to={`/product/${product.id}`} className="catalog-item-link">
+          <div className="catalog-item">
+            <img src={product.imageUrl} alt={product.name} className="item-image" />
+            <h3 className="item-title">{product.name}</h3>
+            <p className="item-price">${product.price.toFixed(2)}</p>
+            <p className="item-shipping">
+              {product.shippingType} {product.shippingPrice !== 0 && `- $${product.shippingPrice}`}
+            </p>
+          </div>
+        </Link>
       ))}
     </div>
   );
