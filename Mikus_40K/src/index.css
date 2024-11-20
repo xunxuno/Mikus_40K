@@ -15,20 +15,29 @@
 /* Estilos del body (globales para toda la aplicación) */
 body {
   margin: 0;
-  height: 100vh;
+  height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
   display: flex;
   flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
   font-family: inherit; /* Usando la misma fuente global */
-  background:#fffaf0 !important; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
+  background: #fffaf0 !important; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
 }
 
 /* Contenedor principal de la página */
 .main-container {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 1; /* Hace que este contenedor ocupe el espacio disponible */
   padding-top: 60px; /* Asegura que el carrusel comience debajo del navbar */
   overflow: hidden;
+}
+
+/* Estilo del footer */
+footer {
+  background-color: #2A2A2A; /* Fondo oscuro */
+  color: #F5F5F5; /* Texto claro */
+  padding: 1rem; /* Espaciado interno */
+  text-align: center;
+  flex-shrink: 0; /* Evita que el footer se reduzca si hay desbordamiento */
 }
 
 /* Estilos para los enlaces */
@@ -69,6 +78,9 @@ button:focus-visible {
   .carousel {
     width: 100%; /* El carrusel ocupa todo el ancho */
     margin-top: 60px; /* Alinea el carrusel debajo del navbar */
+  }
+  footer {
+    font-size: 0.9rem; /* Ajusta el tamaño de fuente del footer */
   }
 }
 
