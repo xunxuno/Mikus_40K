@@ -15,22 +15,14 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div
-      className="navbar"
-      style={{
-        display: 'flex', /* Para alinear los elementos dentro del navbar */
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '10px 20px',
-      }}
-    >
+    <div className="navbar">
       <div
         onClick={() => navigate('/')}
         style={{
-          width: '100px', /* Ajusta el tamaño del logo */
-          height: '50px', /* Ajusta el tamaño del logo */
+          width: '100px',
+          height: '50px',
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover', /* Ajusta el tamaño de la imagen al tamaño del div */
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           cursor: 'pointer',
@@ -46,6 +38,11 @@ const Navbar: React.FC = () => {
       </div>
 
       <p className="navbar-text">Mikus_40K</p>
+
+      <div className="auth-buttons">
+        <button className="login-btn">Login</button>
+        <button className="logout-btn">Logout</button>
+      </div>
     </div>
   );
 };

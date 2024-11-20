@@ -1,0 +1,29 @@
+/* src/components/ContactSupport.css */
+
+.contact-support-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(36, 36, 36); /* Color del navbar */
+    min-height: 100vh;
+    text-align: center;
+    color: #0eeadf; /* Color de texto del navbar-text */
+  }
+  
+  .contact-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff; /* Texto blanco para el título */
+  }
+  
+  .contact-info {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .contact-detail {
+    color: #0eeadf; /* Azul claro del tema */
+  }

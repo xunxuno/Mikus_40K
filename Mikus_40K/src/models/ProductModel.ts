@@ -10,7 +10,7 @@ export interface Product {
   shippingPrice?: number;
   size?: string;
   weight?: string;
-  category: 'Miku' | 'Warhammer'; // Nueva propiedad para categorizar el producto
+  quantity: number;
 }
 
 // Datos temporales de productos
