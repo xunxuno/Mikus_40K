@@ -1,7 +1,7 @@
 /* Estilo del navbar */
 .navbar {
     height: 80px;
-    background-color: rgb(36, 36, 36);
+    background-color: #FFE4B5 ;
     display: block;
     align-items: center;
     justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */
@@ -34,7 +34,7 @@
   }
   
   .navbar-text {
-    color: #0eeadf;
+    color: #007c7c;
     font-size: 1.4rem;
     text-align: center; /* Alinea el texto al centro */
     margin-top: 10px;   /* Ajusta este valor para subir el texto */
@@ -50,20 +50,20 @@
     width: 100%;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #0eeadf;
-    background-color: #1e1e1e;
+    border: 1px solid #dac299;
+    background-color: #e0c9a1;
     color: white;
     outline: none;
   }
   
   .search-bar input[type="text"]::placeholder {
-    color: #888;
+    color: #5c5c5c;
   }
 
   /* Estilo del sub-navbar */
 .sub-navbar {
     height: 50px;
-    background-color: rgb(50, 50, 50); /* Un poco más claro que el navbar principal */
+    background-color: #d3bb91; /* Un poco más claro que el navbar principal */
     display: flex;
     align-items: center;
     justify-content: center; /* Centrar elementos dentro del sub-navbar */
@@ -86,7 +86,7 @@
   }
   
   .sub-navbar-links li a {
-    color: #0eeadf;
+    color: #007c7c;
     text-decoration: none;
     font-size: 1rem;
     padding: 10px;

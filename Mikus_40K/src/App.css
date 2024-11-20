@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to right, #6a0001, #0d407f);
+
   margin: 0; /* Para eliminar márgenes por defecto */
   height: 100vh; /* Para ocupar toda la altura de la ventana */
   display: flex; /* Usamos flexbox */

@@ -4,6 +4,7 @@ import sidebarReducer from './sidebarSlice';
 import authReducer from './authSlice';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
+
 const store = configureStore({
   reducer: {
     carousel: carouselReducer,

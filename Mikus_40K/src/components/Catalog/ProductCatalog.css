@@ -1,0 +1,75 @@
+/* ProductCatalog.css */
+
+.catalog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 70vh;
+  margin-top: 140px;
+}
+
+.catalog-item {
+  display: flex;
+  flex-direction: row;
+  background-color: #EFEFEF; /*1e1e1e*/
+  border-radius: 1px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.catalog-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+  width: 30%;
+  height: 20vh;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #FFD700;
+}
+
+.item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #9e8600; /* FFD700 */
+  margin-right: 5vh;
+  line-height: 1.3;
+  text-transform: capitalize;
+  margin-left: 10vh;
+}
+
+.item-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #007c7c; /* 86ecec */
+  line-height: 1.4;
+  margin-right: 2.5vh;
+}
+
+.item-shipping {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #858585;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

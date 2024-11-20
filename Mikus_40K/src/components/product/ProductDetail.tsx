@@ -1,9 +1,8 @@
 // ProductDetail.tsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '../../controllers/ProductDetailController'; // Importamos el controlador
-import { Product } from '../../models/ProductModel'; // Importamos la interfaz para el tipado
-import './ProductDetail.css';
+import { getProductById } from '../../controllers/ProductDetailController';
+import "./ProductDetail.css";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +13,7 @@ const ProductDetail: React.FC = () => {
   }
 
   return (
-    <div className="product-detail-container">
+    <div className="product-detail-page">
       <div className="product-detail">
         <div className="product-image-container">
           <img src={product.imageUrl} alt={product.name} className="product-image" />

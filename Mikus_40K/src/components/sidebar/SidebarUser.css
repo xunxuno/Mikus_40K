@@ -66,8 +66,8 @@
 }
 
 .sidebar-section button:hover {
-  background-color: #b95f5f; /* Rojo oscuro (Warhammer 40k) */
-  border: 1px solid #b95f5f;
+  background-color: #63b1b1; /* Rojo oscuro (Warhammer 40k) */
+  border: 1px solid rgb(146, 255, 255);
   color: #F5F5F5; /* Blanco para mejor legibilidad */
 }
 
