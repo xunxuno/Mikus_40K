@@ -15,11 +15,9 @@ export interface LoginResponse {
 export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaje: string }> => {
   try {
       const response = await axiosInstance.post('/api/singIn', {
-        secureData: {
-              userName: user.userName,
-              email: user.email,
-              password: user.password,
-          },
+        userName: user.userName,
+        email: user.email,
+        password: user.password,
       });
 
       console.log('Respuesta del servidor:', response.data);

@@ -18,8 +18,6 @@ export const authMiddleware: Middleware = (store) => (next) => (action) => {
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 
-
-
 function verificarToken(req: Request, res: Response, next: NextFunction) {
   const tokenHeader = req.headers['authorization'];
   if (!tokenHeader) {
@@ -41,7 +39,6 @@ const validTokens = new Set<string>();
 
 // Función para obtener el hash de una contraseña
 export async function getHash(passwordString: string): Promise<string> {
-  //const saltRounds = parseInt(process.env.PASSWORD_SALT_ROUNDS || '10', 10);
-  const saltRounds = parseInt(import.meta.env.VITE_PASSWORD_SALT_ROUNDS, 10);
+  const saltRounds = parseInt(process.env.PASSWORD_SALT_ROUNDS || '10', 10);
   return bcrypt.hash(passwordString, saltRounds);
 }
