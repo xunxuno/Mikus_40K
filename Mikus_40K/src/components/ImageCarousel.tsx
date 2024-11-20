@@ -1,11 +1,10 @@
 // /components/ImageCarousel.tsx
-
 import React from 'react';
 import { useImageCarouselController } from '../controllers/useImageCarouselController';
 import './ImageCarousel.css';
 
 interface ImageCarouselProps {
-    images: string[]; // Recibe un array de strings, que serán las rutas de las imágenes
+    images: string[];
 }
 
 function ImageCarousel({ images }: ImageCarouselProps) {
@@ -20,14 +19,12 @@ function ImageCarousel({ images }: ImageCarouselProps) {
                     </div>
                 ))}
             </div>
-
-            {/* Botones circulares para navegar entre las imágenes */}
             <div className="carousel-controls">
                 {images.map((_, index) => (
                     <button
                         key={index}
                         className={`carousel-control ${currentIndex === index ? 'active' : ''}`}
-                        onClick={() => goToSlide(index)} // Al hacer clic, cambia al índice correspondiente
+                        onClick={() => goToSlide(index)}
                     />
                 ))}
             </div>

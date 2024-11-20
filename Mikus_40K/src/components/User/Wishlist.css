@@ -1,0 +1,99 @@
+/* Wishlist.css */
+.wishlist-container {
+    padding: 20px;
+    margin-top: 130px;
+  }
+  
+  .wishlist-container h2 {
+    font-size: 2rem;
+  }
+  
+  .products-container-1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .product-card {
+    position: relative; /* Necesario para posicionar el botón de eliminar */
+    width: 200px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #EFEFEF;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product-card img {
+    width: 75%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .product-card h3 {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  .product-card .price {
+    font-size: 1.4rem;
+    color: #007c7c;
+    font-weight: bold;
+  }
+  
+  .product-card .shipping {
+    font-size: 1rem;
+    color: #979797;
+    margin-top: 5px;
+  }
+
+  .wishlist-container {
+    text-align: center;
+    font-size: 40px;
+    color: #86ecec ;
+  }
+  /* Botón de eliminar con el ícono de bote de basura */
+  .remove-btn {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background: transparent;
+    border: none;
+    font-size: 2px;
+    cursor: pointer;
+    color: #ff6347; /* Color para el icono de eliminar */
+  }
+  
+  .remove-icon {
+    font-size: 24px;
+  }
+  
+  .remove-btn:focus {
+    outline: none;
+  }
+  
+  /* Estilos adicionales para asegurar buena visualización en dispositivos pequeños */
+  @media (max-width: 768px) {
+    .product-card {
+      width: 100%;
+    }
+  
+    .product-card img {
+      width: 50%;
+    }
+  
+    .product-card h3 {
+      font-size: 1rem;
+    }
+  
+    .product-card .price {
+      font-size: 1.2rem;
+    }
+  
+    .product-card .shipping {
+      font-size: 0.9rem;
+    }
+  }
+  
