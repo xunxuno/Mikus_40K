@@ -10,8 +10,8 @@ const ProductCatalog: React.FC = () => {
       {products.map((product: Product) => (
         <Link key={product.id} to={`/product/${product.id}`} className="catalog-item-link">
           <div className="catalog-item">
-            <img src={product.imageUrl} alt={product.name} className="item-image" />
-            <h3 className="item-title">{product.name}</h3>
+            <img src={product.image_path} alt={product.product_Name} className="item-image" />
+            <h3 className="item-title">{product.product_Name}</h3>
             <p className="item-price">${product.price.toFixed(2)}</p>
             <p className="item-shipping">
               {product.shippingType} {product.shippingPrice !== 0 && `- $${product.shippingPrice}`}
