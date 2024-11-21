@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './register.css';
 import { registrarUsuario_ } from '../../controllers/userController'; 
-import { useNavigate } from 'react-router-dom'; 
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +11,6 @@ const Register: React.FC = () => {
   });
   const [message, setMessage] = useState<string | null>(null);
   const [messageType, setMessageType] = useState<'success' | 'error' | null>(null);
-  const navigate = useNavigate(); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,7 +38,6 @@ const Register: React.FC = () => {
         setMessage(response.mensaje); // Usa el mensaje que devuelve tu backend
         setMessageType('success');
         setFormData({ username: '', email: '', password: '', confirmPassword: '' });
-        navigate('/login'); 
     } catch (error: unknown) {
       setMessage('Hubo un error al registrar el usuario. Inténtalo de nuevo.');
       setMessageType('error');
