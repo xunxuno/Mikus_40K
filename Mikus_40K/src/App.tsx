@@ -12,7 +12,6 @@ function App() {
                 <NavCont />
                 <SidebarUser />
                 <Router />
-                {/* Footer al final */}
                 <Footer />
             </div>
         </BrowserRouter>

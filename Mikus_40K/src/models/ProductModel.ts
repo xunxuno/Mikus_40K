@@ -10,6 +10,7 @@ export interface Product {
   shippingPrice?: number;
   size?: string;
   weight?: string;
+  category: 'Miku'|'Warhammer',
   quantity: number;
 }
 
@@ -26,6 +27,7 @@ export const products: Product[] = [
     size: '25cm x 15cm x 10cm',
     weight: '500g',
     category: 'Miku',
+    quantity: 2
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ export const products: Product[] = [
     size: '30cm x 18cm x 12cm',
     weight: '700g',
     category: 'Warhammer',
+    quantity: 10
   },
   {
     id: 3,
@@ -50,6 +53,7 @@ export const products: Product[] = [
     size: '20cm x 12cm x 8cm',
     weight: '400g',
     category: 'Miku',
+    quantity: 5
   },
   {
     id: 4,
@@ -62,6 +66,7 @@ export const products: Product[] = [
     size: '28cm x 16cm x 10cm',
     weight: '900g',
     category: 'Warhammer',
+    quantity: 4
   },
   {
     id: 5,
@@ -74,6 +79,7 @@ export const products: Product[] = [
     size: '22cm x 14cm x 9cm',
     weight: '450g',
     category: 'Miku',
+    quantity: 1
   },
   {
     id: 6,
@@ -86,6 +92,7 @@ export const products: Product[] = [
     size: '32cm x 20cm x 15cm',
     weight: '1kg',
     category: 'Warhammer',
+    quantity: 30
   },
   {
     id: 7,
@@ -98,6 +105,7 @@ export const products: Product[] = [
     size: '23cm x 15cm x 10cm',
     weight: '500g',
     category: 'Miku',
+    quantity: 15
   },
   {
     id: 8,
@@ -110,6 +118,7 @@ export const products: Product[] = [
     size: '24cm x 16cm x 11cm',
     weight: '550g',
     category: 'Miku',
+    quantity: 10
   },
   {
     id: 9,
@@ -122,6 +131,7 @@ export const products: Product[] = [
     size: '27cm x 18cm x 12cm',
     weight: '800g',
     category: 'Warhammer',
+    quantity: 5
   },
   {
     id: 10,
@@ -134,6 +144,7 @@ export const products: Product[] = [
     size: '24cm x 14cm x 10cm',
     weight: '480g',
     category: 'Miku',
+    quantity: 50
   },
   {
     id: 11,
@@ -146,6 +157,7 @@ export const products: Product[] = [
     size: '35cm x 25cm x 20cm',
     weight: '1.5kg',
     category: 'Warhammer',
+    quantity: 3
   },
   {
     id: 12,
@@ -158,6 +170,7 @@ export const products: Product[] = [
     size: '20cm x 12cm x 8cm',
     weight: '400g',
     category: 'Miku',
+    quantity: 5
   },
   {
     id: 13,
@@ -170,6 +183,7 @@ export const products: Product[] = [
     size: '29cm x 17cm x 10cm',
     weight: '750g',
     category: 'Warhammer',
+    quantity: 9
   },
   {
     id: 14,
@@ -182,6 +196,7 @@ export const products: Product[] = [
     size: '23cm x 15cm x 9cm',
     weight: '500g',
     category: 'Miku',
+    quantity: 45
   },
   {
     id: 15,
@@ -194,5 +209,6 @@ export const products: Product[] = [
     size: '25cm x 15cm x 10cm',
     weight: '600g',
     category: 'Miku',
+    quantity: 10
   },
 ];

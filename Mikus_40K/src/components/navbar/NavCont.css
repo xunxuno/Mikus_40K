@@ -1,7 +1,7 @@
 /* Estilo del navbar */
 .navbar {
   height: 80px;
-  background-color: rgb(36, 36, 36);
+  background-color: #2f2f2f;
   display: flex;
   align-items: center;
   justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */
@@ -16,30 +16,21 @@
 /* Estilo del botón con el ícono (con colores añadidos) */
 .navbar-icon {
 background: none;
+
 border-width: 3px;
-border-color: #0eeadf; /* Color del borde */
 cursor: pointer;
 padding: 0px; /* Añadí un poco de padding para que sea más fácil hacer clic */
 display: flex;
 align-items: center;
 justify-content: center;
 position: static;
-transition: background-color 0.3s ease, border-color 1.3s ease; /* Añadí una transición para un efecto suave */
 }
 
 .navbar-icon:hover {
-background-color: #0eeadf; /* Color de fondo al pasar el ratón */
-border-color: #009f9f; /* Cambia el color del borde cuando pasa el ratón */
+background-color: #0eeadf !important; /* Color de fondo al pasar el ratón */
+border-color: #0eeadf;
 }
 
-.navbar-icon svg {
-fill: #0eeadf; /* Color del ícono */
-transition: fill 0.3s ease; /* Transición suave para el ícono */
-}
-
-.navbar-icon:hover svg {
-fill: white; /* Cambia el color del ícono al pasar el ratón */
-}
 
 
 
@@ -78,7 +69,7 @@ fill: white; /* Cambia el color del ícono al pasar el ratón */
 /* Estilo del sub-navbar */
 .sub-navbar {
   height: 50px;
-  background-color: rgb(50, 50, 50); /* Un poco más claro que el navbar principal */
+  background-color: rgb(62, 62, 62) ; /* Un poco más claro que el navbar principal */
   display: flex;
   align-items: center;
   justify-content: center; /* Centrar elementos dentro del sub-navbar */
