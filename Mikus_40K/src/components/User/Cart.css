@@ -38,6 +38,7 @@
 }
 
 .cart-summary {
+    margin-top: auto; /* Empuja el resumen hacia el final del contenedor */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -138,6 +139,18 @@
 .remove-animation {
     animation: moveRight 0.5s forwards;
 }
+
+.cart-empty {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+  
+
 
 @keyframes moveRight {
     0% {
