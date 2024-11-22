@@ -8,11 +8,13 @@ import Footer from './components/Footer/Footer';
 function App() {
     return (
         <BrowserRouter>
-            <div className="App">
-                <NavCont />
-                <SidebarUser />
-                <Router />
-                {/* Footer al final */}
+            <div id="root-container">
+                <div className="App">
+                    <NavCont />
+                    <SidebarUser />
+                    <Router />
+                </div>
+                {/* Footer siempre al final */}
                 <Footer />
             </div>
         </BrowserRouter>
