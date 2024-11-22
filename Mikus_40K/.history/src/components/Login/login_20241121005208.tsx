@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';  // Importa el tipo de estado global
 import { logearUsuario_ } from '../../controllers/userController';  // Importa la función corregida
 import { useNavigate } from 'react-router-dom';  // Importa useNavigate
-import { login } from '../../redux/authSlice';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');  // Cambié `username` a `email` para que coincida con la función
@@ -29,12 +28,8 @@ const Login: React.FC = () => {
           setMessage('¡Inicio de sesión exitoso!');
           setMessageType('success');
           
-          dispatch(login({
-            username: email,     // Utiliza el email como username
-            password: password,  // Guarda la contraseña también
-            token: response.result.token,
-            userId: response.result.userId
-          }));
+          // Aquí puedes manejar el guardado del token y el userId en el estado global si es necesario
+          // dispatch(setUser({ token: response.result.token, userId: response.result.userId }));
 
           // Redirige a la página de inicio ("/")
           navigate('/');  

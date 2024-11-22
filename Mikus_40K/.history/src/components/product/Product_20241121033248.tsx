@@ -1,16 +1,43 @@
 // components/Product.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllProducts } from '../../controllers/ProductController';
+import { obtenerProductosControlador } from '../../controllers/ProductController';
 import './Product.css';
 
 const Product: React.FC = () => {
-  const products = getAllProducts();
+  const [products, setProducts] = useState<Product[]>([]); // Estado para almacenar los productos
   const [wishlist, setWishlist] = useState<number[]>(() => {
     // Cargar wishlist desde localStorage al cargar el componente
     const savedWishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     return savedWishlist;
   });
+  const [loading, setLoading] = useState<boolean>(true); // Estado para manejar la carga de productos
+  const [error, setError] = useState<string>(''); // Estado para manejar los errores
+
+  // Función para obtener productos del controlador
+  const cargarProductos = async () => {
+    try {
+      const productos = await obtenerProductosControlador(); // Llamamos al controlador
+      setProducts(productos); // Establecemos los productos en el estado
+      setLoading(false); // Cambiamos el estado de carga a falso
+    } catch (error) {
+      setError('Error al cargar los productos');
+      setLoading(false); // Cambiamos el estado de carga a falso
+    }
+  };
+
+  // Llamamos a cargarProductos cuando el componente se monta
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   // Función para alternar el estado de wishlist
   const toggleWishlist = (productId: number) => {

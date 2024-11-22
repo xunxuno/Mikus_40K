@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance'; 
+import axios from 'axios';
 
 export interface User {
   id?: number;
@@ -14,33 +14,33 @@ export interface LoginResponse {
 
 export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaje: string }> => {
   try {
-      const response = await axiosInstance.post('/api/singIn', {
-        secureData: {
-              userName: user.userName,
-              email: user.email,
-              password: user.password,
-          },
-      });
+    const response = await axios.post('http://localhost:3002/api/singIn', {
+      dataSegura: {
+        userName: user.userName,
+        email: user.email,
+        password: user.password,
+      },
+    });
 
-      console.log('Respuesta del servidor:', response.data);
+    console.log('Respuesta del servidor:', response.data);
 
-      return response.data; // Se espera que el backend envíe un mensaje de confirmación
+    return response.data; // Se espera que el backend envíe un mensaje de confirmación
   } catch (error: unknown) {
-      if (error instanceof Error) {
-          console.error('Error al registrar usuario:', error.message);
-      } else {
-          console.error('Error desconocido:', error);
-      }
-      throw error;
+    if (error instanceof Error) {
+      console.error('Error al registrar usuario:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error;
   }
 };
 
 // Función para logear un usuario
-export async function logearUsuario(email: string, password: string): Promise<LoginResponse> {
+export async function logearUsuario(nombre: string, password: string): Promise<LoginResponse> {
   try {
-    const response = await axiosInstance.post('http://localhost:3002/api/singUp', {
-      secureData: {
-        email,
+    const response = await axios.post('http://localhost:3002/api/login', {
+      dataSegura: {
+        nombre,
         password,
       },
     });

@@ -15,11 +15,9 @@ export interface LoginResponse {
 export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaje: string }> => {
   try {
       const response = await axiosInstance.post('/api/singIn', {
-        secureData: {
-              userName: user.userName,
-              email: user.email,
-              password: user.password,
-          },
+        userName: user.userName,
+        email: user.email,
+        password: user.password,
       });
 
       console.log('Respuesta del servidor:', response.data);
@@ -36,11 +34,11 @@ export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaj
 };
 
 // Función para logear un usuario
-export async function logearUsuario(email: string, password: string): Promise<LoginResponse> {
+export async function logearUsuario(nombre: string, password: string): Promise<LoginResponse> {
   try {
-    const response = await axiosInstance.post('http://localhost:3002/api/singUp', {
-      secureData: {
-        email,
+    const response = await axiosInstance.post('http://localhost:3002/api/login', {
+      dataSegura: {
+        nombre,
         password,
       },
     });

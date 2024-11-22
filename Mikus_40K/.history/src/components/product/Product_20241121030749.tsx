@@ -27,9 +27,9 @@ const Product: React.FC = () => {
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`} className="product-link">
-            <img src={product.imageUrl} alt={product.name} className="product-image" />
-            <h3>{product.name}</h3>
-            <p className="description">{product.description}</p>
+            <img src={product.image_path} alt={product.product_Name} className="product-image" />
+            <h3>{product.product_Name}</h3>
+            <p className="description">{product.product_Description}</p>
             <p className="price">${product.price}</p>
             <p className="shipping">Envío: {product.shippingType}</p>
           </Link>
@@ -38,12 +38,12 @@ const Product: React.FC = () => {
           <button
             onClick={(e) => {
               e.stopPropagation(); // Evita la redirección al hacer clic en el botón
-              toggleWishlist(product.id);
+              toggleWishlist(product.id ?? 0);  // Si product.id es undefined, se usa 0
             }}
             className="favorite-btn"
-            aria-label={wishlist.includes(product.id) ? 'Quitar de la wishlist' : 'Agregar a la wishlist'}
+            aria-label={wishlist.includes(product.id ?? 0) ? 'Quitar de la wishlist' : 'Agregar a la wishlist'}
           > 
-            {wishlist.includes(product.id) ? (
+            {wishlist.includes(product.id ?? 0) ? (
               <span role="img" aria-label="Corazón" className="favorite-icon">
                 ❤️
               </span>
@@ -53,6 +53,7 @@ const Product: React.FC = () => {
               </span>
             )}
           </button>
+
 
         </div>
       ))}
