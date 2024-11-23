@@ -9,7 +9,7 @@
   color: #39C5BB; /* Turquesa (Hatsune Miku) */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombras más notorias */
-  z-index: 1001; /* Asegúrate de que el sidebar esté encima del overlay */
+  z-index: 1102; /* Asegúrate de que el sidebar esté encima del overlay */
   overflow-y: auto; /* Esto permite que el sidebar tenga scroll vertical cuando sea necesario */
   transition: left 0.3s ease; /* Transición para que el sidebar se deslice */
 }
