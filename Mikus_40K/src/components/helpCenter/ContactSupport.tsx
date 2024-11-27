@@ -1,5 +1,5 @@
 // src/components/ContactSupport.tsx
-import React from 'react';
+//import React from 'react';
 import './ContactSupport.css';
 
 function ContactSupport() {

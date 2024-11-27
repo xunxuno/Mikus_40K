@@ -1,4 +1,4 @@
-// authController.ts
+/*// authController.ts
 import { AppDispatch } from '../redux/store';
 import { login, logout } from '../redux/authSlice';
 //import { User } from '../models/UserModel';
@@ -16,3 +16,4 @@ export const loginUser = (dispatch: AppDispatch, username: string, password: str
 export const logoutUser = (dispatch: AppDispatch) => {
   dispatch(logout());
 };
+*/

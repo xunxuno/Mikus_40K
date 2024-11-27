@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import './home.css';
 import image1 from '../../images/HALLOWEEN(1).png';
 import image2 from '../../images/HALLOWEEN.png';

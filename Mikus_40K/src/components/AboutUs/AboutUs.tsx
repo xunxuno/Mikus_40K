@@ -1,5 +1,5 @@
 // src/components/AboutUs.tsx
-import React from 'react';
+//import React from 'react';
 import './AboutUs.css';
 
 function AboutUs() {

@@ -1,5 +1,5 @@
 // /components/ImageCarousel.tsx
-import React from 'react';
+//import React from 'react';
 import { useImageCarouselController } from '../controllers/useImageCarouselController';
 import './ImageCarousel.css';
 

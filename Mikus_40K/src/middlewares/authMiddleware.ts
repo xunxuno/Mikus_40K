@@ -15,12 +15,12 @@ export const authMiddleware: Middleware = (store) => (next) => (action) => {
 };
 ////////////////////////////////////////////////////////////////////
 
-import { Request, Response, NextFunction } from 'express';
+//import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 
 
 
-function verificarToken(req: Request, res: Response, next: NextFunction) {
+/*function verificarToken(req: Request, res: Response, next: NextFunction) {
   const tokenHeader = req.headers['authorization'];
   if (!tokenHeader) {
     res.status(401).json({ mensaje: 'Token not provided' });
@@ -34,10 +34,10 @@ function verificarToken(req: Request, res: Response, next: NextFunction) {
   } else {
     res.status(401).json({ mensaje: 'Invalid token' });
   }
-}
+}*/
 
 // Almacenar tokens válidos
-const validTokens = new Set<string>();
+//const validTokens = new Set<string>();
 
 // Función para obtener el hash de una contraseña
 export async function getHash(passwordString: string): Promise<string> {
