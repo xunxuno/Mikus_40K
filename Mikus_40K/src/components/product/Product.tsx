@@ -1,16 +1,31 @@
 // components/Product.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllProducts } from '../../controllers/ProductController';
+import { getAllProducts } from '../../controllers/ProductController'; // Importamos la función desde el controlador
+import type { Product } from '../../models/ProductModel'; // Importación tipo-only para Product
 import './Product.css';
 
 const Product: React.FC = () => {
-  const products = getAllProducts();
+  const [products, setProducts] = useState<Product[]>([]); // Define el tipo de products como Product[]
   const [wishlist, setWishlist] = useState<number[]>(() => {
     // Cargar wishlist desde localStorage al cargar el componente
     const savedWishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     return savedWishlist;
   });
+
+  useEffect(() => {
+    // Obtener productos al cargar el componente
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts = await getAllProducts();
+        setProducts(fetchedProducts); // Establecer productos en el estado
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []); // Este efecto solo se ejecuta una vez al cargar el componente
 
   // Función para alternar el estado de wishlist
   const toggleWishlist = (productId: number) => {
@@ -27,9 +42,9 @@ const Product: React.FC = () => {
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`} className="product-link">
-            <img src={product.imageUrl} alt={product.name} className="product-image" />
-            <h3>{product.name}</h3>
-            <p className="description">{product.description}</p>
+            <img src={product.image_path} alt={product.product_Name} className="product-image" />
+            <h3>{product.product_Name}</h3>
+            <p className="description">{product.product_Description}</p>
             <p className="price">${product.price}</p>
             <p className="shipping">Envío: {product.shippingType}</p>
           </Link>

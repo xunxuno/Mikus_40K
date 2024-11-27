@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
-import { products } from '../../models/ProductModel'; // Importamos los productos directamente desde el modelo
+import { obtenerProductos } from '../../models/ProductModel'; // Importamos la función para obtener productos desde la API
 
 const Sidebar: React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
-    // Extraemos solo las imágenes de los productos
-    const imageUrls = products.map((product) => product.imageUrl);
-    
-    // Puedes repetir las imágenes si lo deseas para hacer que se vean más
-    setImages([...imageUrls, ...imageUrls, ...imageUrls]);
+    const fetchImages = async () => {
+      try {
+        // Llamamos a la API para obtener los productos
+        const products = await obtenerProductos();
+        // Extraemos las URLs de las imágenes
+        const imageUrls = products.map((product) => product.imageUrl);
+        // Opcionalmente duplicamos las imágenes para mayor visibilidad
+        setImages([...imageUrls, ...imageUrls, ...imageUrls]);
+      } catch (error) {
+        console.error('Error al obtener imágenes para el sidebar:', error);
+      }
+    };
+
+    fetchImages();
   }, []);
 
   return (
