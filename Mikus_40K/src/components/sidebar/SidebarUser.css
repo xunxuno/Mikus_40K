@@ -39,7 +39,7 @@
   margin-bottom: 10px;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #FFD700; /* Amarillo dorado (detalles de Warhammer 40k) */
+  color: #4284ff; /* Amarillo dorado (detalles de Warhammer 40k) */
 }
 
 .sidebar-section ul {
@@ -57,7 +57,7 @@
   padding: 10px;
   background-color: #39C5BB; /* Turquesa (Hatsune Miku) */
   border: 1px solid #4b4b4b; /* Gris oscuro */
-  color: #1F1F1F; /* Gris muy oscuro para contraste */
+  color: #ffffff; /* Gris muy oscuro para contraste */
   border-radius: 5px;
   cursor: pointer;
   text-align: left;
