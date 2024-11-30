@@ -49,7 +49,7 @@ body {
 /* Efecto de enfoque (focus) en los campos de entrada */
 .square_login input:focus {
     border-color: #003392; /* Bordes turquesa al hacer foco */
-    background-color: #000000; /* Fondo blanco al hacer foco */
+    background-color: #eeeded; /* Fondo blanco al hacer foco */
     outline: none;
 }
 

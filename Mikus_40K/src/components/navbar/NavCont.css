@@ -7,7 +7,7 @@
   justify-content: space-between; /* Cambia a 'space-between' para distribuir los elementos */
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 1110;
   padding: 0 20px;
   width: 100%; /* Usa ancho completo para mejor responsividad */
   box-sizing: border-box; /* Para que el padding no afecte el ancho total */
@@ -78,7 +78,7 @@ border-color: #0eeadf;
   box-sizing: border-box;
   position: fixed;
   top: 80px; /* Coloca el sub-navbar justo debajo del navbar principal */
-  z-index: 1000; /* Un índice menor para mantenerlo debajo del navbar principal */
+  z-index: 1110; /* Un índice menor para mantenerlo debajo del navbar principal */
 }
 
 
