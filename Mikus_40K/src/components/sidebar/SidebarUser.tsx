@@ -9,7 +9,8 @@ import './SidebarUser.css';
 
 function SidebarUser() {
   const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
-  const { token, username } = useSelector((state: RootState) => state.auth); // Obtener token y username
+  const { token, userName } = useSelector((state: RootState) => state.auth); // Obtener token y username
+  console.log(userName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ function SidebarUser() {
           <ul>
             {token ? (
               <div>
-                <p>Hola, {username}</p> {/* Mostrar el nombre de usuario si está logueado */}
+                <p>Hola, {userName}</p> {/* Mostrar el nombre de usuario si está logueado */}
               </div>
             ) : (
               <li><button onClick={goToLogin}>Iniciar sesión</button></li>

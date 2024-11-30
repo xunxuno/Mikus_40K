@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();  // Inicializa useNavigate
-  const { username: loggedUsername, token } = useSelector((state: RootState) => state.auth);
+  const { userName: loggedUsername, token } = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Login: React.FC = () => {
           setMessageType('success');
           
           dispatch(login({
-            username: email,     // Utiliza el email como username
+            userName: response.result.userName,     // Utiliza el email como username
             password: password,  // Guarda la contraseña también
             token: response.result.token,
             userId: response.result.userId

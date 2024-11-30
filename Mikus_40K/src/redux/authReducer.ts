@@ -1,11 +1,13 @@
 interface AuthState {
     token: string | null;
     userId: number | null;
+    userName: string | null;
   }
   
   const initialState: AuthState = {
     token: null,
     userId: null,
+    userName: null,
   };
   
   const authReducer = (state = initialState, action: any): AuthState => {
@@ -15,6 +17,7 @@ interface AuthState {
           ...state,
           token: action.payload.token,
           userId: action.payload.userId,
+          userName: action.payload.userName,
         };
       default:
         return state;
