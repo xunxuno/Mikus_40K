@@ -27,7 +27,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad más alta */
-  z-index: 1000; /* El overlay debe estar justo por debajo del sidebar */
+  z-index: 2000; /* El overlay debe estar justo por debajo del sidebar */
 }
 
 /* Estilo para las secciones dentro del sidebar */
