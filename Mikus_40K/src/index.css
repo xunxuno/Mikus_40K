@@ -17,7 +17,7 @@ html, body {
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  background: #FFFAFA !important; /* 2b2b2b */
+  background: #f4f4f9 !important; /* 2b2b2b */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,7 +33,7 @@ body {
   display: flex;
   flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
   font-family: inherit; /* Usando la misma fuente global */
-  background: #FFFAFA !important; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
+  background: #f4f4f9 !important; /* Gradiente que combina Warhammer 40k y Hatsune Miku */
 }
 
 /* Contenedor principal de la página */

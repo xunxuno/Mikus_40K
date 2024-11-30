@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
-import { obtenerProductos, Product } from '../../models/ProductModel'; // Importamos la función para obtener productos desde el modelo
+import { obtenerProductos, Product } from '../../models/ProductModel';
 
 const Cart: React.FC = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchCartProducts = async () => {
       try {
         const products = await obtenerProductos(); // Obtenemos los productos desde la API
-        // Inicialmente, asumimos que todos los productos están en el carrito
         setCartProducts(products);
       } catch (error) {
         console.error('Error al obtener productos para el carrito:', error);
@@ -17,16 +17,33 @@ const Cart: React.FC = () => {
     };
 
     fetchCartProducts();
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Definir si es móvil según el ancho de la ventana
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Ejecutar al inicio para verificar el tamaño inicial de la pantalla
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
-  // Calcular el total de la compra
+  // Calcular el total de la compra, incluyendo los precios de envío como parte del total final.
   const calculateTotal = () => {
     return cartProducts
-      .reduce((total, item) => total + item.price * item.quantity + (item.shippingPrice || 0), 0)
+      .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
   };
 
-  // Manejar el aumento de la cantidad
+  // Calcular el total de envío, solo sumando los costos de envío de los productos
+  const calculateShipping = () => {
+    return cartProducts
+      .reduce((shipping, item) => shipping + (item.shippingPrice || 0), 0)
+      .toFixed(2);
+  };
+
   const increaseQuantity = (id: number) => {
     setCartProducts(
       cartProducts.map((product) =>
@@ -35,7 +52,6 @@ const Cart: React.FC = () => {
     );
   };
 
-  // Manejar la reducción de la cantidad
   const decreaseQuantity = (id: number) => {
     setCartProducts(
       cartProducts.map((product) =>
@@ -46,14 +62,13 @@ const Cart: React.FC = () => {
     );
   };
 
-  // Eliminar un producto del carrito (con animación)
   const removeProduct = (id: number) => {
     const productToRemove = document.getElementById(`product-${id}`);
     if (productToRemove) {
       productToRemove.classList.add('remove-animation');
       setTimeout(() => {
         setCartProducts(cartProducts.filter((product) => product.id !== id));
-      }, 500); // Espera el tiempo de la animación para eliminar el producto
+      }, 500);
     }
   };
 
@@ -61,14 +76,13 @@ const Cart: React.FC = () => {
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
 
-      {/* Tabla de productos */}
       <table className="cart-table">
         <thead>
           <tr>
             <th>Producto</th>
-            <th>Descripción</th>
+            {!isMobile && <th>Descripción</th>} {/* Solo mostrar columna de descripción si no es móvil */}
             <th>Precio</th>
-            <th>Envío</th>
+            {!isMobile && <th className="shipping-column">Envío</th>} {/* Solo mostrar columna de envío si no es móvil */}
             <th>Cantidad</th>
             <th>Total</th>
             <th>Eliminar</th>
@@ -84,9 +98,11 @@ const Cart: React.FC = () => {
                   className="cart-item-image"
                 />
               </td>
-              <td>{item.product_Description}</td>
+              {!isMobile && <td>{item.product_Description}</td>} {/* Solo mostrar descripción si no es móvil */}
               <td>${item.price.toFixed(2)}</td>
-              <td>{item.shippingPrice ? `$${item.shippingPrice.toFixed(2)}` : 'Gratis'}</td>
+              {!isMobile && <td className="shipping-column">
+                {item.shippingPrice ? `$${item.shippingPrice.toFixed(2)}` : 'Gratis'}
+              </td>} {/* Solo mostrar envío si no es móvil */}
               <td>
                 <button
                   onClick={() => increaseQuantity(item.id)}
@@ -132,9 +148,19 @@ const Cart: React.FC = () => {
           <span>Total:</span>
           <span>${calculateTotal()}</span>
         </div>
+        {!isMobile && (
+          <div className="summary-item">
+            <span>Total de Envío:</span>
+            <span>${calculateShipping()}</span>
+          </div>
+        )}
         <div className="summary-item total">
           <span>Total a Pagar:</span>
-          <span>${calculateTotal()}</span>
+          <span>
+            ${(
+              parseFloat(calculateTotal()) + parseFloat(calculateShipping())
+            ).toFixed(2)}
+          </span>
         </div>
         <button className="checkout-button">Proceder al pago</button>
       </div>

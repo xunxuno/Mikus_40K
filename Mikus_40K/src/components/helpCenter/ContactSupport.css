@@ -1,28 +1,82 @@
 /* src/components/ContactSupport.css */
 
 .contact-support-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    min-height: 100vh;
-    text-align: center;
-    color: #000000; /* Color de texto del navbar-text */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: 'Noto Sans', sans-serif;  /* Fuente moderna */
+  background-color: #f7f7f7;  /* Fondo de la página en un tono suave */
+  min-height: 100vh;
+  text-align: center;
+  color: #333;  /* Color de texto más suave */
+}
+
+.contact-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;  /* Bordes redondeados para un estilo más suave */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  width: 100%;
+  max-width: 600px;  /* Limitar el ancho máximo */
+  margin: 0 auto;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #003392;  /* Color vibrante para el título */
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.contact-info {
+  font-size: 1.125rem;
+  margin: 15px 0;
+  color: #555;  /* Color de texto para la información */
+  line-height: 1.6;
+}
+
+.contact-info strong {
+  font-weight: bold;
+  color: #003392;  /* Color del texto importante */
+}
+
+.contact-details {
+  margin-top: 20px;
+}
+
+.contact-detail {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.contact-icons a {
+  color: #003392;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.contact-icons a:hover {
+  color: #0077b6;
+}
+
+/* Responsividad: mejorar en pantallas pequeñas */
+@media (max-width: 600px) {
   .contact-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #003392; /* Texto blanco para el título */
+      font-size: 2rem;
   }
-   
   .contact-info {
-    font-size: 1rem;
-    margin: 10px 0;
+      font-size: 1rem;
   }
-  
-  .contact-detail {
-    color: #000000; /* Azul claro del tema */
-  }
+}
