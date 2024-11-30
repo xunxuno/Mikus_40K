@@ -3,6 +3,7 @@
   color: #fff;
   padding: 20px 10px;
   font-size: 14px;
+
   z-index: 1100;
   position: relative;
 }
@@ -59,4 +60,6 @@ html, body {
 
 .App {
   flex: 1; /* Asegura que el contenido principal ocupe el espacio disponible */
+
 }
+
