@@ -9,7 +9,7 @@
   color: #39C5BB; /* Turquesa (Hatsune Miku) */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombras más notorias */
-  z-index: 1102; /* Asegúrate de que el sidebar esté encima del overlay */
+  z-index: 2001; /* Asegúrate de que el sidebar esté encima del overlay */
   overflow-y: auto; /* Esto permite que el sidebar tenga scroll vertical cuando sea necesario */
   transition: left 0.3s ease; /* Transición para que el sidebar se deslice */
 }
@@ -39,7 +39,7 @@
   margin-bottom: 10px;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #FFD700; /* Amarillo dorado (detalles de Warhammer 40k) */
+  color: #4284ff; /* Amarillo dorado (detalles de Warhammer 40k) */
 }
 
 .sidebar-section ul {
@@ -57,7 +57,7 @@
   padding: 10px;
   background-color: #39C5BB; /* Turquesa (Hatsune Miku) */
   border: 1px solid #4b4b4b; /* Gris oscuro */
-  color: #1F1F1F; /* Gris muy oscuro para contraste */
+  color: #ffffff; /* Gris muy oscuro para contraste */
   border-radius: 5px;
   cursor: pointer;
   text-align: left;

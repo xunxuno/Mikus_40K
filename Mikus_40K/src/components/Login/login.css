@@ -1,6 +1,6 @@
 /* Estilo general para el fondo de la página */
 body {
-    background-color: #39C5BB; /* Color de fondo verde turquesa */
+    
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -17,7 +17,7 @@ body {
 
 /* Estilo general para el login */
 .login {
-    background-color: #ffffff;
+
     padding: 40px;
     border-radius: 10px;
     width: 100%;
@@ -28,7 +28,7 @@ body {
 
 /* Título del login */
 .login h3 {
-    color: #2c3e50;
+    color: #003392;
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -41,15 +41,15 @@ body {
     border: 1px solid #2c3e50; /* Bordes oscuros para un buen contraste */
     border-radius: 5px;
     font-size: 1rem;
-    background-color: #ecf0f1; /* Fondo suave para los inputs */
-    color: #2c3e50; /* Texto oscuro */
+   
+    color: #000000; /* Texto oscuro */
     transition: all 0.3s ease;
 }
 
 /* Efecto de enfoque (focus) en los campos de entrada */
 .square_login input:focus {
-    border-color: #39C5BB; /* Bordes turquesa al hacer foco */
-    background-color: #ffffff; /* Fondo blanco al hacer foco */
+    border-color: #003392; /* Bordes turquesa al hacer foco */
+    background-color: #000000; /* Fondo blanco al hacer foco */
     outline: none;
 }
 
@@ -57,10 +57,10 @@ body {
 .login button {
     width: 100%;
     padding: 12px;
-    background-color: #39C5BB; /* Botón con el color de fondo */
+    background-color: #003392; /* Botón con el color de fondo */
     border: none;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -68,12 +68,12 @@ body {
 
 /* Efecto de hover en el botón */
 .login button:hover {
-    background-color: #16A085; /* Cambia el verde a un tono más oscuro al pasar el ratón */
+    background-color: #003392; /* Cambia el verde a un tono más oscuro al pasar el ratón */
 }
 
 /* Estilo para los párrafos dentro del formulario */
 .square_login p {
-    color: #2c3e50;
+    color: #000000;
     font-size: 1rem;
     margin: 10px 0;
 }
