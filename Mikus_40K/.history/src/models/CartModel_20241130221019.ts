@@ -2,7 +2,7 @@ import axiosInstance from './axiosInstance';
 
 // Interfaz para los productos en el carrito
 export interface CartItem {
-  id?: number;
+  id: number;
   productId: number;
   quantity: number;
   price: number;
@@ -45,13 +45,10 @@ export const addProductToCart = async (
   product: Omit<CartItem, 'price'>
 ): Promise<{ mensaje: string }> => {
   try {
-    const payload = {
+    const response = await axiosInstance.post('/api/cart/items', {
       secureData: { email },
-      productId: product.productId,
-      quantity: product.quantity,
-    };
-
-    const response = await axiosInstance.post('/api/cart/items', payload);
+      product,
+    });
 
     console.log('Producto agregado al carrito:', response.data);
     return response.data; // Mensaje de confirmación del servidor

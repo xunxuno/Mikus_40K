@@ -3,7 +3,6 @@ import carouselReducer from './carouselSlice';
 import sidebarReducer from './sidebarSlice';
 import authReducer from './authSlice';
 import { authMiddleware } from '../middlewares/authMiddleware';
-import cartReducer from './cartSlice';
 
 
 const store = configureStore({
@@ -11,7 +10,6 @@ const store = configureStore({
     carousel: carouselReducer,
     sidebar: sidebarReducer,
     auth: authReducer,
-    cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authMiddleware),
 });

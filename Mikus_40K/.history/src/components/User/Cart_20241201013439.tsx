@@ -3,25 +3,24 @@ import './Cart.css';
 import { Product } from '../../models/ProductModel';
 import { CartController } from '../../controllers/cartController';
 import ProductComponent from '../product/Product';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, clearCart } from '../../redux/cartSlice';
-import { RootState } from '../../redux/store';
-import { CartItem } from '../../models/CartModel';
 import { getAllProducts } from '../../controllers/ProductController';
 
-const Cart: React.FC = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-  //const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
 
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const dispatch = useDispatch();
+interface CartItem {
+  productId: number;
+  quantity: number;
+}
+
+const Cart: React.FC = () => {
+  const [cartProducts, setCartProducts] = useState<Product[]>([]); // Productos del servidor
+  const [localCart, setLocalCart] = useState<CartItem[]>([]); // Carrito falso
+  const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
 
   // Cargar productos desde el servidor
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetchedProducts = await getAllProducts();
+        const fetchedProducts = await getAllProducts(); // Asegúrate de que esta función traiga los productos
         setCartProducts(fetchedProducts);
       } catch (error) {
         console.error('Error al cargar productos:', error);
@@ -30,16 +29,40 @@ const Cart: React.FC = () => {
     fetchProducts();
   }, []);
 
-  // Sincronizar carrito con el servidor
+  // Función para añadir un producto al carrito falso
+  const addToLocalCart = (productId: number) => {
+    setLocalCart((prevCart) => {
+      const updatedCart = [...prevCart];
+      const index = updatedCart.findIndex((item) => item.productId === productId);
+
+      if (index !== -1) {
+        updatedCart[index].quantity += 1;
+      } else {
+        updatedCart.push({ productId, quantity: 1 });
+      }
+
+      return updatedCart;
+    });
+  };
+
+  // Sincronizar carrito local con productos disponibles
+  useEffect(() => {
+    const syncLocalCart = () => {
+      setLocalCart((prevCart) =>
+        prevCart.filter((item) =>
+          cartProducts.some((product) => product.id === item.productId)
+        )
+      );
+    };
+    syncLocalCart();
+  }, [cartProducts]);
+
+  // Enviar el carrito falso al servidor
   const handleCheckout = async () => {
     const failedItems: CartItem[] = [];
     try {
-      for (const item of cartItems) {
-        const success = await CartController.addItemToCart(userEmail!, {
-          productId: item.productId,
-          quantity: item.quantity,
-        });
-        console.log('email: ', userEmail);        
+      for (const item of localCart) {
+        const success = await CartController.addItemToCart(userEmail, item);
         if (!success) {
           failedItems.push(item);
         }
@@ -50,33 +73,17 @@ const Cart: React.FC = () => {
         alert('Algunos productos no pudieron ser sincronizados.');
       } else {
         console.log('Carrito sincronizado con el servidor');
-        dispatch(clearCart());
+        setLocalCart([]); // Limpiar el carrito local tras el envío
       }
     } catch (error) {
       console.error('Error general al sincronizar el carrito:', error);
     }
   };
 
-  // Manejar agregar productos al carrito
-  const handleAddToCart = (productId: number) => {
-    const product = cartProducts.find((item) => item.id === productId);
-    if (product) {
-      const cartItem: CartItem = {
-        productId: product.id,
-        quantity: 1,
-        price: product.price || 0,
-        product_Name: product.product_Name,
-        product_Description: product.product_Description,
-        imageUrl: product.image_path,
-      };
-      dispatch(addToCart(cartItem));
-    }
-  };
-
   return (
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
-      <ProductComponent addToLocalCart={(productId: number) => handleAddToCart(productId)} />
+      <ProductComponent addToLocalCart={addToLocalCart} />
       <table className="cart-table">
         <thead>
           <tr>
@@ -90,10 +97,13 @@ const Cart: React.FC = () => {
             <tr key={item.id}>
               <td>{item.product_Name}</td>
               <td>
-                {cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity ?? 0}
+                {
+                  localCart.find((cartItem) => cartItem.productId === item.id)
+                    ?.quantity || 0
+                }
               </td>
               <td>
-                <button onClick={() => handleAddToCart(item.id)}>Agregar</button>
+                <button onClick={() => addToLocalCart(item.id)}>Agregar</button>
               </td>
             </tr>
           ))}
@@ -103,8 +113,9 @@ const Cart: React.FC = () => {
         Total: $
         {cartProducts.reduce((total, item) => {
           const quantity =
-            cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity || 0;
-          return total + (item.price || 0) * quantity;
+            localCart.find((cartItem) => cartItem.productId === item.id)?.quantity ||
+            0;
+          return total + item.price * quantity;
         }, 0)}
       </h2>
       <button className="checkout-button" onClick={handleCheckout}>

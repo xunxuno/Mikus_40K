@@ -17,18 +17,18 @@ const Product: React.FC<ProductProps> = ({ addToLocalCart }) => {
   });
 
   useEffect(() => {
+    // Obtener productos al cargar el componente
     const fetchProducts = async () => {
       try {
-        const fetchedProducts = await getAllProducts(); // Cambia esto a tu API real
-        setProducts(fetchedProducts);
+        const fetchedProducts = await getAllProducts();
+        setProducts(fetchedProducts); // Establecer productos en el estado
       } catch (error) {
         console.error('Error al cargar productos:', error);
       }
     };
-  
+
     fetchProducts();
-  }, []);
-   // Este efecto solo se ejecuta una vez al cargar el componente
+  }, []); // Este efecto solo se ejecuta una vez al cargar el componente
 
   // Función para alternar el estado de wishlist
   const toggleWishlist = (productId: number) => {

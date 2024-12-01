@@ -11,8 +11,7 @@ import { getAllProducts } from '../../controllers/ProductController';
 
 const Cart: React.FC = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-  //const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
+  const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
@@ -35,11 +34,10 @@ const Cart: React.FC = () => {
     const failedItems: CartItem[] = [];
     try {
       for (const item of cartItems) {
-        const success = await CartController.addItemToCart(userEmail!, {
+        const success = await CartController.addItemToCart(userEmail, {
           productId: item.productId,
           quantity: item.quantity,
         });
-        console.log('email: ', userEmail);        
         if (!success) {
           failedItems.push(item);
         }

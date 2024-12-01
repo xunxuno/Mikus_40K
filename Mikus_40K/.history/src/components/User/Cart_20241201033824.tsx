@@ -11,8 +11,8 @@ import { getAllProducts } from '../../controllers/ProductController';
 
 const Cart: React.FC = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-  //const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
+  //const userEmail = useSelector((state: RootState) => state.auth.userEmail);
+  const userEmail = 'd@d'; // Reemplaza con el email real del usuario
 
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();

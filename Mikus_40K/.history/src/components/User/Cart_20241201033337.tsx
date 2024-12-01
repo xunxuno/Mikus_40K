@@ -38,8 +38,7 @@ const Cart: React.FC = () => {
         const success = await CartController.addItemToCart(userEmail!, {
           productId: item.productId,
           quantity: item.quantity,
-        });
-        console.log('email: ', userEmail);        
+        });        
         if (!success) {
           failedItems.push(item);
         }

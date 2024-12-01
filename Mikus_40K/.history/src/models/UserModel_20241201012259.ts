@@ -11,7 +11,6 @@ export interface LoginResponse {
   token: string;
   userId: number;
   userName: string;
-  userEmail: string;
 }
 
 export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaje: string }> => {
@@ -47,14 +46,13 @@ export async function logearUsuario(email: string, password: string): Promise<Lo
       },
     });
 
-    const { token, userId, userName, userEmail} = response.data; // Asegúrate de que tu API devuelve estos campos
+    const { token, userId, userName} = response.data; // Asegúrate de que tu API devuelve estos campos
     console.log('Token recibido:', token);
     console.log('UserId recibido:', userId);
     console.log('UserName recibido:', userName);
-    console.log('email recibido:', userEmail);
     console.log('Respuesta del servidor:', response.data);
 
-    return { token, userId, userName, userEmail };
+    return { token, userId, userName };
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error al obtener usuario por nombre:', error.message);

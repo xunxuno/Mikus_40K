@@ -51,7 +51,7 @@ export async function logearUsuario(email: string, password: string): Promise<Lo
     console.log('Token recibido:', token);
     console.log('UserId recibido:', userId);
     console.log('UserName recibido:', userName);
-    console.log('email recibido:', userEmail);
+    console.log('UserName recibido:', userEmail);
     console.log('Respuesta del servidor:', response.data);
 
     return { token, userId, userName, userEmail };

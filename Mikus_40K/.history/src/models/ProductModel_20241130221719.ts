@@ -6,7 +6,7 @@ export interface Product {
   product_Name: string;
   price: number;
   product_Description: string;
-  image_path: string;
+  image_path?: string;
   shippingType: string;
   shippingPrice?: number;
   //category?: 'Miku' | 'Warhammer';

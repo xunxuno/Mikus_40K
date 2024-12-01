@@ -1,4 +1,4 @@
-import { getOrCreateCart, addProductToCart, Cart,  CartItem} from '../models/CartModel';
+import { getOrCreateCart, addProductToCart, CartItem, Cart } from '../models/CartModel';
 
 export const CartController = {
   // Obtener o crear un carrito
@@ -13,16 +13,17 @@ export const CartController = {
     }
   },
 
-  async addItemToCart(userEmail: string, product: Omit<CartItem, 'price'>): Promise<boolean> {
+  // Agregar un producto al carrito
+  async addItemToCart(email: string, product: { productId: number; quantity: number }): Promise<boolean> {
     try {
-      const response = await addProductToCart(userEmail, product);
+      const response = await addProductToCart(email, product);
       console.log(response.mensaje);
       return true;
     } catch (error: unknown) {
       console.error('Error al agregar producto al carrito:', error);
-      console.log('product: ', product);
-      console.log('email: ', userEmail);
       return false;
     }
   }
+  ,
+
 };

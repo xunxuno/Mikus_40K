@@ -13,15 +13,14 @@ export const CartController = {
     }
   },
 
-  async addItemToCart(userEmail: string, product: Omit<CartItem, 'price'>): Promise<boolean> {
+  async addItemToCart(email: string, product: Omit<CartItem, 'price'>): Promise<boolean> {
     try {
-      const response = await addProductToCart(userEmail, product);
+      const response = await addProductToCart(email, product);
+      console.log('product: ', product);
       console.log(response.mensaje);
       return true;
     } catch (error: unknown) {
       console.error('Error al agregar producto al carrito:', error);
-      console.log('product: ', product);
-      console.log('email: ', userEmail);
       return false;
     }
   }

@@ -41,12 +41,12 @@ export const getOrCreateCart = async (email: string): Promise<Cart> => {
 
 // Función para añadir un producto al carrito
 export const addProductToCart = async (
-  email: string,
+  userId: number,
   product: Omit<CartItem, 'price'>
 ): Promise<{ mensaje: string }> => {
   try {
     const payload = {
-      secureData: { email },
+      secureData: { userId },
       productId: product.productId,
       quantity: product.quantity,
     };

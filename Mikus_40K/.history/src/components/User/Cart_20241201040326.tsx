@@ -32,6 +32,8 @@ const Cart: React.FC = () => {
 
   // Sincronizar carrito con el servidor
   const handleCheckout = async () => {
+    console.log('localStorage userEmail:', localStorage.getItem('userEmail'));
+
     const failedItems: CartItem[] = [];
     try {
       for (const item of cartItems) {

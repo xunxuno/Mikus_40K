@@ -8,8 +8,8 @@ export interface Product {
   product_Description: string;
   image_path: string;
   shippingType: string;
-  shippingPrice?: number;
-  //category?: 'Miku' | 'Warhammer';
+  shippingPrice: number;
+  category: 'Miku' | 'Warhammer';
   quantity: number;
   /*size: string;  // Agregar tamaño
   weight: string; // Agregar peso

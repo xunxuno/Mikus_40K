@@ -52,6 +52,7 @@ export const addProductToCart = async (
     };
 
     const response = await axiosInstance.post('/api/cart/items', payload);
+    console.log('payload: ', payload);
 
     console.log('Producto agregado al carrito:', response.data);
     return response.data; // Mensaje de confirmación del servidor
