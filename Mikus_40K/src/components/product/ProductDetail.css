@@ -92,3 +92,19 @@
 .add-to-cart-btn:focus {
     outline: none;
 }
+
+.add-to-cart-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #86ecec; /* Color pastel */
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #67b6b6;
+  }
