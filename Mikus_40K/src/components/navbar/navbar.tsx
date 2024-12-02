@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
         <input type="text" placeholder="Buscar..." />
       </div>
 
-      <p className="navbar-text">{userName || 'Mikus_40K'}</p>
+      <p className="navbar-text">{userName || ''}</p>
 
       <div className="auth-buttons">
         {!token ? (  // Si no hay token, mostrar login y register
