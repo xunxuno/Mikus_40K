@@ -76,7 +76,6 @@ const Cart: React.FC = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
-      <ProductComponent addToLocalCart={(productId: number) => handleAddToCart(productId)} />
       <table className="cart-table">
         <thead>
           <tr>
