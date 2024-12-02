@@ -2,7 +2,7 @@
 .sidebar {
   width: 250px; /* Tamaño del sidebar en pantallas grandes */
   height: 100vh; /* Ocupa toda la altura de la página */
-  background-color: #FFFAFA;
+  background-color: #f4f4f9;
   color: white;
   position: fixed;
   top: 0;

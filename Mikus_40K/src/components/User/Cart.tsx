@@ -1,143 +1,114 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
-import { obtenerProductos, Product } from '../../models/ProductModel'; // Importamos la función para obtener productos desde el modelo
+import { Product } from '../../models/ProductModel';
+import { CartController } from '../../controllers/cartController';
+import ProductComponent from '../product/Product';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart, clearCart } from '../../redux/cartSlice';
+import { RootState } from '../../redux/store';
+import { CartItem } from '../../models/CartModel';
+import { getAllProducts } from '../../controllers/ProductController';
 
 const Cart: React.FC = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
+  //const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
 
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
+
+  // Cargar productos desde el servidor
   useEffect(() => {
-    const fetchCartProducts = async () => {
+    const fetchProducts = async () => {
       try {
-        const products = await obtenerProductos(); // Obtenemos los productos desde la API
-        // Inicialmente, asumimos que todos los productos están en el carrito
-        setCartProducts(products);
+        const fetchedProducts = await getAllProducts();
+        setCartProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error al obtener productos para el carrito:', error);
+        console.error('Error al cargar productos:', error);
       }
     };
-
-    fetchCartProducts();
+    fetchProducts();
   }, []);
 
-  // Calcular el total de la compra
-  const calculateTotal = () => {
-    return cartProducts
-      .reduce((total, item) => total + item.price * item.quantity + (item.shippingPrice || 0), 0)
-      .toFixed(2);
+  // Sincronizar carrito con el servidor
+  const handleCheckout = async () => {
+    const failedItems: CartItem[] = [];
+    try {
+      for (const item of cartItems) {
+        const success = await CartController.addItemToCart(userEmail!, {
+          productId: item.productId,
+          quantity: item.quantity,
+        });
+        console.log('email: ', userEmail);        
+        if (!success) {
+          failedItems.push(item);
+        }
+      }
+
+      if (failedItems.length > 0) {
+        console.error('Error al sincronizar los siguientes productos:', failedItems);
+        alert('Algunos productos no pudieron ser sincronizados.');
+      } else {
+        console.log('Carrito sincronizado con el servidor');
+        dispatch(clearCart());
+      }
+    } catch (error) {
+      console.error('Error general al sincronizar el carrito:', error);
+    }
   };
 
-  // Manejar el aumento de la cantidad
-  const increaseQuantity = (id: number) => {
-    setCartProducts(
-      cartProducts.map((product) =>
-        product.id === id ? { ...product, quantity: product.quantity + 1 } : product
-      )
-    );
-  };
-
-  // Manejar la reducción de la cantidad
-  const decreaseQuantity = (id: number) => {
-    setCartProducts(
-      cartProducts.map((product) =>
-        product.id === id && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      )
-    );
-  };
-
-  // Eliminar un producto del carrito (con animación)
-  const removeProduct = (id: number) => {
-    const productToRemove = document.getElementById(`product-${id}`);
-    if (productToRemove) {
-      productToRemove.classList.add('remove-animation');
-      setTimeout(() => {
-        setCartProducts(cartProducts.filter((product) => product.id !== id));
-      }, 500); // Espera el tiempo de la animación para eliminar el producto
+  // Manejar agregar productos al carrito
+  const handleAddToCart = (productId: number) => {
+    const product = cartProducts.find((item) => item.id === productId);
+    if (product) {
+      const cartItem: CartItem = {
+        productId: product.id,
+        quantity: 1,
+        price: product.price || 0,
+        product_Name: product.product_Name,
+        product_Description: product.product_Description,
+        imageUrl: product.image_path,
+      };
+      dispatch(addToCart(cartItem));
     }
   };
 
   return (
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
-
-      {/* Tabla de productos */}
       <table className="cart-table">
         <thead>
           <tr>
             <th>Producto</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Envío</th>
             <th>Cantidad</th>
-            <th>Total</th>
-            <th>Eliminar</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {cartProducts.map((item: Product) => (
-            <tr id={`product-${item.id}`} key={item.id}>
+          {cartProducts.map((item) => (
+            <tr key={item.id}>
+              <td>{item.product_Name}</td>
               <td>
-                <img
-                  src={item.imageUrl}
-                  alt={item.product_Name}
-                  className="cart-item-image"
-                />
-              </td>
-              <td>{item.product_Description}</td>
-              <td>${item.price.toFixed(2)}</td>
-              <td>{item.shippingPrice ? `$${item.shippingPrice.toFixed(2)}` : 'Gratis'}</td>
-              <td>
-                <button
-                  onClick={() => increaseQuantity(item.id)}
-                  className="quantity-button"
-                >
-                  +
-                </button>
-                <input
-                  type="text"
-                  value={item.quantity}
-                  readOnly
-                  className="quantity-input"
-                />
-                <button
-                  onClick={() => decreaseQuantity(item.id)}
-                  className={`quantity-button ${item.quantity <= 1 ? 'disabled' : ''}`}
-                  disabled={item.quantity <= 1}
-                >
-                  -
-                </button>
+                {cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity ?? 0}
               </td>
               <td>
-                ${(
-                  item.price * item.quantity +
-                  (item.shippingPrice || 0)
-                ).toFixed(2)}
-              </td>
-              <td>
-                <button
-                  onClick={() => removeProduct(item.id)}
-                  className="remove-button"
-                >
-                  🗑️
-                </button>
+                <button onClick={() => handleAddToCart(item.id)}>Agregar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <div className="cart-summary">
-        <div className="summary-item">
-          <span>Total:</span>
-          <span>${calculateTotal()}</span>
-        </div>
-        <div className="summary-item total">
-          <span>Total a Pagar:</span>
-          <span>${calculateTotal()}</span>
-        </div>
-        <button className="checkout-button">Proceder al pago</button>
-      </div>
+      <h2 className="cart-total">
+        Total: $
+        {cartProducts.reduce((total, item) => {
+          const quantity =
+            cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity || 0;
+          return total + (item.price || 0) * quantity;
+        }, 0)}
+      </h2>
+      <button className="checkout-button" onClick={handleCheckout}>
+        Comprar Ahora
+      </button>
     </div>
   );
 };

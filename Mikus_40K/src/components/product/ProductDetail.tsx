@@ -1,7 +1,9 @@
 // components/ProductDetail.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { getProductById } from '../../controllers/ProductDetailController'; // Importamos la función desde el controlador
+import { addToCart } from '../../redux/cartSlice'; // Importamos la acción de Redux
 import type { Product } from '../../models/ProductModel'; // Importación tipo-only para Product
 import './ProductDetail.css';
 
@@ -9,6 +11,22 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Obtenemos el id de los parámetros de la URL
   const [product, setProduct] = useState<Product | null>(null); // Estado para almacenar el producto
   const [loading, setLoading] = useState<boolean>(true); // Estado de carga
+  const dispatch = useDispatch(); // Hook para disparar acciones de Redux
+
+  // Función para manejar el agregado al carrito
+  const handleAddToCart = () => {
+    if (product) {
+      const cartItem = {
+        productId: product.id,
+        quantity: 1,
+        price: product.price,
+        product_Name: product.product_Name,
+        product_Description: product.product_Description,
+        imageUrl: product.imageUrl,
+      };
+      dispatch(addToCart(cartItem)); // Enviamos el producto al carrito en Redux
+    }
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -50,6 +68,12 @@ const ProductDetail: React.FC = () => {
           <div className="product-weight">
             <strong>Peso:</strong> {product.weight}
           </div>
+          <button
+            className="add-to-cart-button"
+            onClick={handleAddToCart}
+          >
+            Agregar al carrito
+          </button>
         </div>
       </div>
     </div>

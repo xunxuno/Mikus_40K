@@ -25,15 +25,18 @@ const Login: React.FC = () => {
         if (response.result) {
           setMessage('¡Inicio de sesión exitoso!');
           setMessageType('success');
-          dispatch(
-            login({
-              userName: response.result.userName,
-              password: password,
-              token: response.result.token,
-              userId: response.result.userId,
-            })
-          );
-          navigate('/');
+
+          dispatch(login({
+            userName: response.result.userName,     // Utiliza el email como username
+            password: password,  // Guarda la contraseña también
+            token: response.result.token,
+            userId: response.result.userId,
+            userEmail: response.result.userEmail,
+          }));
+
+          // Redirige a la página de inicio ("/")
+          navigate('/');  
+
         } else {
           setMessage(response.mensaje);
           setMessageType('error');
