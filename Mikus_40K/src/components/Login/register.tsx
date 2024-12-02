@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './register.css';
+import './register.css';  // Asegúrate de tener este archivo en el directorio adecuado
 import { registrarUsuario_ } from '../../controllers/userController'; 
 import { useNavigate } from 'react-router-dom'; 
 
@@ -21,22 +21,17 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Formulario enviado'); // Confirmar que se activó el evento submit
-    console.log('Datos del formulario:', formData);
     const { username, email, password, confirmPassword } = formData;
 
     if (password !== confirmPassword) {
-      console.log('Las contraseñas no coinciden');
       setMessage('Las contraseñas no coinciden');
       setMessageType('error');
       return;
     }
 
     try {
-        console.log('Intentando registrar usuario...');
         const response = await registrarUsuario_(username, email, password);
 
-        console.log('Respuesta del servidor:', response);
         setMessage(response.mensaje); // Usa el mensaje que devuelve tu backend
         setMessageType('success');
         setFormData({ username: '', email: '', password: '', confirmPassword: '' });
@@ -46,6 +41,10 @@ const Register: React.FC = () => {
       setMessageType('error');
     }
   };
+
+  // Controla la visibilidad del mensaje emergente
+  const showModal = messageType ? 'block' : 'none';
+
   return (
     <div className="register-container">
       <h3>Registrarse</h3>
@@ -101,12 +100,12 @@ const Register: React.FC = () => {
         <div className="form-group">
           <button type="submit">Registrarse</button>
         </div>
-        {message && (
-          <div className={`message ${messageType}`}>
-            {message}
-          </div>
-        )}
       </form>
+
+      {/* Ventana emergente para el mensaje */}
+      <div className="modal" style={{ display: showModal }}>
+        {message}
+      </div>
     </div>
   );
 };

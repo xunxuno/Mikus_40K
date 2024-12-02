@@ -7,12 +7,14 @@ const userId = localStorage.getItem('userId');
 const password = localStorage.getItem('password');
 const userEmail = localStorage.getItem('userEmail');
 
+
 interface AuthState {
   userName: string | null;
   token: string | null;
   password: string | null;
   userId: number | null;
   userEmail: string | null;
+
 }
 
 const initialState: AuthState = {
@@ -21,6 +23,7 @@ const initialState: AuthState = {
   password: password ? password : null,
   userId: userId ? Number(userId) : null,
   userEmail: userEmail ? userEmail : null,
+
 };
 
 const authSlice = createSlice({
@@ -32,14 +35,18 @@ const authSlice = createSlice({
       state.password = action.payload.password;
       state.token = action.payload.token;
       state.userId = action.payload.userId;
+
       state.userEmail = action.payload.userEmail;
+
 
       // Guardamos los datos en localStorage
       localStorage.setItem('userName', action.payload.userName);
       localStorage.setItem('password', action.payload.password);
       localStorage.setItem('token', action.payload.token);
       localStorage.setItem('userId', action.payload.userId.toString());
+
       localStorage.setItem('userEmail', action.payload.userEmail);
+
     },
     logout(state) {
       state.userName = null;
@@ -47,6 +54,7 @@ const authSlice = createSlice({
       state.token = null;
       state.userId = null;
       state.userEmail = null;
+
 
       // Limpiamos los datos de localStorage
       localStorage.removeItem('userName');

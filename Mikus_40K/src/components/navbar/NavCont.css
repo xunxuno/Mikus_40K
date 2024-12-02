@@ -15,25 +15,22 @@
 
 /* Estilo del botón con el ícono (con colores añadidos) */
 .navbar-icon {
-background: none;
-
-border-width: 3px;
-cursor: pointer;
-padding: 0px; /* Añadí un poco de padding para que sea más fácil hacer clic */
-display: flex;
-align-items: center;
-justify-content: center;
-position: static;
+  background: none;
+  border-width: 3px;
+  cursor: pointer;
+  padding: 0px; /* Añadí un poco de padding para que sea más fácil hacer clic */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: static;
 }
 
 .navbar-icon:hover {
-background-color: #0eeadf !important; /* Color de fondo al pasar el ratón */
-border-color: #0eeadf;
+  background-color: #0eeadf !important; /* Color de fondo al pasar el ratón */
+  border-color: #0eeadf;
 }
 
-
-
-
+/* Estilo del contenedor dentro del navbar */
 .navbar-container {  /* El contenedor que rodea el .navbar-text */
   display: flex;
   justify-content: flex-end;  /* Mueve todos los elementos dentro de este contenedor hacia la derecha */
@@ -45,6 +42,7 @@ border-color: #0eeadf;
   text-align: center; /* Alinea el texto al centro */
   margin-top: 10px;   /* Ajusta este valor para subir el texto */
 }
+
 /* Estilo de la barra de búsqueda */
 .search-bar {
   flex-grow: 1; /* Ocupa espacio disponible entre los elementos */
@@ -69,7 +67,7 @@ border-color: #0eeadf;
 /* Estilo del sub-navbar */
 .sub-navbar {
   height: 50px;
-  background-color: rgb(62, 62, 62) ; /* Un poco más claro que el navbar principal */
+  background-color: rgb(62, 62, 62); /* Un poco más claro que el navbar principal */
   display: flex;
   align-items: center;
   justify-content: center; /* Centrar elementos dentro del sub-navbar */
@@ -80,7 +78,6 @@ border-color: #0eeadf;
   top: 80px; /* Coloca el sub-navbar justo debajo del navbar principal */
   z-index: 1110; /* Un índice menor para mantenerlo debajo del navbar principal */
 }
-
 
 /* Estilo de los enlaces en el sub-navbar */
 .sub-navbar-links {
@@ -107,133 +104,117 @@ border-color: #0eeadf;
 
 /* Estilo de la imagen del logo dentro del navbar */
 .navbar-logo {
-display: inline-flex;
-height: 100%;
-align-items: center;
-margin-right: 10px;
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 10px;
 }
 
 .navbar-logo-img {
-width: 80px; /* Ajusta el tamaño según sea necesario */
-height: auto;
-object-fit: contain;
-}
-/* Estilo de la imagen del logo dentro del navbar */
-.navbar-logo {
-display: inline-flex;
-height: 100%;
-align-items: center;
-margin-right: 10px;
-}
-
-.navbar-logo-img {
-width: 80px; /* Ajusta el tamaño según sea necesario */
-height: auto;
-object-fit: contain;
-}
-
-/* Estilo de la imagen del logo dentro del navbar */
-.navbar-logo {
-display: inline-flex;
-height: 100%;
-align-items: center;
-margin-right: 10px;
-}
-
-.navbar-logo-img {
-width: 80px; /* Ajusta el tamaño según sea necesario */
-height: auto;
-object-fit: contain;
+  width: 80px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  object-fit: contain;
 }
 
 /* Media Queries */
 @media (max-width: 7680px) {
   .search-bar {
-      display: block; /* Oculta la barra de búsqueda en pantallas pequeñas */
+    display: block; /* Oculta la barra de búsqueda en pantallas pequeñas */
   }
 
   .navbar-icon {
-      display: block; /* Muestra el icono de menú en pantallas pequeñas */
+    display: block; /* Muestra el icono de menú en pantallas pequeñas */
   }
 
   .sub-navbar-links {
-      display: blocks; /* Ocultamos los enlaces inicialmente */
+    display: blocks; /* Ocultamos los enlaces inicialmente */
   }
 
   .sub-navbar.active .sub-navbar-links {
-      display: flex; /* Muestra los enlaces cuando está activo */
-      flex-direction: row; /* Organiza los enlaces en una fila horizontal */
-      gap: 10px; /* Añade espacio entre los enlaces */
-      align-items: center; /* Alinea los enlaces al centro verticalmente */
-      justify-content: flex-start; /* Alinea los enlaces a la izquierda */
-      width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
-      flex-wrap: nowrap; /* Evita que los enlaces se vayan a una nueva línea */
+    display: flex; /* Muestra los enlaces cuando está activo */
+    flex-direction: row; /* Organiza los enlaces en una fila horizontal */
+    gap: 10px; /* Añade espacio entre los enlaces */
+    align-items: center; /* Alinea los enlaces al centro verticalmente */
+    justify-content: flex-start; /* Alinea los enlaces a la izquierda */
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
+    flex-wrap: nowrap; /* Evita que los enlaces se vayan a una nueva línea */
   }
 
   .sub-navbar-links a {
-      text-decoration: none; /* Asegura que los enlaces no tengan subrayado */
-      color: inherit; /* Hereda el color del contenedor */
+    text-decoration: none; /* Asegura que los enlaces no tengan subrayado */
+    color: inherit; /* Hereda el color del contenedor */
   }
+
   /* Estilo para los botones de Login/Logout */
-.auth-buttons {
-display: flex;
-gap: 10px; /* Espacio entre los botones */
-}
+  .auth-buttons {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+  }
 
-/* Estilos para el botón de Login */
-.auth-buttons .login-btn {
-background-color: #0eeadf;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-font-size: 1rem;
-font-weight: bold;
-cursor: pointer;
-transition: background-color 0.3s ease, color 0.3s ease;
-}
+  /* Estilos para el botón de Login */
+  .auth-buttons .login-btn {
+    background-color: #0eeadf !important;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-.auth-buttons .login-btn:hover {
-background-color: #009f9f;
-color: white;
-}
+  .auth-buttons .login-btn:hover {
+    background-color: #009f9f !important;
+    color: white;
+  }
 
-/* Estilos para el botón de Logout */
-.auth-buttons .logout-btn {
-background-color: #ff4d4d; /* Color rojo para logout */
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-font-size: 1rem;
-font-weight: bold;
-cursor: pointer;
-transition: background-color 0.3s ease, color 0.3s ease;
-}
+  .auth-buttons .register-btn:hover {
+    background-color: #009f9f !important;
+    color: white;
+    border-color:#009f9f !important ;
+  }
 
-.auth-buttons .logout-btn:hover {
-background-color: #cc0000;
-color: white;
-}
+  .auth-buttons .profile-btn:hover {
+    background-color: #009f9f !important;
+    color: white;
+    border-color:#009f9f !important ;
+  }
 
-/* Estilo del botón del carrito de compras */
-.cart-button {
-background-color: #0eeadf;
-border: none;
-border-radius: 5px;
-color: white;
-font-size: 1rem;
-padding: 10px 15px;
-cursor: pointer;
-position: absolute;
-right: 20px; /* Ajusta la posición hacia la derecha */
-top: 50%; /* Centra verticalmente en el sub-navbar */
-transform: translateY(-50%);
-}
+  /* Estilos para el botón de Logout */
+  .auth-buttons .logout-btn {
+    background-color: #009f9f !important; /* Color rojo para logout */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-.cart-button:hover {
-background-color: #009f9f;
-}
+  .auth-buttons .logout-btn:hover {
+    background-color: #009f9f !important;
+    color: white;
+  }
 
+  /* Estilo del botón del carrito de compras */
+  .cart-button {
+    background-color: #0eeadf;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px; /* Ajusta la posición hacia la derecha */
+    top: 50%; /* Centra verticalmente en el sub-navbar */
+    transform: translateY(-50%);
+  }
 
+  .cart-button:hover {
+    background-color: #009f9f !important;
+  }
 }
