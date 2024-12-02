@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { Product } from '../../models/ProductModel';
 import { CartController } from '../../controllers/cartController';
-import ProductComponent from '../product/Product';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, clearCart } from '../../redux/cartSlice';
+import { addToCart, decreaseQuantity, clearCart, removeFromCart } from '../../redux/cartSlice';
 import { RootState } from '../../redux/store';
 import { CartItem } from '../../models/CartModel';
 import { getAllProducts } from '../../controllers/ProductController';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Cart: React.FC = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [isRemoving, setIsRemoving] = useState<number | null>(null);
   const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-  //const userEmail = 'user@example.com'; // Reemplaza con el email real del usuario
-
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -39,7 +39,6 @@ const Cart: React.FC = () => {
           productId: item.productId,
           quantity: item.quantity,
         });
-        console.log('email: ', userEmail);        
         if (!success) {
           failedItems.push(item);
         }
@@ -73,42 +72,73 @@ const Cart: React.FC = () => {
     }
   };
 
+  // Manejar disminuir cantidad
+  const handleDecreaseQuantity = (productId: number) => {
+    dispatch(decreaseQuantity(productId));
+  };
+
+  // Manejar eliminar producto con animación
+  const handleRemoveFromCart = (productId: number) => {
+    setIsRemoving(productId);
+    setTimeout(() => {
+      dispatch(removeFromCart(productId));  // Eliminar el producto después de la animación
+    }, 500); // Espera para que la animación ocurra antes de eliminar
+  };
+
   return (
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
       <table className="cart-table">
         <thead>
           <tr>
+            <th>Imagen</th>
             <th>Producto</th>
+            <th>Descripción</th>
+            <th>Tipo de Envío</th>
             <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {cartProducts.map((item) => (
-            <tr key={item.id}>
-              <td>{item.product_Name}</td>
-              <td>
-                {cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity ?? 0}
-              </td>
-              <td>
-                <button onClick={() => handleAddToCart(item.id)}>Agregar</button>
-              </td>
-            </tr>
-          ))}
+          {cartProducts.map((item) => {
+            const cartItem = cartItems.find((cartItem: CartItem) => cartItem.productId === item.id);
+            if (!cartItem || cartItem.quantity === 0) return null; // No mostrar si la cantidad es 0
+
+            return (
+              <tr key={item.id} className={isRemoving === item.id ? 'removing' : ''}>
+                <td>
+                  <img src={item.image_path} alt={item.product_Name} style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover' }} />
+                </td>
+                <td>{item.product_Name}</td>
+                <td>{item.product_Description}</td>
+                <td>{item.shippingType}</td>
+                <td>{cartItem.quantity}</td>
+                <td>
+                  <button onClick={() => handleAddToCart(item.id)} className="quantity-button">+</button>
+                  <button onClick={() => handleDecreaseQuantity(item.id)} className="quantity-button">-</button>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => handleRemoveFromCart(item.id)}
+                    className="remove-button"
+                  />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <h2 className="cart-total">
         Total: $
         {cartProducts.reduce((total, item) => {
-          const quantity =
-            cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity || 0;
+          const quantity = cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity || 0;
           return total + (item.price || 0) * quantity;
         }, 0)}
       </h2>
-      <button className="checkout-button" onClick={handleCheckout}>
-        Comprar Ahora
-      </button>
+      <div className="checkout-container">
+        <button className="checkout-button" onClick={handleCheckout}>
+          Comprar Ahora
+        </button>
+      </div>
     </div>
   );
 };

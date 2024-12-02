@@ -43,6 +43,13 @@ const cartSlice = createSlice({
       state.items = state.items.filter(item => item.productId !== action.payload);
       saveCartToLocalStorage(state.items);  // Guardamos el carrito actualizado en localStorage
     },
+    decreaseQuantity(state, action: PayloadAction<number>) {
+      const item = state.items.find(item => item.productId === action.payload);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      }
+      saveCartToLocalStorage(state.items);  // Guardamos el carrito actualizado en localStorage
+    },
     clearCart(state) {
       state.items = [];
       localStorage.removeItem('cart');  // Eliminamos el carrito de localStorage
@@ -56,6 +63,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, decreaseQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
