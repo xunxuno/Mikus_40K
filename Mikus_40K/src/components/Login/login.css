@@ -7,6 +7,44 @@ body {
     height: 100vh; /* Aseguramos que el body ocupe toda la altura */
 }
 
+/* Estilo del mensaje emergente */
+.modal {
+    display: none;
+    position: fixed;
+    top: 140px; /* Ajusta la distancia desde la parte superior */
+    right: -300px; /* Comienza fuera de la pantalla */
+    padding: 15px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    z-index: 3000;
+    text-align: center;
+    animation: slideIn 0.1s ease-out, fadeOut 5s 5s forwards; /* Agregamos la animación para desaparecer */
+    animation-fill-mode: forwards; /* Asegura que se mantenga en la posición final */
+}
+
+/* Animación de deslizamiento */
+@keyframes slideIn {
+    from {
+        right: -300px; /* Comienza fuera de la pantalla */
+    }
+    to {
+        right: 20px; /* Llega a la posición final */
+    }
+}
+
+/* Animación de desvanecimiento */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
 /* Contenedor de la página de login */
 .login-container {
     display: flex;
