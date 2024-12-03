@@ -45,7 +45,7 @@ const Wishlist: React.FC = () => {
           wishlistProducts.map((product) => (
             <div key={product.id} className="product-card">
               <Link to={`/product/${product.id}`} className="product-link">
-                <img src={product.image_path} alt={product.product_Name} className="product-image" />
+                <img src={product.imageUrl} alt={product.product_Name} className="product-image" />
                 <h3>{product.product_Name}</h3>
                 <p className="description">{product.product_Description}</p>
                 <p className="price">${product.price.toFixed(2)}</p>
