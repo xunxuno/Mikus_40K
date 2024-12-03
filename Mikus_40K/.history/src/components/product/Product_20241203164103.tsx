@@ -50,16 +50,14 @@ const Product: React.FC = () => {
 
       // Verificar si el producto ya está en el carrito
       const existingProduct = await getProductQuantityInCart(cart_id, product.id);
-      console.log('productos existentes: ', existingProduct);
 
-      if (existingProduct.quantity > 0) {
+      if (existingProduct>=1) {
         // Si el producto ya está en el carrito, actualizar la cantidad
         await updateProductQuantityInCart(userId, {
           productId: product.id,
-          quantity: existingProduct.quantity + 1,
+          quantity: existingProduct + 1, // Aumentamos la cantidad
           price: product.price || 0
         });
-        console.log('cantiadad actualizada a: ', existingProduct);
         alert(`La cantidad del producto "${product.product_Name}" fue actualizada en el carrito.`);
       } else {
         // Si el producto no está en el carrito, lo agregamos normalmente

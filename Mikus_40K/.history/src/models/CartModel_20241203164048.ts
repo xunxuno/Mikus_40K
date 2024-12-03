@@ -119,12 +119,12 @@ export const clearPendingCart = async (userId: number): Promise<{ mensaje: strin
   }
 };
 
-export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<{ quantity: number }> => {
+export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<number> => {
   try {
     const response = await axiosInstance.get(`/api/cart/product/${cart_id}/${productId}`);
-    return response.data || { quantity: 0 }; // Devuelve `null` si no hay datos
+    return response.data || 0; // Devuelve `null` si no hay datos
   } catch (error) {
     console.error('Error al verificar cantidad del producto en el carrito:', error);
-    return { quantity: 0 }; // Si hay error, devolvemos cantidad 0
+    throw error;
   }
 };

@@ -9,7 +9,7 @@ export const getOrCreatePendingCart = async (userId: number): Promise<number> =>
     console.log("userId: ", userId);
 
     console.log('Carrito pendiente obtenido o creado:', response.data);
-    return response.data.cartId; // Devuelve el ID del carrito desde el servidor
+    return response.data.cart_id; // Devuelve el ID del carrito desde el servidor
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error al obtener o crear el carrito pendiente:', error.message);
@@ -119,12 +119,16 @@ export const clearPendingCart = async (userId: number): Promise<{ mensaje: strin
   }
 };
 
-export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<{ quantity: number }> => {
+export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<number> => {
   try {
     const response = await axiosInstance.get(`/api/cart/product/${cart_id}/${productId}`);
-    return response.data || { quantity: 0 }; // Devuelve `null` si no hay datos
-  } catch (error) {
-    console.error('Error al verificar cantidad del producto en el carrito:', error);
-    return { quantity: 0 }; // Si hay error, devolvemos cantidad 0
+    return response.data.quantity;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al obtener la cantidad del producto en el carrito:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw new Error('No se pudo obtener la cantidad del producto en el carrito.');
   }
 };
