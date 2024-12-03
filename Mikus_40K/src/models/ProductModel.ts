@@ -9,11 +9,8 @@ export interface Product {
   image_path: string;
   shippingType: string;
   shippingPrice?: number;
-  //category?: 'Miku' | 'Warhammer';
-  quantity: number;
-  /*size: string;  // Agregar tamaño
-  weight: string; // Agregar peso
-  imageUrl: string; */// Aseguramos que esta propiedad exista
+  category?: 'Miku' | 'Warhammer';
+  //quantity: number;
 };
 
 // Función para obtener todos los productos desde la API

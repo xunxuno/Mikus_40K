@@ -5,6 +5,9 @@ interface CartItem {
   productId: number;
   quantity: number;
   price: number;
+  productName?: string;  // Añadido
+  productDescription?: string;  // Añadido
+  imageUrl?: string;  // Añadido
 }
 
 interface CartState {

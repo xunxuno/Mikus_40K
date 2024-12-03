@@ -1,37 +1,17 @@
 import axiosInstance from './axiosInstance';
 
-// Interfaz para los productos en el carrito
-export interface CartItem {
-  id?: number;
-  productId: number;
-  quantity: number;
-  price: number;
-  shippingPrice?: number;
-  product_Name?: string;
-  product_Description?: string;
-  imageUrl?: string;
-}
-
-// Interfaz para el carrito
-export interface Cart {
-  id: number;
-  userId: number;
-  items: CartItem[];
-  createdAt: string;
-}
-
-// Función para obtener o crear un carrito
-export const getOrCreateCart = async (email: string): Promise<Cart> => {
+// Función para obtener o crear un carrito pendiente
+export const getOrCreatePendingCart = async (userId: number): Promise<number> => {
   try {
-    const response = await axiosInstance.post('/api/cart', {
-      secureData: { email },
-    });
+    // Enviar el userId directamente al backend
+    const response = await axiosInstance.post('/api/cart', { userId });
+    console.log("userId: ", userId);
 
-    console.log('Carrito obtenido o creado:', response.data);
-    return response.data; // Devuelve el carrito desde el servidor
+    console.log('Carrito pendiente obtenido o creado:', response.data);
+    return response.data.id; // Devuelve el ID del carrito desde el servidor
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error('Error al obtener o crear el carrito:', error.message);
+      console.error('Error al obtener o crear el carrito pendiente:', error.message);
     } else {
       console.error('Error desconocido:', error);
     }
@@ -39,25 +19,98 @@ export const getOrCreateCart = async (email: string): Promise<Cart> => {
   }
 };
 
-// Función para añadir un producto al carrito
+// Función para agregar un producto al carrito pendiente
 export const addProductToCart = async (
-  email: string,
+  userId: number,
   product: Omit<CartItem, 'price'>
 ): Promise<{ mensaje: string }> => {
   try {
     const payload = {
-      secureData: { email },
+      userId,
       productId: product.productId,
       quantity: product.quantity,
     };
 
     const response = await axiosInstance.post('/api/cart/items', payload);
 
-    console.log('Producto agregado al carrito:', response.data);
+    console.log('Producto agregado al carrito pendiente:', response.data);
     return response.data; // Mensaje de confirmación del servidor
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error('Error al agregar producto al carrito:', error.message);
+      console.error('Error al agregar producto al carrito pendiente:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error;
+  }
+};
+
+// Función para actualizar la cantidad de un producto en el carrito
+export const updateProductQuantityInCart = async (
+  userId: number,
+  productId: number,
+  quantity: number
+): Promise<{ mensaje: string }> => {
+  try {
+    const payload = {
+      userId,
+      productId,
+      quantity,
+    };
+
+    const response = await axiosInstance.put('/api/cart/items', payload);
+
+    console.log('Cantidad del producto actualizada:', response.data);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al actualizar cantidad del producto:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error;
+  }
+};
+
+// Función para eliminar un producto del carrito
+export const removeProductFromCart = async (
+  userId: number,
+  productId: number
+): Promise<{ mensaje: string }> => {
+  try {
+    const payload = {
+      userId,
+      productId,
+    };
+
+    const response = await axiosInstance.delete('/api/cart/items', { data: payload });
+
+    console.log('Producto eliminado del carrito:', response.data);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al eliminar producto del carrito:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error;
+  }
+};
+
+// Función para vaciar el carrito pendiente
+export const clearPendingCart = async (userId: number): Promise<{ mensaje: string }> => {
+  try {
+    const payload = {
+      userId,
+    };
+
+    const response = await axiosInstance.delete('/api/cart', { data: payload });
+
+    console.log('Carrito pendiente vaciado:', response.data);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al vaciar el carrito pendiente:', error.message);
     } else {
       console.error('Error desconocido:', error);
     }

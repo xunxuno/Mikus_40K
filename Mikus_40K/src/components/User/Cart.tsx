@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { Product } from '../../models/ProductModel';
-import { CartController } from '../../controllers/cartController';
+import { 
+  getOrCreatePendingCart, 
+  addProductToCart, 
+  updateProductQuantityInCart, 
+  removeProductFromCart, 
+  clearPendingCart 
+} from '../../models/CartModel';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, decreaseQuantity, clearCart, removeFromCart } from '../../redux/cartSlice';
 import { RootState } from '../../redux/store';
@@ -17,7 +23,6 @@ const Cart: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
-  // Cargar productos desde el servidor
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -30,59 +35,71 @@ const Cart: React.FC = () => {
     fetchProducts();
   }, []);
 
-  // Sincronizar carrito con el servidor
   const handleCheckout = async () => {
-    const failedItems: CartItem[] = [];
     try {
+      if (!userEmail) return alert('Inicia sesión para realizar la compra.');
+      const pendingCart = await getOrCreatePendingCart(userEmail);
+
       for (const item of cartItems) {
-        const success = await CartController.addItemToCart(userEmail!, {
+        await addProductToCart(userEmail, {
           productId: item.productId,
           quantity: item.quantity,
         });
-        if (!success) {
-          failedItems.push(item);
-        }
       }
 
-      if (failedItems.length > 0) {
-        console.error('Error al sincronizar los siguientes productos:', failedItems);
-        alert('Algunos productos no pudieron ser sincronizados.');
-      } else {
-        console.log('Carrito sincronizado con el servidor');
-        dispatch(clearCart());
+      alert('Compra realizada exitosamente.');
+      dispatch(clearCart());
+      await clearPendingCart(userEmail);
+    } catch (error) {
+      console.error('Error durante el checkout:', error);
+    }
+  };
+
+  const handleAddToCart = async (productId: number) => {
+    try {
+      const product = cartProducts.find((item) => item.id === productId);
+      if (product) {
+        dispatch(
+          addToCart({
+            productId: product.id,
+            quantity: 1,
+            price: product.price || 0,
+            productName: product.product_Name,  // Usar product_Name como en el modelo
+            productDescription: product.product_Description,  // Usar product_Description como en el modelo
+            imageUrl: product.image_path,
+          })
+        );
       }
     } catch (error) {
-      console.error('Error general al sincronizar el carrito:', error);
+      console.error('Error al agregar producto al carrito:', error);
     }
   };
 
-  // Manejar agregar productos al carrito
-  const handleAddToCart = (productId: number) => {
-    const product = cartProducts.find((item) => item.id === productId);
-    if (product) {
-      const cartItem: CartItem = {
-        productId: product.id,
-        quantity: 1,
-        price: product.price || 0,
-        product_Name: product.product_Name,
-        product_Description: product.product_Description,
-        imageUrl: product.image_path,
-      };
-      dispatch(addToCart(cartItem));
+  const handleDecreaseQuantity = async (productId: number) => {
+    try {
+      const cartItem = cartItems.find((item) => item.productId === productId);
+      if (cartItem && cartItem.quantity > 1) {
+        await updateProductQuantityInCart(userEmail!, productId, cartItem.quantity - 1);
+        dispatch(decreaseQuantity(productId));
+      } else {
+        handleRemoveFromCart(productId);
+      }
+    } catch (error) {
+      console.error('Error al disminuir la cantidad:', error);
     }
   };
 
-  // Manejar disminuir cantidad
-  const handleDecreaseQuantity = (productId: number) => {
-    dispatch(decreaseQuantity(productId));
-  };
-
-  // Manejar eliminar producto con animación
-  const handleRemoveFromCart = (productId: number) => {
-    setIsRemoving(productId);
-    setTimeout(() => {
-      dispatch(removeFromCart(productId));  // Eliminar el producto después de la animación
-    }, 500); // Espera para que la animación ocurra antes de eliminar
+  const handleRemoveFromCart = async (productId: number) => {
+    try {
+      setIsRemoving(productId);
+      await removeProductFromCart(userEmail!, productId);
+      setTimeout(() => {
+        dispatch(removeFromCart(productId));
+        setIsRemoving(null);
+      }, 500);
+    } catch (error) {
+      console.error('Error al eliminar producto del carrito:', error);
+    }
   };
 
   return (
@@ -94,24 +111,26 @@ const Cart: React.FC = () => {
             <th>Imagen</th>
             <th>Producto</th>
             <th>Descripción</th>
-            <th>Tipo de Envío</th>
             <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {cartProducts.map((item) => {
-            const cartItem = cartItems.find((cartItem: CartItem) => cartItem.productId === item.id);
-            if (!cartItem || cartItem.quantity === 0) return null; // No mostrar si la cantidad es 0
+            const cartItem = cartItems.find((cartItem) => cartItem.productId === item.id);
+            if (!cartItem || cartItem.quantity === 0) return null;
 
             return (
               <tr key={item.id} className={isRemoving === item.id ? 'removing' : ''}>
                 <td>
-                  <img src={item.image_path} alt={item.product_Name} style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover' }} />
+                  <img
+                    src={item.image_path}
+                    alt={item.product_Name}
+                    style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover' }}
+                  />
                 </td>
-                <td>{item.product_Name}</td>
-                <td>{item.product_Description}</td>
-                <td>{item.shippingType}</td>
+                <td>{item.product_Name}</td> {/* Usar product_Name como en el modelo */}
+                <td>{item.product_Description}</td> {/* Usar product_Description como en el modelo */}
                 <td>{cartItem.quantity}</td>
                 <td>
                   <button onClick={() => handleAddToCart(item.id)} className="quantity-button">+</button>
@@ -128,9 +147,9 @@ const Cart: React.FC = () => {
         </tbody>
       </table>
       <h2 className="cart-total">
-        Total: $
+        Total: $ 
         {cartProducts.reduce((total, item) => {
-          const quantity = cartItems.find((cartItem: CartItem) => cartItem.productId === item.id)?.quantity || 0;
+          const quantity = cartItems.find((cartItem) => cartItem.productId === item.id)?.quantity || 0;
           return total + (item.price || 0) * quantity;
         }, 0)}
       </h2>
