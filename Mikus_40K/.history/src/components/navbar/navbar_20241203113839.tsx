@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { MaterialSymbolsMenu } from '../icons/MaterialSymbolsMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../redux/sidebarSlice';
-import { RootState } from '../../redux/store';
-import backgroundImage from '../../images/logo_temporal.jpg';
-import {buscarProductos} from '../../models/ProductModel';
+import { RootState } from '../../redux/store'; // Asegúrate de importar el estado raíz
+import backgroundImage from '../../images/logo_temporal.jpg'; // Asegúrate que esta ruta sea correcta
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();
@@ -31,15 +30,25 @@ const Navbar: React.FC = () => {
     setSearchQuery(e.target.value);
   };
 
+  // Manejar la acción de búsqueda
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!searchQuery.trim()) return;
+    if (!searchQuery.trim()) return; // Si está vacío, no hacer nada
 
     try {
-      const results = await buscarProductos(searchQuery);
-      console.log('Resultados de búsqueda:', results);
-      // Navegar a la página de resultados o mostrar los productos en pantalla
-      navigate('/search-results', { state: { results } });
+      // Aquí haces la petición a tu API de búsqueda
+      const response = await fetch(
+        `/api/products/search?query=${encodeURIComponent(searchQuery)}`
+      );
+      const results = await response.json();
+
+      if (response.ok) {
+        console.log('Resultados de búsqueda:', results);
+        // Navegar a una página con los resultados o actualizar un estado global/local
+        navigate('/search-results', { state: { results } });
+      } else {
+        console.error('Error al buscar:', results);
+      }
     } catch (error) {
       console.error('Error al realizar la búsqueda:', error);
     }

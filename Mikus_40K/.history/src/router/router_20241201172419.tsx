@@ -18,7 +18,6 @@ import Orders from "../components/User/Orders";
 import TrackOrder from "../components/User/TrackOrder";
 import Login from "../components/Login/login";
 import Register from "../components/Login/register";
-import SearchResults from '../components/Catalog/SearchResults';
 
 function Router() {
     return (
@@ -43,8 +42,6 @@ function Router() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="*" element={<Navigate to="/" />} />
-                <Route path="/search-results" element={<SearchResults />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
         </div>
     );
