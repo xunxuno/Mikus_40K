@@ -33,20 +33,20 @@ export const obtenerProductos = async (): Promise<Product[]> => {
   }
 };
 
-export const buscarProductos = async (nombre: string): Promise<Product[]> => {
+export const buscarProductos = async (product_Name: string): Promise<Product[]> => {
   try {
-    const response = await axiosInstance.get('/api/products/search', {
-      params: { product_Name: nombre },
-    }); // Enviamos `product_Name` como parámetro
+    const response = await axiosInstance.get(`/products/search`, {
+      params: { query: product_Name },
+    });
     console.log('Resultados de búsqueda:', response.data);
 
-    return response.data; // Retorna los productos encontrados
+    return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error al buscar productos:', error.message);
     } else {
       console.error('Error desconocido:', error);
     }
-    throw error; // Lanza el error
+    throw error;
   }
 };

@@ -31,10 +31,11 @@ const Navbar: React.FC = () => {
     setSearchQuery(e.target.value);
   };
 
+  // Manejar la acción de búsqueda
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-
+  
     try {
       const results = await buscarProductos(searchQuery);
       console.log('Resultados de búsqueda:', results);

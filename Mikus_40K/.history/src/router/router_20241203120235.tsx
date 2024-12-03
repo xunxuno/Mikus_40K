@@ -43,7 +43,6 @@ function Router() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="*" element={<Navigate to="/" />} />
-                <Route path="/search-results" element={<SearchResults />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
         </div>
