@@ -23,17 +23,16 @@ export const getOrCreatePendingCart = async (userId: number): Promise<number> =>
 // Función para agregar un producto al carrito pendiente
 export const addProductToCart = async (
   userId: number,
-  product: Omit<CartItem, 'imageUrl'>
+  product: Omit<CartItem, 'price'>
 ): Promise<{ mensaje: string }> => {
   try {
     const payload = {
       userId,
       productId: product.productId,
       quantity: product.quantity,
-      price: product.price
     };
 
-    const response = await axiosInstance.post('/api/cart/add', payload);
+    const response = await axiosInstance.post('/api/cart/items', payload);
 
     console.log('Producto agregado al carrito pendiente:', response.data);
     return response.data; // Mensaje de confirmación del servidor
@@ -60,7 +59,7 @@ export const updateProductQuantityInCart = async (
       quantity,
     };
 
-    const response = await axiosInstance.put('/api/cart/update-quantity', payload);
+    const response = await axiosInstance.put('/api/cart/items', payload);
 
     console.log('Cantidad del producto actualizada:', response.data);
     return response.data;

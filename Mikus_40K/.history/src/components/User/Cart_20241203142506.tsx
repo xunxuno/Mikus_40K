@@ -45,7 +45,6 @@ const Cart: React.FC = () => {
         await addProductToCart(userId, {
           productId: item.productId,
           quantity: item.quantity,
-          price: item.price,
         });
       }
 

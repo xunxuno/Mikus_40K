@@ -60,7 +60,7 @@ export const updateProductQuantityInCart = async (
       quantity,
     };
 
-    const response = await axiosInstance.put('/api/cart/update-quantity', payload);
+    const response = await axiosInstance.put('/api/cart/items', payload);
 
     console.log('Cantidad del producto actualizada:', response.data);
     return response.data;
