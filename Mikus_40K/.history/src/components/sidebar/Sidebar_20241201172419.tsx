@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
         // Llamamos a la API para obtener los productos
         const products = await obtenerProductos();
         // Extraemos las URLs de las imágenes
-        const imageUrls = products.map((product) => product.image_path);
+        const imageUrls = products.map((product) => product.imageUrl);
         // Opcionalmente duplicamos las imágenes para mayor visibilidad
         setImages([...imageUrls, ...imageUrls, ...imageUrls]);
       } catch (error) {
