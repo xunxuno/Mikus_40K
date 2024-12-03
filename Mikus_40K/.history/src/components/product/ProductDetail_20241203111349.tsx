@@ -51,7 +51,7 @@ const ProductDetail: React.FC = () => {
     <div className="product-detail-page">
       <div className="product-detail">
         <div className="product-image-container">
-          <img src={product.image_path} alt={product.product_Name} className="product-image" />
+          <img src={product.imageUrl} alt={product.product_Name} className="product-image" />
         </div>
         <div className="product-info">
           <h2 className="product-title">{product.product_Name}</h2>
@@ -62,12 +62,12 @@ const ProductDetail: React.FC = () => {
           <div className="product-shipping">
             <strong>Envío:</strong> {product.shippingType} ({product.shippingPrice !== undefined ? `+$${product.shippingPrice}` : 'Gratis'})
           </div>
-          {/*<div className="product-size">
+          <div className="product-size">
             <strong>Medidas:</strong> {product.size}
           </div>
           <div className="product-weight">
-            {<strong>Peso:</strong> {product.weight}}
-          </div>*/}
+            <strong>Peso:</strong> {product.weight}
+          </div>
           <button
             className="add-to-cart-button"
             onClick={handleAddToCart}
