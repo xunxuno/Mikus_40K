@@ -46,6 +46,37 @@ const Cart: React.FC = () => {
     fetchCart();
   }, [userId, dispatch]);
 
+  const handleAddToCart = async (productId: number) => {
+    try {
+      const existingItem = cartItems.find((item: CartItem) => item.productId === productId);
+
+      if (existingItem) {
+        const updatedQuantity = existingItem.quantity + 1;
+
+        // Llamamos a la función updateProductQuantityInCart con el formato correcto
+        await updateProductQuantityInCart(userId!, {
+          productId: existingItem.productId,
+          quantity: updatedQuantity,
+          price: existingItem.price || 0
+        });
+
+        dispatch(addToCart({ productId, quantity: 1, price: existingItem.price }));
+      } else {
+        // Si el producto no existe, lo agregamos con una cantidad de 1
+        await updateProductQuantityInCart(userId!, {
+          productId,
+          quantity: 1,
+          price: 0
+        });
+
+        dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      }
+
+      alert('Cantidad del producto actualizada en el carrito.');
+    } catch (error) {
+      console.error('Error al actualizar la cantidad del producto en el carrito:', error);
+    }
+  };
 
   const handleRemoveFromCart = async (productId: number) => {
     try {

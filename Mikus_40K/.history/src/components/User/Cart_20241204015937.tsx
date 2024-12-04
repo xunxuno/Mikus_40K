@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { 
   getOrCreatePendingCart, 
+  addProductToCart, 
   removeProductFromCart, 
   clearPendingCart, 
-  getCartItems,
-  updateProductQuantityInCart
+  getCartItems 
 } from '../../models/CartModel';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, clearCart, removeFromCart, setCartItems } from '../../redux/cartSlice';
@@ -25,27 +25,42 @@ const Cart: React.FC = () => {
     const fetchCart = async () => {
       try {
         if (!userId) return;
-    
+
         const pendingCartId = await getOrCreatePendingCart(userId);
         setCartId(pendingCartId);
-    
+
         const items = await getCartItems(pendingCartId);
-        const formattedItems = items.map((item: any) => {
-          return {
-            ...item,
-            productId: item.product_id, // Mapear product_id a productId
-          };
-        });
+        const formattedItems = items.map((item: any) => ({
+          ...item,
+          productId: item.productId,
+        }));
         dispatch(setCartItems(formattedItems)); // Actualizar Redux con los items del carrito
       } catch (error) {
         console.error('Error al cargar el carrito:', error);
       }
     };
-    
 
     fetchCart();
   }, [userId, dispatch]);
 
+  const handleAddToCart = async (productId: number) => {
+    try {
+      const existingItem = cartItems.find((item) => item.productId === productId);
+
+      if (existingItem) {
+        const updatedQuantity = existingItem.quantity + 1;
+        await addProductToCart(userId!, { productId, quantity: updatedQuantity, price: existingItem.price });
+        dispatch(addToCart({ productId, quantity: 1, price: existingItem.price }));
+      } else {
+        await addProductToCart(userId!, { productId, quantity: 1, price: 0 });
+        dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      }
+
+      alert('Producto actualizado en el carrito.');
+    } catch (error) {
+      console.error('Error al agregar producto al carrito:', error);
+    }
+  };
 
   const handleRemoveFromCart = async (productId: number) => {
     try {
@@ -62,38 +77,13 @@ const Cart: React.FC = () => {
 
   const handleUpdateQuantity = async (productId: number, newQuantity: number) => {
     if (newQuantity <= 0) return; // No permitir cantidades negativas o cero
-  
-    const existingItem = cartItems.find((item: CartItem) => item.productId === productId);
-    console.log('existingItem: ', existingItem); // Verifica que esta línea esté mostrando el valor correcto de productId
-  
+
+    const existingItem = cartItems.find((item) => item.productId === productId);
     if (existingItem) {
-      const payload = {
-        userId: userId!,
-        productId: existingItem.productId, // Usamos productId aquí
-        quantity: newQuantity,
-        price: existingItem.price || 0,
-      };
-      console.log('payload productId: ', payload.productId); // Aquí deberías ver el valor correcto de productId
-  
-      try {
-        // Llamada a la función con el formato correcto
-        await updateProductQuantityInCart(userId!, payload);
-  
-        // Actualizamos Redux con la nueva cantidad
-        dispatch(addToCart({
-          productId: existingItem.productId, // Usamos productId aquí
-          quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
-          price: existingItem.price
-        }));
-      } catch (error) {
-        console.error('Error al actualizar cantidad:', error);
-      }
-    } else {
-      console.error('Producto no encontrado para actualización');
+      await addProductToCart(userId!, { productId, quantity: newQuantity, price: existingItem.price });
+      dispatch(addToCart({ productId, quantity: newQuantity - existingItem.quantity, price: existingItem.price }));
     }
   };
-  
-  
 
   const handleCheckout = async () => {
     try {
@@ -101,7 +91,7 @@ const Cart: React.FC = () => {
       if (!cartId) return alert('No se pudo obtener el carrito pendiente.');
 
       for (const item of cartItems) {
-        await updateProductQuantityInCart(userId!, item); // Usar la función para actualizar cantidades durante el checkout
+        await addProductToCart(userId, item);
       }
 
       alert('Compra realizada exitosamente.');
@@ -125,7 +115,7 @@ const Cart: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item: CartItem) => (
+          {cartItems.map((item) => (
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
               <td>{item.product_name}</td>
               <td>

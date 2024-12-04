@@ -25,15 +25,18 @@ const Cart: React.FC = () => {
     const fetchCart = async () => {
       try {
         if (!userId) return;
-    
+
         const pendingCartId = await getOrCreatePendingCart(userId);
         setCartId(pendingCartId);
-    
+
         const items = await getCartItems(pendingCartId);
         const formattedItems = items.map((item: any) => {
+          if (!item.productId) {
+            console.error('Producto sin productId:', item); // Log para detectar problemas con el productId
+          }
           return {
             ...item,
-            productId: item.product_id, // Mapear product_id a productId
+            productId: item.productId,
           };
         });
         dispatch(setCartItems(formattedItems)); // Actualizar Redux con los items del carrito
@@ -41,11 +44,33 @@ const Cart: React.FC = () => {
         console.error('Error al cargar el carrito:', error);
       }
     };
-    
 
     fetchCart();
   }, [userId, dispatch]);
 
+  const handleAddToCart = async (productId: number) => {
+    try {
+      const existingItem = cartItems.find((item) => item.productId === productId);
+
+      if (existingItem) {
+        const updatedQuantity = existingItem.quantity + 1;
+
+        // Llamamos a la función updateProductQuantityInCart para actualizar la cantidad
+        await updateProductQuantityInCart(userId!, { productId, quantity: updatedQuantity, price: existingItem.price });
+
+        dispatch(addToCart({ productId, quantity: 1, price: existingItem.price }));
+      } else {
+        // Si el producto no existe, lo agregamos con una cantidad de 1
+        await updateProductQuantityInCart(userId!, { productId, quantity: 1, price: 0 });
+
+        dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      }
+
+      alert('Cantidad del producto actualizada en el carrito.');
+    } catch (error) {
+      console.error('Error al actualizar la cantidad del producto en el carrito:', error);
+    }
+  };
 
   const handleRemoveFromCart = async (productId: number) => {
     try {
@@ -63,26 +88,30 @@ const Cart: React.FC = () => {
   const handleUpdateQuantity = async (productId: number, newQuantity: number) => {
     if (newQuantity <= 0) return; // No permitir cantidades negativas o cero
   
-    const existingItem = cartItems.find((item: CartItem) => item.productId === productId);
-    console.log('existingItem: ', existingItem); // Verifica que esta línea esté mostrando el valor correcto de productId
-  
+    const existingItem = cartItems.find((item) => item.productId === productId);
+
     if (existingItem) {
+      console.log('Producto a actualizar:', existingItem); // Verifica que el producto tiene el productId correcto
+
       const payload = {
         userId: userId!,
-        productId: existingItem.productId, // Usamos productId aquí
+        productId: existingItem.productId, // Asegúrate de usar existingItem.productId aquí
         quantity: newQuantity,
         price: existingItem.price || 0,
       };
-      console.log('payload productId: ', payload.productId); // Aquí deberías ver el valor correcto de productId
-  
+
+      console.log("Payload para actualización:", payload); // Revisa que el productId ahora sea correcto
+
       try {
-        // Llamada a la función con el formato correcto
-        await updateProductQuantityInCart(userId!, payload);
-  
-        // Actualizamos Redux con la nueva cantidad
+        await updateProductQuantityInCart(userId!, {
+          productId: existingItem.productId,
+          quantity: newQuantity,
+          price: existingItem.price || 0
+        });
+
         dispatch(addToCart({
-          productId: existingItem.productId, // Usamos productId aquí
-          quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
+          productId: existingItem.productId,
+          quantity: newQuantity - existingItem.quantity,
           price: existingItem.price
         }));
       } catch (error) {
@@ -92,8 +121,6 @@ const Cart: React.FC = () => {
       console.error('Producto no encontrado para actualización');
     }
   };
-  
-  
 
   const handleCheckout = async () => {
     try {
@@ -125,7 +152,7 @@ const Cart: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item: CartItem) => (
+          {cartItems.map((item) => (
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
               <td>{item.product_name}</td>
               <td>
