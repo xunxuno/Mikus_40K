@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Order, getOrderHistory, ProductItem } from '../../models/CartModel';
+import { OrderItem, getOrderHistory } from '../../models/CartModel';
 import './OrderHistory.css';
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 
 const OrderHistory: React.FC = () => {
-  const [orderItems, setOrderItems] = useState<Order[]>([]);
+  const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const userId = useSelector((state: RootState) => state.auth.userId);
@@ -51,19 +51,14 @@ const OrderHistory: React.FC = () => {
     <div className="order-history-container">
       <h2>Historial de Compras</h2>
       <div className="order-history-grid">
-        {orderItems.map((order) => (
-          <div key={order.id} className="order-history-item">
-            <h3 className="order-history-product">Orden ID: {order.id}</h3>
-            {order.items.map((item: ProductItem, index) => (
-              <div key={item.id} className="order-history-item-detail">
-                <h4 className="order-history-product">{`Producto: ${item.product_name}`}</h4>
-                <p className="order-history-quantity">Cantidad: {item.quantity}</p>
-                <p className="order-history-price">Precio: ${item.price.toFixed(2)}</p>
-                <p className="order-history-total">
-                  Total: ${(item.quantity * item.price).toFixed(2)}
-                </p>
-              </div>
-            ))}
+        {orderItems.map((item) => (
+          <div key={item.id} className="order-history-item">
+            <h3 className="order-history-product">{item.product_name}</h3>
+            <p className="order-history-quantity">Cantidad: {item.quantity}</p>
+            <p className="order-history-price">Precio: ${item.price.toFixed(2)}</p>
+            <p className="order-history-total">
+              Total: ${(item.quantity * item.price).toFixed(2)}
+            </p>
           </div>
         ))}
       </div>

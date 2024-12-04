@@ -22,23 +22,6 @@ export interface OrderItem {
   product_name: string; // Suponiendo que traes el nombre del producto
 }
 
-export interface Order {
-  id: number;
-  user_id: number;
-  total_price: number;
-  created_at: string;
-  items: ProductItem[]; // Aquí se define que un pedido puede tener una lista de productos asociados
-}
-
-export interface ProductItem {
-  id: number;
-  order_id: number;
-  product_id: number;
-  quantity: number;
-  price: number;
-  product_name: string;
-}
-
 // Función para obtener o crear un carrito pendiente
 export const getOrCreatePendingCart = async (userId: number): Promise<number> => {
   try {
@@ -195,10 +178,10 @@ export const createOrder = async (payload: OrderPayload): Promise<OrderResponse>
   }
 };
 
-export const getOrderHistory = async (userId: number): Promise<Order[]> => {
+export const getOrderHistory = async (userId: number): Promise<OrderItem[]> => {
   try {
-    const response = await axiosInstance.get(`api/users/${userId}/order-history`);
-    return response.data as Order[];
+    const response = await axiosInstance.get(`/orders/history/${userId}`);
+    return response.data as OrderItem[];
   } catch (error) {
     console.error('Error fetching order history:', error);
     throw error;
