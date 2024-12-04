@@ -87,6 +87,7 @@ const Login: React.FC = () => {
             <p>Bienvenido, {loggedUsername}</p>
           </div>
         )}
+              <h4>¿No tienes cuenta? <a href="/register">registrate!!!</a> </h4>
       </div>
     </div>
   );

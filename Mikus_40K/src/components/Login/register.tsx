@@ -100,6 +100,7 @@ const Register: React.FC = () => {
         <div className="form-group">
           <button type="submit">Registrarse</button>
         </div>
+        <h4>¿Ya tienes cuenta? <a href="/login">inicia sesion!!!</a> </h4>
       </form>
 
       {/* Ventana emergente para el mensaje */}

@@ -1,4 +1,5 @@
-//import React from "react";
+// Router.tsx
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../components/home/home';
 import ProductDetail from '../components/product/ProductDetail';
@@ -24,10 +25,21 @@ import UserDetails from '../components/User/userDetails';
 const userId = localStorage.getItem('userId');
 const userIdNumber = Number(userId);
 
+const isAuthenticated = () => {
+    // Verifica si el usuario tiene un token o está autenticado
+    const token = localStorage.getItem('token');
+    return token !== null; // Si tiene un token, está autenticado
+}
+
 function Router() {
     return (
         <div className="router-container">
             <Routes>
+                {/* Rutas protegidas: si el usuario ya está autenticado, lo redirige al home */}
+                <Route path="/login" element={isAuthenticated() ? <Navigate to="/" /> : <Login />} />
+                <Route path="/register" element={isAuthenticated() ? <Navigate to="/" /> : <Register />} />
+
+                {/* Otras rutas públicas */}
                 <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/help-center" element={<HelpCenter />} />
@@ -44,17 +56,14 @@ function Router() {
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/track-order" element={<TrackOrder />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="*" element={<Navigate to="/" />} />
                 <Route path="/search-results" element={<SearchResults />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/user-deatails" element={<UserDetails />} />
+
+                {/* Redirige cualquier ruta no encontrada al home */}
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </div>
     );
 }
 
-
 export default Router;
-
