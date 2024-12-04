@@ -1,77 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
-import { Product } from '../../models/ProductModel';
 import { 
   getOrCreatePendingCart, 
   addProductToCart, 
   updateProductQuantityInCart, 
   removeProductFromCart, 
-  clearPendingCart 
+  clearPendingCart, 
+  getCartItems 
 } from '../../models/CartModel';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, decreaseQuantity, clearCart, removeFromCart } from '../../redux/cartSlice';
+import { addToCart, decreaseQuantity, clearCart, removeFromCart, setCartItems } from '../../redux/cartSlice';
 import { RootState } from '../../redux/store';
 import { CartItem } from '../../redux/cartSlice';
-import { getAllProducts } from '../../controllers/ProductController';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Cart: React.FC = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const [isRemoving, setIsRemoving] = useState<number | null>(null);
-  const userEmail = useSelector((state: RootState) => state.auth.userEmail);
+  const [cartId, setCartId] = useState<number | null>(null);
   const userId = useSelector((state: RootState) => state.auth.userId);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchCart = async () => {
       try {
-        const fetchedProducts = await getAllProducts();
-        setCartProducts(fetchedProducts);
+        if (!userId) return;
+
+        // Obtener o crear el carrito pendiente
+        const pendingCartId = await getOrCreatePendingCart(userId);
+        setCartId(pendingCartId);
+
+        // Obtener los items del carrito
+        const items = await getCartItems(pendingCartId);
+        // Asignamos el productId en la estructura del cartItems
+        const formattedItems = items.map((item: any) => ({
+          ...item,
+          productId: item.productId, // Asegúrate de que cada artículo tenga un productId
+        }));
+        dispatch(setCartItems(formattedItems)); // Actualizar Redux con los items del carrito
       } catch (error) {
-        console.error('Error al cargar productos:', error);
+        console.error('Error al cargar el carrito:', error);
       }
     };
-    fetchProducts();
-  }, []);
 
-  const handleCheckout = async () => {
-    try {
-      if (!userId) return alert('Inicia sesión para realizar la compra.');
-      const pendingCart = await getOrCreatePendingCart(userId);
-
-      for (const item of cartItems) {
-        await addProductToCart(userId, {
-          productId: item.productId,
-          quantity: item.quantity,
-          price: item.price,
-        });
-      }
-
-      alert('Compra realizada exitosamente.');
-      dispatch(clearCart());
-      await clearPendingCart(userId);
-    } catch (error) {
-      console.error('Error durante el checkout:', error);
-    }
-  };
+    fetchCart();
+  }, [userId, dispatch]);
 
   const handleAddToCart = async (productId: number) => {
     try {
-      const product = cartProducts.find((item) => item.id === productId);
-      if (product) {
-        dispatch(
-          addToCart({
-            productId: product.id,
-            quantity: 1,
-            price: product.price || 0,
-            productName: product.product_Name,  // Usar product_Name como en el modelo
-            productDescription: product.product_Description,  // Usar product_Description como en el modelo
-            imageUrl: product.image_path,
-          })
-        );
-      }
+      const existingItem = cartItems.find((item) => item.productId === productId);
+      const updatedQuantity = (existingItem?.quantity || 0) + 1;
+
+      await addProductToCart(userId!, { productId, quantity: updatedQuantity, price: 0 });
+      dispatch(addToCart({ productId, quantity: 1, price: 0 }));
     } catch (error) {
       console.error('Error al agregar producto al carrito:', error);
     }
@@ -81,7 +63,11 @@ const Cart: React.FC = () => {
     try {
       const cartItem = cartItems.find((item) => item.productId === productId);
       if (cartItem && cartItem.quantity > 1) {
-        await updateProductQuantityInCart(userId!, productId, cartItem.quantity - 1);
+        await updateProductQuantityInCart(userId!, {
+          productId,
+          quantity: cartItem.quantity - 1,
+          price: cartItem.price,
+        });
         dispatch(decreaseQuantity(productId));
       } else {
         handleRemoveFromCart(productId);
@@ -104,56 +90,57 @@ const Cart: React.FC = () => {
     }
   };
 
+  const handleCheckout = async () => {
+    try {
+      if (!userId) return alert('Inicia sesión para realizar la compra.');
+      if (!cartId) return alert('No se pudo obtener el carrito pendiente.');
+
+      for (const item of cartItems) {
+        await addProductToCart(userId, item);
+      }
+
+      alert('Compra realizada exitosamente.');
+      dispatch(clearCart());
+      await clearPendingCart(userId);
+    } catch (error) {
+      console.error('Error durante el checkout:', error);
+    }
+  };
+
   return (
     <div className="cart-container">
       <h1 className="cart-title">Carrito de Compras</h1>
       <table className="cart-table">
         <thead>
           <tr>
-            <th>Imagen</th>
             <th>Producto</th>
-            <th>Descripción</th>
             <th>Cantidad</th>
+            <th>Precio</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {cartProducts.map((item) => {
-            const cartItem = cartItems.find((cartItem) => cartItem.productId === item.id);
-            if (!cartItem || cartItem.quantity === 0) return null;
-
-            return (
-              <tr key={item.id} className={isRemoving === item.id ? 'removing' : ''}>
-                <td>
-                  <img
-                    src={item.image_path}
-                    alt={item.product_Name}
-                    style={{ width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover' }}
-                  />
-                </td>
-                <td>{item.product_Name}</td> {/* Usar product_Name como en el modelo */}
-                <td>{item.product_Description}</td> {/* Usar product_Description como en el modelo */}
-                <td>{cartItem.quantity}</td>
-                <td>
-                  <button onClick={() => handleAddToCart(item.id)} className="quantity-button">+</button>
-                  <button onClick={() => handleDecreaseQuantity(item.id)} className="quantity-button">-</button>
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleRemoveFromCart(item.id)}
-                    className="remove-button"
-                  />
-                </td>
-              </tr>
-            );
-          })}
+          {cartItems.map((item) => (
+            <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
+              <td>{item.productName}</td>
+              <td>{item.quantity}</td>
+              <td>${item.price.toFixed(2)}</td>
+              <td>
+                <button onClick={() => handleAddToCart(item.productId)} className="quantity-button">+</button>
+                <button onClick={() => handleDecreaseQuantity(item.productId)} className="quantity-button">-</button>
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  onClick={() => handleRemoveFromCart(item.productId)}
+                  className="remove-button"
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <h2 className="cart-total">
         Total: $ 
-        {cartProducts.reduce((total, item) => {
-          const quantity = cartItems.find((cartItem) => cartItem.productId === item.id)?.quantity || 0;
-          return total + (item.price || 0) * quantity;
-        }, 0)}
+        {cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
       </h2>
       <div className="checkout-container">
         <button className="checkout-button" onClick={handleCheckout}>
