@@ -130,9 +130,9 @@ export const getProductQuantityInCart = async (cart_id: number, productId: numbe
 };
 
 // Función para obtener los items de un carrito
-export const getCartItems = async (cartId: number): Promise<CartItem[]> => {
+export const getCartItems = async (cart_id: number): Promise<CartItem[]> => {
   try {
-    const response = await axiosInstance.get(`/api/cart/product/:cart_id/:productId`);
+    const response = await axiosInstance.get(`/api/cart/${cart_id}/items`);
     console.log('Items obtenidos del carrito:', response.data);
     return response.data; // Retorna los items del carrito
   } catch (error: unknown) {
