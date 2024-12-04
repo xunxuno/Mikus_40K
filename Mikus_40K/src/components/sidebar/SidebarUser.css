@@ -1,7 +1,7 @@
 /* Estilo para el sidebar */
 .sidebar-user {
   position: fixed;
-  left: -300px; /* Inicia fuera de la pantalla */
+  left: -400px; /* Inicia fuera de la pantalla */
   top: 0;
   height: 100%; /* Ocupa toda la altura */
   background-color: #1F1F1F; /* Gris muy oscuro */
@@ -11,7 +11,7 @@
   z-index: 2001;
   overflow-y: auto;
   transition: left 0.3s ease, width 0.3s ease, padding 0.3s ease; /* Transiciones suaves para la animación */
-  width: 20vw; /* Ancho basado en el 20% del ancho de la ventana */
+  width: 15vw; /* Ancho basado en el 20% del ancho de la ventana */
 }
 
 /* Cuando el sidebar es visible, se posiciona en su lugar */
@@ -96,10 +96,10 @@
   background-color: #39C5BB;
 }
 /* Media Query para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   /* Ajustar el ancho del sidebar para que ocupe un porcentaje más pequeño en móviles */
   .sidebar-user {
-    width: 60vw; /* Sidebar ocupa el 60% del ancho de la ventana */
+    width: 30vw; /* Sidebar ocupa el 60% del ancho de la ventana */
   }
 
   /* Ajustar el padding y márgenes en el sidebar para que sea más compacto */
