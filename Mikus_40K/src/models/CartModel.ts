@@ -85,7 +85,7 @@ export const removeProductFromCart = async (
       productId,
     };
 
-    const response = await axiosInstance.delete('/api/cart/items', { data: payload });
+    const response = await axiosInstance.delete('/api/cart/remove-product', { data: payload });
 
     console.log('Producto eliminado del carrito:', response.data);
     return response.data;
@@ -106,7 +106,7 @@ export const clearPendingCart = async (userId: number): Promise<{ mensaje: strin
       userId,
     };
 
-    const response = await axiosInstance.delete('/api/cart', { data: payload });
+    const response = await axiosInstance.delete('/api/cart/clear', { data: payload });
 
     console.log('Carrito pendiente vaciado:', response.data);
     return response.data;

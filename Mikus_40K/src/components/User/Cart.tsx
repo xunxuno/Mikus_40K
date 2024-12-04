@@ -96,11 +96,6 @@ const Cart: React.FC = () => {
       console.error('Error al actualizar cantidad:', error);
     }
   };
-  
-  
-  
-  
-  
 
   const handleCheckout = async () => {
     try {
