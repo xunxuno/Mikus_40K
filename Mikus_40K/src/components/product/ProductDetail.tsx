@@ -1,9 +1,9 @@
-// components/ProductDetail.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getProductById } from '../../controllers/ProductDetailController'; // Importamos la función desde el controlador
 import { addToCart } from '../../redux/cartSlice'; // Importamos la acción de Redux
+import { addProductToCart, getOrCreatePendingCart, updateProductQuantityInCart, getProductQuantityInCart } from '../../models/CartModel'; // Importamos funciones de la API
 import type { Product } from '../../models/ProductModel'; // Importación tipo-only para Product
 import './ProductDetail.css';
 
@@ -13,18 +13,47 @@ const ProductDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true); // Estado de carga
   const dispatch = useDispatch(); // Hook para disparar acciones de Redux
 
+  // Obtén el userId de algún contexto, hook o estado global si es necesario
+  const userId = 1; // Asegúrate de reemplazar esto con el id del usuario real
+
   // Función para manejar el agregado al carrito
-  const handleAddToCart = () => {
-    if (product) {
-      const cartItem = {
-        productId: product.id,
-        quantity: 1,
-        price: product.price,
-        product_Name: product.product_Name,
-        product_Description: product.product_Description,
-        imageUrl: product.image_path,
-      };
-      dispatch(addToCart(cartItem)); // Enviamos el producto al carrito en Redux
+  const handleAddToCart = async () => {
+    if (!userId) {
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+      return;
+    }
+
+    try {
+      // Asegurarse de que el usuario tiene un carrito pendiente
+      const cart_id = await getOrCreatePendingCart(userId);
+      console.log('cart_id: ', cart_id);
+
+      // Verificar si el producto ya está en el carrito
+      const existingProduct = await getProductQuantityInCart(cart_id, product?.id || 0);
+      console.log('productos existentes: ', existingProduct);
+
+      if (existingProduct.quantity > 0) {
+        // Si el producto ya está en el carrito, actualizar la cantidad
+        await updateProductQuantityInCart(userId, {
+          productId: product?.id || 0,
+          quantity: existingProduct.quantity + 1,
+          price: product?.price || 0
+        });
+        console.log('cantidad actualizada a: ', existingProduct);
+        alert(`La cantidad del producto "${product?.product_Name}" fue actualizada en el carrito.`);
+      } else {
+        // Si el producto no está en el carrito, lo agregamos normalmente
+        await addProductToCart(userId, {
+          productId: product?.id || 0,
+          quantity: 1,
+          price: product?.price || 0,
+          product_name: product?.product_Name || ''
+        });
+        alert(`El producto "${product?.product_Name}" fue agregado al carrito.`);
+      }
+    } catch (error) {
+      console.error('Error al agregar producto al carrito:', error);
+      alert('Hubo un error al agregar el producto al carrito. Inténtalo nuevamente.');
     }
   };
 
@@ -62,12 +91,6 @@ const ProductDetail: React.FC = () => {
           <div className="product-shipping">
             <strong>Envío:</strong> {product.shippingType} ({product.shippingPrice !== undefined ? `+$${product.shippingPrice}` : 'Gratis'})
           </div>
-          {/*<div className="product-size">
-            <strong>Medidas:</strong> {product.size}
-          </div>
-          <div className="product-weight">
-            {<strong>Peso:</strong> {product.weight}}
-          </div>*/}
           <button
             className="add-to-cart-button"
             onClick={handleAddToCart}
