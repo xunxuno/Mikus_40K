@@ -21,14 +21,10 @@ function SidebarUser() {
   const goToContactSupport = () => navigate('/contact-support');
   const goToProfile = () => navigate('/profile');
   const goToHistory = () => navigate('/purchase-history');
-  const goToPoints = () => navigate('/user-points');
-  const changePassword = () => navigate('/change-password');
-  const goToPayment = () => navigate('/payment-method');
   const shippingAddressesView = () => navigate('/shipping-addresses');
   const goToCart = () => navigate('/cart');
   const goToWishList = () => navigate('/wishlist');
   const goToOrders = () => navigate('/orders');
-  const trackOrder = () => navigate('/track-order');
   const goToLogin = () => navigate('/login');
   const goToRegister = () => navigate('/register');
 
@@ -48,14 +44,11 @@ function SidebarUser() {
             )}
             <li><button onClick={goToProfile}>Perfil</button></li>
             <li><button onClick={goToHistory}>Historial de compras</button></li>
-            <li><button onClick={goToPoints}>Puntos de fidelidad</button></li>
           </ul>
         </div>
         <div className="sidebar-section">
           <h3>Configuración de cuenta</h3>
           <ul>
-            <li><button onClick={changePassword}>Cambiar contraseña</button></li>
-            <li><button onClick={goToPayment}>Métodos de pago</button></li>
             <li><button onClick={shippingAddressesView}>Direcciones de envío</button></li>
           </ul>
         </div>
@@ -70,7 +63,6 @@ function SidebarUser() {
           <h3>Gestión de pedidos</h3>
           <ul>
             <li><button onClick={goToOrders}>Ver pedidos</button></li>
-            <li><button onClick={trackOrder}>Rastrear envíos</button></li>
           </ul>
         </div>
         <div className="sidebar-section">

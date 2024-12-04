@@ -2,46 +2,61 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: center; /* Centra horizontalmente */
+
 }
 
 @media (min-width: 769px) {
   .products-container {
     width: calc(100% - 250px);
+    justify-content: center; /* Centra horizontalmente */
+
+  }
+
+  .product-card img {
+    width: 10%; /* Asegura que la imagen ocupe todo el espacio disponible */
+    height: auto;
+    max-height: 150px; /* Limita la altura de la imagen */
   }
 }
 
 @media (max-width: 768px) {
   .products-container {
     width: 100%;
+    justify-content: center; /* Centra horizontalmente */
+    /* Alinea los elementos al inicio */
+    padding: 0 10px; /* Agrega un poco de espacio a los lados */
   }
 
   .product-card {
-    width: 100px;
-    padding: 5px;
-    font-size: 0.8rem;
+    width: 100%; /* Asegura que las tarjetas ocupen el 100% del contenedor */
+    max-width: 250px; /* Limita el ancho máximo de las tarjetas */
+    padding: 8px; /* Reduce el padding */
+    font-size: 0.8rem; /* Reduce el tamaño de la fuente */
   }
 
   .product-card img {
-    width: 50%;
+    width: 10%; /* Asegura que la imagen ocupe todo el espacio disponible */
     height: auto;
+    max-height: 150px; /* Limita la altura de la imagen */
+    margin-top: -5px;
   }
 
   .product-card h3 {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 3px 0;
   }
 
   .product-card .price {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Reduce el tamaño del precio */
   }
 
   .product-card .shipping {
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* Reduce el tamaño de la información de envío */
   }
 
   .product-card .description {
-    display: none;
+    display: none; /* Opcional: esconde la descripción si no es necesaria en pantallas pequeñas */
   }
 }
 

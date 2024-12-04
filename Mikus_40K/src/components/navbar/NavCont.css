@@ -20,7 +20,7 @@
   cursor: pointer;
   padding: 0px; /* Añadí un poco de padding para que sea más fácil hacer clic */
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   position: static;
 }
@@ -45,7 +45,7 @@
 
 /* Estilo de la barra de búsqueda */
 .search-bar {
-  flex-grow: 1; /* Ocupa espacio disponible entre los elementos */
+  flex-grow: 0; /* Ocupa espacio disponible entre los elementos */
   max-width: 900px; /* Limita el ancho máximo */
   margin-right: 20px;
 }
@@ -55,7 +55,7 @@
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #0eeadf;
-  background-color: #1e1e1e;
+  background-color: #3d3d3d !important;
   color: white;
   outline: none;
 }

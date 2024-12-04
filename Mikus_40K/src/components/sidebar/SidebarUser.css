@@ -11,7 +11,7 @@
   z-index: 2001;
   overflow-y: auto;
   transition: left 0.3s ease, width 0.3s ease, padding 0.3s ease; /* Transiciones suaves para la animación */
-  width: 15vw; /* Ancho basado en el 20% del ancho de la ventana */
+  width: 18vw; /* Ancho basado en el 20% del ancho de la ventana */
 }
 
 /* Cuando el sidebar es visible, se posiciona en su lugar */
@@ -98,10 +98,10 @@
 }
 
 /* Media Query para pantallas pequeñas (móviles) */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   /* Ajustar el ancho del sidebar para que ocupe un porcentaje más pequeño en móviles */
   .sidebar-user {
-    width: 30vw; /* Sidebar ocupa el 30% del ancho de la ventana */
+    width: 45vw; /* Sidebar ocupa el 30% del ancho de la ventana */
   }
 
   /* Ajustar el padding y márgenes en el sidebar para que sea más compacto */
@@ -129,3 +129,4 @@
     margin-bottom: 15px; /* Reducir espacio entre las secciones */
   }
 }
+

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Product } from '../../models/ProductModel';
-import './SearchResults.css';
+import '../product/Product.css';
+import './SearchResults.css'
 
 const SearchResults: React.FC = () => {
   // Obtiene los resultados de la búsqueda desde el estado de navegación
@@ -13,21 +14,24 @@ const SearchResults: React.FC = () => {
   }
 
   return (
-    <div className="results-container">
+    <div className='space'>
+    <div className="products-container">
       {results.map((product: Product) => (
-        <Link key={product.id} to={`/product/${product.id}`} className="result-item-link">
-          <div className="result-item">
-            <img src={product.image_path} alt={product.product_Name} className="item-image" />
-            <h3 className="item-title">{product.product_Name}</h3>
-            <p className="item-price">${product.price.toFixed(2)}</p>
-            <p className="item-shipping">
+        <Link key={product.id} to={`/product/${product.id}`} className="product-card-link">
+          <div className="product-card">
+            <img src={product.image_path} alt={product.product_Name} className="product-card-img" />
+            <h3>{product.product_Name}</h3>
+            <p className="price">${product.price.toFixed(2)}</p>
+            <p className="shipping">
               {product.shippingType} {product.shippingPrice !== 0 && `- $${product.shippingPrice}`}
             </p>
           </div>
         </Link>
       ))}
     </div>
+    </div>
   );
 };
 
 export default SearchResults;
+

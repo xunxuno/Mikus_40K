@@ -21,7 +21,9 @@ img {
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
   .products {
-    width: 100%; /* En pantallas pequeñas, la imagen ocupa todo el ancho */
+    width: 100%;
+    font-size: 30px;
+    justify-content: center;
   }
 }
 
