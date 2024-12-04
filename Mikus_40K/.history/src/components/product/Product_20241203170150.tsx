@@ -67,7 +67,6 @@ const Product: React.FC = () => {
           productId: product.id,
           quantity: 1,
           price: product.price || 0,
-          product_name: product.product_Name
         });
         alert(`El producto "${product.product_Name}" fue agregado al carrito.`);
       }

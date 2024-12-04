@@ -89,7 +89,7 @@ const Cart: React.FC = () => {
       // Actualizamos Redux con la nueva cantidad
       dispatch(addToCart({
         productId: existingItem.productId,
-        quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
+        quantity: newQuantity, // Solo modificamos la diferencia
         price: existingItem.price
       }));
     } catch (error) {
@@ -137,7 +137,7 @@ const Cart: React.FC = () => {
               <td>{item.product_name}</td>
               <td>
               <button 
-              onClick={() => handleUpdateQuantity(item.productId, -1)} 
+              onClick={() => handleUpdateQuantity(item.productId, item.quantity-2)} 
               disabled={item.quantity <= 1}
             >
               -

@@ -30,8 +30,7 @@ export const addProductToCart = async (
       userId,
       productId: product.productId,
       quantity: product.quantity,
-      price: product.price,
-      product_name: product.product_name
+      price: product.price
     };
 
     const response = await axiosInstance.post('/api/cart/add', payload);
@@ -127,21 +126,5 @@ export const getProductQuantityInCart = async (cart_id: number, productId: numbe
   } catch (error) {
     console.error('Error al verificar cantidad del producto en el carrito:', error);
     return { quantity: 0 }; // Si hay error, devolvemos cantidad 0
-  }
-};
-
-// Función para obtener los items de un carrito
-export const getCartItems = async (cart_id: number): Promise<CartItem[]> => {
-  try {
-    const response = await axiosInstance.get(`/api/cart/${cart_id}/items`);
-    console.log('Items obtenidos del carrito:', response.data);
-    return response.data; // Retorna los items del carrito
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Error al obtener items del carrito:', error.message);
-    } else {
-      console.error('Error desconocido:', error);
-    }
-    throw error;
   }
 };

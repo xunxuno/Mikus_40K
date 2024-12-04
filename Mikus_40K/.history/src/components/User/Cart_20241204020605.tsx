@@ -4,8 +4,7 @@ import {
   getOrCreatePendingCart, 
   removeProductFromCart, 
   clearPendingCart, 
-  getCartItems,
-  updateProductQuantityInCart
+  getCartItems 
 } from '../../models/CartModel';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, clearCart, removeFromCart, setCartItems } from '../../redux/cartSlice';
@@ -13,6 +12,7 @@ import { RootState } from '../../redux/store';
 import { CartItem } from '../../redux/cartSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { updateProductQuantityInCart } from '../../models/CartModel';  // Asegúrate de importar la función correctamente
 
 const Cart: React.FC = () => {
   const [isRemoving, setIsRemoving] = useState<number | null>(null);
@@ -25,27 +25,47 @@ const Cart: React.FC = () => {
     const fetchCart = async () => {
       try {
         if (!userId) return;
-    
+
         const pendingCartId = await getOrCreatePendingCart(userId);
         setCartId(pendingCartId);
-    
+
         const items = await getCartItems(pendingCartId);
-        const formattedItems = items.map((item: any) => {
-          return {
-            ...item,
-            productId: item.product_id, // Mapear product_id a productId
-          };
-        });
+        const formattedItems = items.map((item: any) => ({
+          ...item,
+          productId: item.productId,
+        }));
         dispatch(setCartItems(formattedItems)); // Actualizar Redux con los items del carrito
       } catch (error) {
         console.error('Error al cargar el carrito:', error);
       }
     };
-    
 
     fetchCart();
   }, [userId, dispatch]);
 
+  const handleAddToCart = async (productId: number) => {
+    try {
+      const existingItem = cartItems.find((item) => item.productId === productId);
+
+      if (existingItem) {
+        const updatedQuantity = existingItem.quantity + 1;
+
+        // Llamamos a la función updateProductQuantityInCart para actualizar la cantidad
+        await updateProductQuantityInCart(userId!, { productId, quantity: updatedQuantity, price: existingItem.price });
+
+        dispatch(addToCart({ productId, quantity: 1, price: existingItem.price }));
+      } else {
+        // Si el producto no existe, lo agregamos con una cantidad de 1
+        await updateProductQuantityInCart(userId!, { productId, quantity: 1, price: 0 });
+
+        dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      }
+
+      alert('Cantidad del producto actualizada en el carrito.');
+    } catch (error) {
+      console.error('Error al actualizar la cantidad del producto en el carrito:', error);
+    }
+  };
 
   const handleRemoveFromCart = async (productId: number) => {
     try {
@@ -60,46 +80,26 @@ const Cart: React.FC = () => {
     }
   };
 
-  const handleUpdateQuantity = async (productId: number, change: number) => {
-    // No permitir cantidades negativas o cero
-    const existingItem = cartItems.find((item: CartItem) => item.productId === productId);
-    
-    if (!existingItem) {
-      console.error('Producto no encontrado para actualización');
-      return;
-    }
-    
-    const newQuantity = existingItem.quantity + change; // Calculamos la nueva cantidad
+  const handleUpdateQuantity = async (productId: number, newQuantity: number) => {
+    if (newQuantity <= 0) return; // No permitir cantidades negativas o cero
   
-    if (newQuantity <= 0) return; // No permitir cantidades menores o iguales a cero
+    const existingItem = cartItems.find((item) => item.productId === productId);
   
-    const payload = {
-      userId: userId!,
-      productId: existingItem.productId,
-      quantity: newQuantity,
-      price: existingItem.price || 0,
-    };
-    
-    console.log('payload: ', payload); // Verifica el valor de productId y quantity
+    if (existingItem) {
+      // Llamamos a la función de actualización con el formato correcto
+      await updateProductQuantityInCart(userId!, {
+        productId,
+        quantity: newQuantity,
+        price: existingItem.price || 0
+      });
   
-    try {
-      // Llamada a la función para actualizar la cantidad en el carrito
-      await updateProductQuantityInCart(userId!, payload);
-      
-      // Actualizamos Redux con la nueva cantidad
       dispatch(addToCart({
-        productId: existingItem.productId,
-        quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
+        productId,
+        quantity: newQuantity - existingItem.quantity,
         price: existingItem.price
       }));
-    } catch (error) {
-      console.error('Error al actualizar cantidad:', error);
     }
   };
-  
-  
-  
-  
   
 
   const handleCheckout = async () => {
@@ -132,21 +132,20 @@ const Cart: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item: CartItem) => (
+          {cartItems.map((item) => (
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
               <td>{item.product_name}</td>
               <td>
-              <button 
-              onClick={() => handleUpdateQuantity(item.productId, -1)} 
-              disabled={item.quantity <= 1}
-            >
-              -
-            </button>
-            {item.quantity}
-            <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
-              +
-            </button>
-
+                <button 
+                  onClick={() => handleUpdateQuantity(item.productId, item.quantity - 1)} 
+                  disabled={item.quantity <= 1}
+                >
+                  -
+                </button>
+                {item.quantity}
+                <button onClick={() => handleUpdateQuantity(item.productId, item.quantity + 1)}>
+                  +
+                </button>
               </td>
               <td>${item.price.toFixed(2)}</td>
               <td>

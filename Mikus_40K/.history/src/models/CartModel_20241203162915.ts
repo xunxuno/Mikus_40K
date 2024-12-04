@@ -9,7 +9,7 @@ export const getOrCreatePendingCart = async (userId: number): Promise<number> =>
     console.log("userId: ", userId);
 
     console.log('Carrito pendiente obtenido o creado:', response.data);
-    return response.data.cartId; // Devuelve el ID del carrito desde el servidor
+    return response.data.id; // Devuelve el ID del carrito desde el servidor
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error al obtener o crear el carrito pendiente:', error.message);
@@ -30,8 +30,7 @@ export const addProductToCart = async (
       userId,
       productId: product.productId,
       quantity: product.quantity,
-      price: product.price,
-      product_name: product.product_name
+      price: product.price
     };
 
     const response = await axiosInstance.post('/api/cart/add', payload);
@@ -120,28 +119,12 @@ export const clearPendingCart = async (userId: number): Promise<{ mensaje: strin
   }
 };
 
-export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<{ quantity: number }> => {
+export const getProductQuantityInCart = async (cart_id: number, productId: number): Promise<number> => {
   try {
-    const response = await axiosInstance.get(`/api/cart/product/${cart_id}/${productId}`);
-    return response.data || { quantity: 0 }; // Devuelve `null` si no hay datos
+    const response = await axiosInstance.get(`/api/cart/product//${cart_id}/${productId}`);
+    return response.data || 0; // Devuelve `null` si no hay datos
   } catch (error) {
     console.error('Error al verificar cantidad del producto en el carrito:', error);
-    return { quantity: 0 }; // Si hay error, devolvemos cantidad 0
-  }
-};
-
-// Función para obtener los items de un carrito
-export const getCartItems = async (cart_id: number): Promise<CartItem[]> => {
-  try {
-    const response = await axiosInstance.get(`/api/cart/${cart_id}/items`);
-    console.log('Items obtenidos del carrito:', response.data);
-    return response.data; // Retorna los items del carrito
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Error al obtener items del carrito:', error.message);
-    } else {
-      console.error('Error desconocido:', error);
-    }
     throw error;
   }
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllProducts } from '../../controllers/ProductController'; // Importamos la función desde el controlador
-import { addProductToCart, getOrCreatePendingCart, updateProductQuantityInCart, getProductQuantityInCart } from '../../models/CartModel'; // Importamos funciones de la API
+import { addProductToCart, getOrCreatePendingCart } from '../../models/CartModel'; // Importamos funciones de la API
 import { useSelector } from 'react-redux'; // Para acceder al estado de usuario
 import type { Product } from '../../models/ProductModel'; // Importación tipo-only para Product
 import { RootState } from '../../redux/store'; // Estado global
@@ -45,32 +45,16 @@ const Product: React.FC = () => {
 
     try {
       // Asegurarse de que el usuario tiene un carrito pendiente
-      const cart_id = await getOrCreatePendingCart(userId);
-      console.log('cart_id: ', cart_id);
+      await getOrCreatePendingCart(userId);
 
-      // Verificar si el producto ya está en el carrito
-      const existingProduct = await getProductQuantityInCart(cart_id, product.id);
-      console.log('productos existentes: ', existingProduct);
+      // Agregar producto al carrito
+      await addProductToCart(userId, {
+        productId: product.id,
+        quantity: 1,
+        price: product.price || 0,
+      });
 
-      if (existingProduct.quantity > 0) {
-        // Si el producto ya está en el carrito, actualizar la cantidad
-        await updateProductQuantityInCart(userId, {
-          productId: product.id,
-          quantity: existingProduct.quantity + 1,
-          price: product.price || 0
-        });
-        console.log('cantiadad actualizada a: ', existingProduct);
-        alert(`La cantidad del producto "${product.product_Name}" fue actualizada en el carrito.`);
-      } else {
-        // Si el producto no está en el carrito, lo agregamos normalmente
-        await addProductToCart(userId, {
-          productId: product.id,
-          quantity: 1,
-          price: product.price || 0,
-          product_name: product.product_Name
-        });
-        alert(`El producto "${product.product_Name}" fue agregado al carrito.`);
-      }
+      alert(`El producto "${product.product_Name}" fue agregado al carrito.`);
     } catch (error) {
       console.error('Error al agregar producto al carrito:', error);
       alert('Hubo un error al agregar el producto al carrito. Inténtalo nuevamente.');

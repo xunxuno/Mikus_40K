@@ -18,6 +18,7 @@ const Home: React.FC = () => {
       <div>
         <Sidebar />
         <h3 className="products">PRODUCTOS DESTACADOS</h3>
+        {/* Eliminamos la función de carrito local, ya no es necesaria */}
         <ProductComponent />
       </div>
     </>
