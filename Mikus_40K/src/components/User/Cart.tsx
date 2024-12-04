@@ -122,7 +122,7 @@ const Cart: React.FC = () => {
         <tbody>
           {cartItems.map((item) => (
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
-              <td>{item.productName}</td>
+              <td>{item.product_name}</td>
               <td>{item.quantity}</td>
               <td>${item.price.toFixed(2)}</td>
               <td>
