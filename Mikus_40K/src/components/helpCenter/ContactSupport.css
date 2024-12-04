@@ -6,18 +6,19 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  font-family: 'Noto Sans', sans-serif;  /* Fuente moderna */
-  background-color: #f7f7f7;  /* Fondo de la página en un tono suave */
+  font-family: 'Arial', sans-serif;  /* Fuente consistente con el diseño */
+  background-color: #2b2b2b;  /* Fondo oscuro tipo metalizado */
   min-height: 100vh;
   text-align: center;
-  color: #333;  /* Color de texto más suave */
+  color: #00d7d7;  /* Texto cian vibrante */
 }
 
 .contact-box {
-  background-color: white;
+  background-color: #1c1c1c;  /* Fondo de la caja oscuro */
   padding: 30px;
-  border-radius: 12px;  /* Bordes redondeados para un estilo más suave */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  border-radius: 12px;  /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* Sombras intensas */
+  border: 2px solid #ffd700;  /* Borde dorado */
   width: 100%;
   max-width: 600px;  /* Limitar el ancho máximo */
   margin: 0 auto;
@@ -26,7 +27,7 @@
 .contact-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #003392;  /* Color vibrante para el título */
+  color: #00d7d7;  /* Título en cian vibrante */
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -35,13 +36,13 @@
 .contact-info {
   font-size: 1.125rem;
   margin: 15px 0;
-  color: #555;  /* Color de texto para la información */
+  color: #ffffff;  /* Texto blanco */
   line-height: 1.6;
 }
 
 .contact-info strong {
   font-weight: bold;
-  color: #003392;  /* Color del texto importante */
+  color: #ffd700;  /* Texto importante en dorado */
 }
 
 .contact-details {
@@ -49,7 +50,7 @@
 }
 
 .contact-detail {
-  color: #333;
+  color: #00d7d7;  /* Texto cian */
   font-size: 1rem;
   margin-bottom: 10px;
 }
@@ -62,13 +63,15 @@
 }
 
 .contact-icons a {
-  color: #003392;
+  color: #00d7d7;  /* Iconos cian */
   font-size: 1.5rem;
   text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .contact-icons a:hover {
-  color: #0077b6;
+  transform: scale(1.1);
+  color: #ffd700;  /* Efecto dorado al pasar el cursor */
 }
 
 /* Responsividad: mejorar en pantallas pequeñas */

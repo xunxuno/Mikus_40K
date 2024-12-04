@@ -6,15 +6,15 @@
     margin: 0 auto;
     margin-top: 230px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #1c1c1c; /* Fondo oscuro */
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más marcada */
     font-family: 'Arial', sans-serif;
 }
 
 /* Título */
 .register-container h3 {
-    color: #2c3e50;
+    color: #00d7d7; /* Texto cian vibrante */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -26,8 +26,8 @@
     top: 140px; /* Ajusta la distancia desde la parte superior */
     right: -300px; /* Comienza fuera de la pantalla */
     padding: 15px;
-    background-color: rgba(243, 0, 0, 0.8);
-    color: white;
+    background-color: #1c1c1c; /* Fondo oscuro */
+    color: #ffd700; /* Texto dorado */
     border-radius: 8px;
     font-size: 1rem;
     z-index: 3000;
@@ -56,7 +56,6 @@
     }
 }
 
-
 /* Estilo del formulario */
 .register-form {
     display: flex;
@@ -71,7 +70,7 @@
 /* Estilo de las etiquetas */
 .form-group label {
     font-size: 14px;
-    color: #555;
+    color: #00d7d7; /* Texto cian vibrante */
     margin-bottom: 5px;
     display: block;
 }
@@ -81,18 +80,18 @@
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #2c3e50; /* Bordes oscuros para un buen contraste */
+    border: 1px solid #ffd700; /* Bordes dorados */
     border-radius: 5px;
     font-size: 1rem;
-    background-color: #ecf0f1; /* Fondo suave para los inputs */
-    color: #2c3e50; /* Texto oscuro */
+    background-color: #2b2b2b; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
 .form-group input:focus {
-    border-color: #39C5BB; /* Bordes turquesa al hacer foco */
-    background-color: #ffffff; /* Fondo blanco al hacer foco */
+    border-color: #00d7d7; /* Bordes cian al hacer foco */
+    background-color: #1c1c1c; /* Fondo oscuro al hacer foco */
     outline: none;
 }
 
@@ -100,17 +99,18 @@
 .form-group button {
     padding: 12px;
     font-size: 16px;
-    background-color: #39C5BB;
-    color: white;
-    border: none;
+    background-color: #00d7d7; /* Fondo cian */
+    color: #1c1c1c; /* Texto oscuro */
+    border: 1px solid #ffd700; /* Bordes dorados */
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     width: 100%;
 }
 
 .form-group button:hover {
-    background-color: #16A085; /* Cambia el verde a un tono más oscuro al pasar el ratón */
+    background-color: #ffd700; /* Fondo dorado al pasar el ratón */
+    border-color: #00d7d7; /* Bordes cian */
 }
 
 /* Estilo para pantallas pequeñas (mobile-first approach) */
@@ -119,7 +119,7 @@
         padding: 15px;
     }
 
-    .register-container h2 {
+    .register-container h3 {
         font-size: 20px;
     }
 
