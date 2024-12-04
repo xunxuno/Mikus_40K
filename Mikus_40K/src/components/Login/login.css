@@ -1,9 +1,9 @@
 /* Estilo general para el fondo de la página */
 body {
-    background-color: #39C5BB; /* Color de fondo verde turquesa */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #2c3e50; /* Color del título del login */
     height: 100vh; /* Aseguramos que el body ocupe toda la altura */
 }
 
@@ -17,18 +17,22 @@ body {
 
 /* Estilo general para el login */
 .login {
-    background-color: #ffffff;
     padding: 40px;
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9; /* Fondo del contenedor */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: center;
+    display: flex;
+    flex-direction: column; /* Alineación de los elementos en columna */
+    align-items: stretch; /* Los elementos ocupan todo el ancho del contenedor */
+    justify-content: center;
 }
 
 /* Título del login */
 .login h3 {
-    color: #2c3e50;
+    color: #2c3e50; /* Color del título */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -37,18 +41,27 @@ body {
 .square_login input {
     width: 100%;
     padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #2c3e50; /* Bordes oscuros para un buen contraste */
+    margin: 10px 0; /* Asegura margen uniforme arriba y abajo */
+    border: 1px solid #2c3e50; /* Bordes oscuros */
     border-radius: 5px;
     font-size: 1rem;
-    background-color: #ecf0f1; /* Fondo suave para los inputs */
     color: #2c3e50; /* Texto oscuro */
+    background-color: #ecf0f1; /* Fondo claro */
     transition: all 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del campo */
+}
+
+/* Ajustes para los campos de entrada dentro de un contenedor */
+.square_login {
+    display: flex;
+    flex-direction: column; /* Asegura que los inputs estén alineados verticalmente */
+    align-items: stretch; /* Los campos ocuparán todo el ancho disponible */
+    justify-content: center;
 }
 
 /* Efecto de enfoque (focus) en los campos de entrada */
 .square_login input:focus {
-    border-color: #39C5BB; /* Bordes turquesa al hacer foco */
+    border-color: #39C5BB; /* Bordes cian al hacer foco */
     background-color: #ffffff; /* Fondo blanco al hacer foco */
     outline: none;
 }
@@ -57,25 +70,19 @@ body {
 .login button {
     width: 100%;
     padding: 12px;
-    background-color: #39C5BB; /* Botón con el color de fondo */
+    background-color: #39C5BB; /* Fondo cian */
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: 4px;
+    color: white; /* Texto blanco */
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del botón */
 }
 
 /* Efecto de hover en el botón */
 .login button:hover {
-    background-color: #16A085; /* Cambia el verde a un tono más oscuro al pasar el ratón */
-}
-
-/* Estilo para los párrafos dentro del formulario */
-.square_login p {
-    color: #2c3e50;
-    font-size: 1rem;
-    margin: 10px 0;
+    background-color: #16A085; /* Fondo verde oscuro al pasar el cursor */
 }
 
 /* Media queries para dispositivos móviles */

@@ -3,7 +3,9 @@
   color: #fff;
   padding: 20px 10px;
   font-size: 14px;
-  z-index: 1101;
+  
+  z-index: 1110;
+  position: relative;
 }
 
 .footer-content {
@@ -58,4 +60,6 @@ html, body {
 
 .App {
   flex: 1; /* Asegura que el contenido principal ocupe el espacio disponible */
+
 }
+

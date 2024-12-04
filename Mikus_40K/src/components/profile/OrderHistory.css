@@ -1,0 +1,30 @@
+.order-history-container {
+    padding: 20px;
+  }
+  
+  .order-history-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .order-history-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-history-product {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .order-history-quantity,
+  .order-history-price,
+  .order-history-total {
+    margin: 4px 0;
+  }
+  

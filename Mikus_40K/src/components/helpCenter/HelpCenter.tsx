@@ -2,7 +2,7 @@
 //import React from 'react';
 
 function HelpCenter() {
-  return <div>Este es el Centro de Ayuda de la pagina</div>;
+  return <div>Este es el Centro de Ayuda de la pagina web</div>;
 }
 
 export default HelpCenter;
