@@ -1,6 +1,7 @@
+// src/components/UserDetailsForm.tsx
 import React, { useState, useEffect } from 'react';
 import { UserDetails, fetchUserDetails, updateUserDetails } from '../../models/UserModel';
-import { useNavigate } from 'react-router-dom';
+import './userDetails.css';
 
 interface UserDetailsFormProps {
   userId: number;
@@ -9,20 +10,14 @@ interface UserDetailsFormProps {
 const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
   const [details, setDetails] = useState<UserDetails | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUserDetails = async () => {
       try {
-        const userDetails = await fetchUserDetails();
-        if (userDetails) {
-          setDetails(userDetails);
-        } else {
-          navigate('/user-details'); // Redirigir si no existen detalles
-        }
+        const userDetails = await fetchUserDetails(userId);
+        setDetails(userDetails);
       } catch (error) {
         console.error('Error fetching user details:', error);
-        navigate('/user-deatails'); // Redirigir si ocurre un error
       }
     };
     loadUserDetails();
@@ -34,14 +29,13 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
     }
   };
 
-  // Asegurarnos de prevenir el envío automático de formularios
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevenir el envío del formulario de manera predeterminada
+    e.preventDefault();
     if (details) {
       try {
         await updateUserDetails(details);
-        setIsEditing(true); // Desactivar el modo de edición después de guardar
-        //alert('User details updated successfully!');
+        setIsEditing(false);
+        alert('User details updated successfully!');
       } catch (error) {
         console.error('Error updating user details:', error);
       }
@@ -64,42 +58,20 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
                 type="text"
                 id={key}
                 name={key}
-                value={details[key as keyof UserDetails] || ''}
+                value={details[key as keyof UserDetails]}
                 onChange={handleChange}
-                readOnly={!isEditing} // Solo es editable si está en modo edición
+                readOnly={!isEditing}
               />
             </div>
           ) : null
         )}
-        
-        {/* Separación de botones para editar y guardar */}
-        <div>
-          {!isEditing ? (
-            <button
-              type="button"
-              onClick={() => setIsEditing(true)} // Cambia el estado para editar
-              className="edit-button"
-            >
-              Edit
-            </button>
-          ) : (
-            <>
-              <button
-                type="submit"
-                className="save-button"
-              >
-                Save Changes
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsEditing(false)} // Cambia el estado para cancelar la edición
-                className="cancel-button"
-              >
-                Cancel
-              </button>
-            </>
-          )}
-        </div>
+        {isEditing ? (
+          <button type="submit">Save Changes</button>
+        ) : (
+          <button type="button" onClick={() => setIsEditing(true)}>
+            Edit
+          </button>
+        )}
       </form>
     </div>
   );

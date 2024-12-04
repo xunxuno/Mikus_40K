@@ -22,7 +22,7 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
         }
       } catch (error) {
         console.error('Error fetching user details:', error);
-        navigate('/user-deatails'); // Redirigir si ocurre un error
+        navigate('/user-details'); // Redirigir si ocurre un error
       }
     };
     loadUserDetails();

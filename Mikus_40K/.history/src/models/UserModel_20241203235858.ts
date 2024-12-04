@@ -92,15 +92,10 @@ export const createUserDetails = async (details: UserDetails): Promise<void> => 
 };
 
 // Función para obtener los detalles del usuario por ID
-export const fetchUserDetails = async (): Promise<UserDetails | null> => {
+export const fetchUserDetails = async (userId: number): Promise<UserDetails | null> => {
   try {
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      throw new Error('No se encontró userId en localStorage');
-    }
-
-    const response = await axiosInstance.get(`/api/user-details/${Number(userId)}`);
-    return response.data as UserDetails;
+    const response = await axiosInstance.get(`/api/user-details/${userId}`);
+    return response.data;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error al obtener detalles del usuario:', error.message);
@@ -110,7 +105,6 @@ export const fetchUserDetails = async (): Promise<UserDetails | null> => {
     throw error;
   }
 };
-
 
 // Función para actualizar los detalles del usuario
 export const updateUserDetails = async (details: UserDetails): Promise<void> => {
@@ -129,7 +123,6 @@ export const updateUserDetails = async (details: UserDetails): Promise<void> => 
     } = details;
 
     const response = await axiosInstance.put(`/api/user-details/update`, {
-      user_id,
       first_name,
       last_name,
       phone_number,
