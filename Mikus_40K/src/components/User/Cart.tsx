@@ -3,13 +3,12 @@ import './Cart.css';
 import { 
   getOrCreatePendingCart, 
   addProductToCart, 
-  updateProductQuantityInCart, 
   removeProductFromCart, 
   clearPendingCart, 
   getCartItems 
 } from '../../models/CartModel';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, decreaseQuantity, clearCart, removeFromCart, setCartItems } from '../../redux/cartSlice';
+import { addToCart, clearCart, removeFromCart, setCartItems } from '../../redux/cartSlice';
 import { RootState } from '../../redux/store';
 import { CartItem } from '../../redux/cartSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,7 +32,6 @@ const Cart: React.FC = () => {
 
         // Obtener los items del carrito
         const items = await getCartItems(pendingCartId);
-        // Asignamos el productId en la estructura del cartItems
         const formattedItems = items.map((item: any) => ({
           ...item,
           productId: item.productId, // Asegúrate de que cada artículo tenga un productId
@@ -50,30 +48,22 @@ const Cart: React.FC = () => {
   const handleAddToCart = async (productId: number) => {
     try {
       const existingItem = cartItems.find((item) => item.productId === productId);
-      const updatedQuantity = (existingItem?.quantity || 0) + 1;
 
-      await addProductToCart(userId!, { productId, quantity: updatedQuantity, price: 0 });
-      dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      if (existingItem) {
+        // Si el producto ya existe en el carrito, incrementa la cantidad
+        const updatedQuantity = existingItem.quantity + 1;
+
+        await addProductToCart(userId!, { productId, quantity: updatedQuantity, price: existingItem.price });
+        dispatch(addToCart({ productId, quantity: 1, price: existingItem.price }));
+      } else {
+        // Si el producto no está en el carrito, agrega uno nuevo
+        await addProductToCart(userId!, { productId, quantity: 1, price: 0 });
+        dispatch(addToCart({ productId, quantity: 1, price: 0 }));
+      }
+
+      alert('Producto actualizado en el carrito.');
     } catch (error) {
       console.error('Error al agregar producto al carrito:', error);
-    }
-  };
-
-  const handleDecreaseQuantity = async (productId: number) => {
-    try {
-      const cartItem = cartItems.find((item) => item.productId === productId);
-      if (cartItem && cartItem.quantity > 1) {
-        await updateProductQuantityInCart(userId!, {
-          productId,
-          quantity: cartItem.quantity - 1,
-          price: cartItem.price,
-        });
-        dispatch(decreaseQuantity(productId));
-      } else {
-        handleRemoveFromCart(productId);
-      }
-    } catch (error) {
-      console.error('Error al disminuir la cantidad:', error);
     }
   };
 
@@ -126,8 +116,10 @@ const Cart: React.FC = () => {
               <td>{item.quantity}</td>
               <td>${item.price.toFixed(2)}</td>
               <td>
-                <button onClick={() => handleAddToCart(item.productId)} className="quantity-button">+</button>
-                <button onClick={() => handleDecreaseQuantity(item.productId)} className="quantity-button">-</button>
+                {/* Botón de agregar al carrito, igual al de 'Product' */}
+                <button onClick={() => handleAddToCart(item.productId)} className="cart-btn">
+                  🛒 Agregar al carrito
+                </button>
                 <FontAwesomeIcon
                   icon={faTrash}
                   onClick={() => handleRemoveFromCart(item.productId)}
