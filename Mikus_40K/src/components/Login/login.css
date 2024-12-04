@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #00d7d7;
+    color: #2c3e50; /* Color del título del login */
     height: 100vh; /* Aseguramos que el body ocupe toda la altura */
 }
 
@@ -21,8 +21,8 @@ body {
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
-    background-color: #2b2b2b;  /* Fondo oscuro tipo metalizado */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más marcada */
+    background-color: #f9f9f9; /* Fondo del contenedor */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: center;
     display: flex;
     flex-direction: column; /* Alineación de los elementos en columna */
@@ -32,7 +32,7 @@ body {
 
 /* Título del login */
 .login h3 {
-    color: #00d7d7; /* Texto cian vibrante */
+    color: #2c3e50; /* Color del título */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -42,11 +42,11 @@ body {
     width: 100%;
     padding: 12px;
     margin: 10px 0; /* Asegura margen uniforme arriba y abajo */
-    border: 1px solid #ffd700; /* Bordes dorados */
+    border: 1px solid #2c3e50; /* Bordes oscuros */
     border-radius: 5px;
     font-size: 1rem;
-    color: #ffffff; /* Texto blanco */
-    background-color: #2b2b2b; /* Fondo oscuro */
+    color: #2c3e50; /* Texto oscuro */
+    background-color: #ecf0f1; /* Fondo claro */
     transition: all 0.3s ease;
     box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del campo */
 }
@@ -61,8 +61,8 @@ body {
 
 /* Efecto de enfoque (focus) en los campos de entrada */
 .square_login input:focus {
-    border-color: #00d7d7; /* Bordes cian al hacer foco */
-    background-color: #1c1c1c; /* Fondo oscuro al hacer foco */
+    border-color: #39C5BB; /* Bordes cian al hacer foco */
+    background-color: #ffffff; /* Fondo blanco al hacer foco */
     outline: none;
 }
 
@@ -70,21 +70,19 @@ body {
 .login button {
     width: 100%;
     padding: 12px;
-    background-color: #00d7d7; /* Fondo cian */
-    border: 1px solid #ffd700; /* Bordes dorados */
-    border-radius: 5px;
-    color: #1c1c1c; /* Texto oscuro */
+    background-color: #39C5BB; /* Fondo cian */
+    border: none;
+    border-radius: 4px;
+    color: white; /* Texto blanco */
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease;
     box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del botón */
 }
 
 /* Efecto de hover en el botón */
 .login button:hover {
-    background-color: #ffd700; /* Fondo dorado al pasar el cursor */
-    border-color: #00d7d7; /* Bordes cian */
-    color: #1c1c1c; /* Texto oscuro */
+    background-color: #16A085; /* Fondo verde oscuro al pasar el cursor */
 }
 
 /* Media queries para dispositivos móviles */

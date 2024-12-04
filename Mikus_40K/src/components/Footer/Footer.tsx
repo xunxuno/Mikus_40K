@@ -7,9 +7,8 @@ const Footer: React.FC = () => {
       <div className="footer-content">
         <p>&copy; {new Date().getFullYear()} Miku´s 40k. Todos los derechos reservados.</p>
         <ul className="footer-links">
-          <li><a href="/support">Contactar el Soporte</a></li>
-          <li><a href="/help-center">Centro de Ayuda</a></li>
-          <li><a href="/contact">Contacto</a></li>
+          <li><a href="/about-us">Sobre Nosotros</a></li>
+          <li><a href="/contact-support">Contacto</a></li>
         </ul>
       </div>
     </footer>
