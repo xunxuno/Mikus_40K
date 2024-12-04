@@ -22,7 +22,6 @@ const Cart: React.FC = () => {
   const userId = useSelector((state: RootState) => state.auth.userId);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -111,7 +110,8 @@ const Cart: React.FC = () => {
       const order = await createOrder({ userId, cartId });
       console.log('Orden creada:', order);
       alert('Compra realizada exitosamente.');
-      navigate('/'); 
+      dispatch(clearCart());
+      await clearPendingCart(userId);
     } catch (error) {
       console.error('Error durante el checkout:', error);
     }
