@@ -137,7 +137,7 @@ const Cart: React.FC = () => {
               <td>{item.product_name}</td>
               <td>
               <button 
-              onClick={() => handleUpdateQuantity(item.productId, -1)} 
+              onClick={() => handleUpdateQuantity(item.productId, item.quantity-2)} 
               disabled={item.quantity <= 1}
             >
               -

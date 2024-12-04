@@ -60,43 +60,50 @@ const Cart: React.FC = () => {
     }
   };
 
-  const handleUpdateQuantity = async (productId: number, change: number) => {
-    // No permitir cantidades negativas o cero
-    const existingItem = cartItems.find((item: CartItem) => item.productId === productId);
+  const handleUpdateQuantity = async (productId: number, newQuantity: number) => {
+    if (newQuantity <= 0) return; // No permitir cantidades negativas o cero
     
-    if (!existingItem) {
+    // Actualizar cantidad localmente en el estado de Redux o estado local
+    const updatedCartItems = cartItems.map((item: CartItem) =>
+      item.productId === productId
+        ? { ...item, quantity: newQuantity } // Actualizar la cantidad en el carrito
+        : item
+    );
+    
+    // Actualizamos Redux con la nueva cantidad
+    dispatch(setCartItems(updatedCartItems));
+  
+    // Buscamos el item actualizado
+    const existingItem = updatedCartItems.find((item: CartItem) => item.productId === productId);
+    console.log('existingItem: ', existingItem); // Verifica que esta línea esté mostrando el valor correcto de productId
+    console.log('newQuantity: ', newQuantity); // Verifica el nuevo valor de cantidad
+    
+    if (existingItem) {
+      const payload = {
+        userId: userId!,
+        productId: existingItem.productId, // Usamos productId aquí
+        quantity: newQuantity,
+        price: existingItem.price || 0,
+      };
+      console.log('payload productId: ', payload.productId); // Aquí deberías ver el valor correcto de productId
+    
+      try {
+        // Llamada a la función con el formato correcto
+        await updateProductQuantityInCart(userId!, payload);
+    
+        // Actualizamos Redux con la nueva cantidad
+        dispatch(addToCart({
+          productId: existingItem.productId, // Usamos productId aquí
+          quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
+          price: existingItem.price
+        }));
+      } catch (error) {
+        console.error('Error al actualizar cantidad:', error);
+      }
+    } else {
       console.error('Producto no encontrado para actualización');
-      return;
-    }
-    
-    const newQuantity = existingItem.quantity + change; // Calculamos la nueva cantidad
-  
-    if (newQuantity <= 0) return; // No permitir cantidades menores o iguales a cero
-  
-    const payload = {
-      userId: userId!,
-      productId: existingItem.productId,
-      quantity: newQuantity,
-      price: existingItem.price || 0,
-    };
-    
-    console.log('payload: ', payload); // Verifica el valor de productId y quantity
-  
-    try {
-      // Llamada a la función para actualizar la cantidad en el carrito
-      await updateProductQuantityInCart(userId!, payload);
-      
-      // Actualizamos Redux con la nueva cantidad
-      dispatch(addToCart({
-        productId: existingItem.productId,
-        quantity: newQuantity - existingItem.quantity, // Solo modificamos la diferencia
-        price: existingItem.price
-      }));
-    } catch (error) {
-      console.error('Error al actualizar cantidad:', error);
     }
   };
-  
   
   
   
@@ -137,16 +144,16 @@ const Cart: React.FC = () => {
               <td>{item.product_name}</td>
               <td>
               <button 
-              onClick={() => handleUpdateQuantity(item.productId, -1)} 
-              disabled={item.quantity <= 1}
-            >
-              -
-            </button>
-            {item.quantity}
-            <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
-              +
-            </button>
+                onClick={() => handleUpdateQuantity(item.productId, item.quantity - 1)} 
+                disabled={item.quantity <= 1} // Asegurarte de que no se pueda reducir a 0
+              >
+                -
+              </button>
 
+                {item.quantity}
+                <button onClick={() => handleUpdateQuantity(item.productId, item.quantity + 1)}>
+                  +
+                </button>
               </td>
               <td>${item.price.toFixed(2)}</td>
               <td>
