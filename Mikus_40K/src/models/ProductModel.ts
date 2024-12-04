@@ -16,7 +16,7 @@ export interface Product {
 // Función para obtener todos los productos desde la API
 export const obtenerProductos = async (): Promise<Product[]> => {
   try {
-    const response = await axiosInstance.get('/api/products'); // Asegúrate de que esta es la URL correcta de tu API
+    const response = await axiosInstance.get('/api/products'); 
     console.log('Productos recibidos:', response.data);
 
     return response.data; // Devuelve los productos recibidos de la API
@@ -26,6 +26,24 @@ export const obtenerProductos = async (): Promise<Product[]> => {
     } else {
       console.error('Error desconocido:', error);
     }
-    throw error; // Lanza el error para que pueda ser manejado más arriba
+    throw error; 
+  }
+};
+
+export const buscarProductos = async (nombre: string): Promise<Product[]> => {
+  try {
+    const response = await axiosInstance.get('/api/products/search', {
+      params: { product_Name: nombre },
+    }); // Enviamos `product_Name` como parámetro
+    console.log('Resultados de búsqueda:', response.data);
+
+    return response.data; // Retorna los productos encontrados
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al buscar productos:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error; // Lanza el error
   }
 };

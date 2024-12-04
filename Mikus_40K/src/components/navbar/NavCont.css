@@ -20,7 +20,7 @@
   cursor: pointer;
   padding: 0px; /* Añadí un poco de padding para que sea más fácil hacer clic */
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   position: static;
 }
@@ -45,7 +45,7 @@
 
 /* Estilo de la barra de búsqueda */
 .search-bar {
-  flex-grow: 1; /* Ocupa espacio disponible entre los elementos */
+  flex-grow: 0; /* Ocupa espacio disponible entre los elementos */
   max-width: 900px; /* Limita el ancho máximo */
   margin-right: 20px;
 }
@@ -55,7 +55,7 @@
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #0eeadf;
-  background-color: #1e1e1e;
+  background-color: #3d3d3d !important;
   color: white;
   outline: none;
 }
@@ -115,34 +115,85 @@
   height: auto;
   object-fit: contain;
 }
+/* Contenedor general para login y barra de búsqueda */
+.auth-search-container {
+  display: flex; /* Alinea elementos en fila */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 10px; /* Espaciado entre el botón de login y la barra de búsqueda */
+}
+
+/* Estilo del botón de login */
+.auth-buttons .login-btn {
+  background-color: #0eeadf;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-buttons .login-btn:hover {
+  background-color: #009f9f;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex; /* Alinea el botón y la barra de texto en fila */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 5px; /* Espaciado entre barra de texto y botón */
+}
+
+.search-bar input[type="text"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #0eeadf;
+  background-color: #1e1e1e;
+  color: white;
+  outline: none;
+  width: 200px; /* Ajusta el ancho según necesidad */
+  box-sizing: border-box;
+}
+
+.search-bar input[type="text"]::placeholder {
+  color: #888;
+}
+
+button[type="submit"] {
+  background-color: #0eeadf;
+  color: white;
+  border: 2px solid #0eeadf;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #009f9f;
+}
+
+button[type="submit"]:active {
+  background-color: #007f7f;
+}
+
+button[type="submit"]:focus {
+  outline: 2px solid #007f7f;
+  outline-offset: 2px;
+}
+
 
 /* Media Queries */
 @media (max-width: 7680px) {
   .search-bar {
-    display: block; /* Oculta la barra de búsqueda en pantallas pequeñas */
+    display: block; /* Muestra la barra de búsqueda en pantallas grandes */
   }
 
   .navbar-icon {
     display: block; /* Muestra el icono de menú en pantallas pequeñas */
-  }
-
-  .sub-navbar-links {
-    display: blocks; /* Ocultamos los enlaces inicialmente */
-  }
-
-  .sub-navbar.active .sub-navbar-links {
-    display: flex; /* Muestra los enlaces cuando está activo */
-    flex-direction: row; /* Organiza los enlaces en una fila horizontal */
-    gap: 10px; /* Añade espacio entre los enlaces */
-    align-items: center; /* Alinea los enlaces al centro verticalmente */
-    justify-content: flex-start; /* Alinea los enlaces a la izquierda */
-    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
-    flex-wrap: nowrap; /* Evita que los enlaces se vayan a una nueva línea */
-  }
-
-  .sub-navbar-links a {
-    text-decoration: none; /* Asegura que los enlaces no tengan subrayado */
-    color: inherit; /* Hereda el color del contenedor */
   }
 
   /* Estilo para los botones de Login/Logout */
@@ -172,13 +223,13 @@
   .auth-buttons .register-btn:hover {
     background-color: #009f9f !important;
     color: white;
-    border-color:#009f9f !important ;
+    border-color: #009f9f !important;
   }
 
   .auth-buttons .profile-btn:hover {
     background-color: #009f9f !important;
     color: white;
-    border-color:#009f9f !important ;
+    border-color: #009f9f !important;
   }
 
   /* Estilos para el botón de Logout */
@@ -216,5 +267,40 @@
 
   .cart-button:hover {
     background-color: #009f9f !important;
+  }
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sub-navbar {
+    padding: 5px 10px; /* Reduce el espacio interno */
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
+    white-space: nowrap; /* Evita que los elementos se envuelvan */
+  }
+
+  .sub-navbar-links {
+    display: flex; /* Asegura que los enlaces estén en fila */
+    flex-direction: row; /* Manténlos en una línea horizontal */
+    gap: 10px; /* Espacio entre enlaces */
+    width: auto; /* Ajusta el ancho dinámicamente */
+  }
+
+  .sub-navbar-links li a {
+    padding: 5px 8px; /* Reduce el padding para pantallas pequeñas */
+    font-size: 0.85rem; /* Ajusta el tamaño de la fuente */
+    text-align: center; /* Mantén el texto centrado */
+  }
+
+  .cart-button {
+    position: relative; /* Cambia a relativa para ajustar con márgenes */
+    top: 0px; /* Baja ligeramente el botón */
+    margin-left: auto; /* Mantiene el botón alineado a la derecha */
+    transform: none; /* Elimina cualquier transformación previa */
+  }
+
+  /* Ocultar botón de búsqueda en dispositivos móviles */
+  .search-bar button[type="submit"] {
+    display: none; /* Oculta el botón de búsqueda en pantallas pequeñas */
   }
 }

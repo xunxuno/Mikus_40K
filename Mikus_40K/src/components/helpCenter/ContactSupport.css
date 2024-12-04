@@ -6,27 +6,28 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  font-family: 'Noto Sans', sans-serif;  /* Fuente moderna */
-  background-color: #f7f7f7;  /* Fondo de la página en un tono suave */
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
   min-height: 100vh;
   text-align: center;
-  color: #333;  /* Color de texto más suave */
+  color: #00d7d7;
 }
 
 .contact-box {
-  background-color: white;
+  background-color: #1c1c1c;
   padding: 30px;
-  border-radius: 12px;  /* Bordes redondeados para un estilo más suave */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffd700;
   width: 100%;
-  max-width: 600px;  /* Limitar el ancho máximo */
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .contact-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #003392;  /* Color vibrante para el título */
+  color: #00d7d7;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -35,13 +36,13 @@
 .contact-info {
   font-size: 1.125rem;
   margin: 15px 0;
-  color: #555;  /* Color de texto para la información */
+  color: #ffffff;
   line-height: 1.6;
 }
 
 .contact-info strong {
   font-weight: bold;
-  color: #003392;  /* Color del texto importante */
+  color: #ffd700;
 }
 
 .contact-details {
@@ -49,7 +50,7 @@
 }
 
 .contact-detail {
-  color: #333;
+  color: #00d7d7;
   font-size: 1rem;
   margin-bottom: 10px;
 }
@@ -62,21 +63,65 @@
 }
 
 .contact-icons a {
-  color: #003392;
+  color: #00d7d7;
   font-size: 1.5rem;
   text-decoration: none;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .contact-icons a:hover {
-  color: #0077b6;
+  transform: scale(1.1);
+  color: #ffd700;
 }
 
 /* Responsividad: mejorar en pantallas pequeñas */
-@media (max-width: 600px) {
-  .contact-title {
-      font-size: 2rem;
+@media (max-width: 768px) {
+  .contact-support-container {
+    padding: 20px;
   }
+
+  .contact-title {
+    font-size: 2rem;  /* Reduce el tamaño del título */
+    margin-bottom: 15px;
+  }
+
   .contact-info {
-      font-size: 1rem;
+    font-size: 1rem;  /* Reduce el tamaño de la información */
+  }
+
+  .contact-box {
+    padding: 20px;  /* Reduce el padding en pantallas pequeñas */
+    width: 90%;  /* Reduce el ancho de la caja */
+  }
+
+  .contact-icons {
+    gap: 15px;  /* Reduce el espacio entre los íconos */
+    margin-top: 20px;
+  }
+
+  .contact-icons a {
+    font-size: 1.25rem;  /* Reduce el tamaño de los iconos */
+  }
+
+  .contact-detail {
+    font-size: 0.9rem;  /* Reduce el tamaño de los detalles de contacto */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: 1.8rem;  /* Asegura que el título sea más pequeño */
+  }
+
+  .contact-info {
+    font-size: 0.9rem;  /* Asegura que la info se ajuste mejor */
+  }
+
+  .contact-icons a {
+    font-size: 1.2rem;  /* Reducción del tamaño de los íconos */
+  }
+
+  .contact-detail {
+    font-size: 0.85rem;  /* Ajuste más fino del tamaño de los detalles */
   }
 }

@@ -1,22 +1,22 @@
 /* Estilo para el sidebar */
 .sidebar-user {
   position: fixed;
-  left: -300px; /* Inicia fuera de la pantalla (para el efecto de aparición) */
+  left: -400px; /* Inicia fuera de la pantalla */
   top: 0;
-  width: 250px; /* Ancho del sidebar */
-  height: 100%; /* Asegura que el sidebar ocupe toda la altura de la pantalla */
-  background-color: #1F1F1F; /* Gris muy oscuro (Warhammer 40k) */
-  color: #39C5BB; /* Turquesa (Hatsune Miku) */
+  height: 100%; /* Ocupa toda la altura */
+  background-color: #1c1c1c; /* Fondo oscuro */
+  color: #00d7d7; /* Texto cian vibrante */
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombras más notorias */
-  z-index: 2001; /* Asegúrate de que el sidebar esté encima del overlay */
-  overflow-y: auto; /* Esto permite que el sidebar tenga scroll vertical cuando sea necesario */
-  transition: left 0.3s ease; /* Transición para que el sidebar se deslice */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 2001;
+  overflow-y: auto;
+  transition: left 0.3s ease, width 0.3s ease, padding 0.3s ease; /* Transiciones suaves para la animación */
+  width: 18vw; /* Ancho basado en el 20% del ancho de la ventana */
 }
 
 /* Cuando el sidebar es visible, se posiciona en su lugar */
 .sidebar-user.visible {
-  left: 0; /* Mueve el sidebar al centro de la pantalla */
+  left: 0;
 }
 
 /* Estilo para la superposición oscura (overlay) */
@@ -26,20 +26,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad más alta */
-  z-index: 2000; /* El overlay debe estar justo por debajo del sidebar */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
 }
 
 /* Estilo para las secciones dentro del sidebar */
 .sidebar-section {
   margin-bottom: 30px;
+  transition: margin-bottom 0.3s ease;
 }
 
 .sidebar-section h3 {
   margin-bottom: 10px;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #4284ff; /* Amarillo dorado (detalles de Warhammer 40k) */
+  color: #ffd700; /* Títulos en dorado */
+  transition: font-size 0.3s ease;
 }
 
 .sidebar-section ul {
@@ -49,15 +51,16 @@
 
 .sidebar-section li {
   margin-bottom: 10px;
+  color: #00d7d7; /* Texto cian */
 }
 
 /* Estilo para los botones del sidebar */
 .sidebar-section button {
   width: 100%;
   padding: 10px;
-  background-color: #39C5BB; /* Turquesa (Hatsune Miku) */
-  border: 1px solid #4b4b4b; /* Gris oscuro */
-  color: #ffffff; /* Gris muy oscuro para contraste */
+  background-color: #00d7d7; /* Fondo cian */
+  border: 1px solid #ffd700; /* Borde dorado */
+  color: #ffffff; /* Texto blanco */
   border-radius: 5px;
   cursor: pointer;
   text-align: left;
@@ -66,9 +69,9 @@
 }
 
 .sidebar-section button:hover {
-  background-color: #63b1b1; /* Rojo oscuro (Warhammer 40k) */
-  border: 1px solid rgb(146, 255, 255);
-  color: #F5F5F5; /* Blanco para mejor legibilidad */
+  background-color: #ffd700; /* Fondo dorado al pasar el cursor */
+  border: 1px solid #00d7d7; /* Borde cian */
+  color: #1c1c1c; /* Texto oscuro */
 }
 
 .sidebar-section button:focus {
@@ -77,19 +80,53 @@
 
 /* Personalización del scrollbar en el sidebar */
 .sidebar-user::-webkit-scrollbar {
-  width: 8px; /* Ancho del scrollbar */
+  width: 8px;
 }
 
 .sidebar-user::-webkit-scrollbar-track {
-  background-color: #3A3A3A; /* Color de fondo del track (gris metálico) */
+  background-color: #3a3a3a; /* Fondo del scrollbar */
   border-radius: 10px;
 }
 
 .sidebar-user::-webkit-scrollbar-thumb {
-  background-color: #5A5A5A; /* Gris oscuro */
-  border-radius: 10px; /* Bordes redondeados */
+  background-color: #5a5a5a; /* Scrollbar en gris */
+  border-radius: 10px;
 }
 
 .sidebar-user::-webkit-scrollbar-thumb:hover {
-  background-color: #39C5BB; /* Turquesa (resaltado al pasar el ratón) */
+  background-color: #00d7d7; /* Scrollbar cian al pasar el cursor */
 }
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  /* Ajustar el ancho del sidebar para que ocupe un porcentaje más pequeño en móviles */
+  .sidebar-user {
+    width: 45vw; /* Sidebar ocupa el 30% del ancho de la ventana */
+  }
+
+  /* Ajustar el padding y márgenes en el sidebar para que sea más compacto */
+  .sidebar-user {
+    padding: 15px; /* Reducir el padding */
+  }
+
+  /* Ajustar los botones dentro del sidebar */
+  .sidebar-section button {
+    font-size: 0.9rem; /* Reducir el tamaño de fuente en botones */
+  }
+
+  /* Ajustar los encabezados */
+  .sidebar-section h3 {
+    font-size: 1rem; /* Reducir el tamaño del texto en los encabezados */
+  }
+
+  /* Es posible que quieras ocultar el overlay o cambiar su comportamiento */
+  .overlay {
+    display: block; /* Mostrar el overlay si es necesario */
+  }
+
+  /* Puedes ajustar el comportamiento de los márgenes en las secciones */
+  .sidebar-section {
+    margin-bottom: 15px; /* Reducir espacio entre las secciones */
+  }
+}
+

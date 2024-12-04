@@ -1,49 +1,11 @@
 /* Estilo general para el fondo de la página */
 body {
-    
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #2c3e50; /* Color del título del login */
     height: 100vh; /* Aseguramos que el body ocupe toda la altura */
 }
-
-/* Estilo del mensaje emergente */
-.modal {
-    display: none;
-    position: fixed;
-    top: 140px; /* Ajusta la distancia desde la parte superior */
-    right: -300px; /* Comienza fuera de la pantalla */
-    padding: 15px;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: white;
-    border-radius: 8px;
-    font-size: 1rem;
-    z-index: 3000;
-    text-align: center;
-    animation: slideIn 0.1s ease-out, fadeOut 5s 5s forwards; /* Agregamos la animación para desaparecer */
-    animation-fill-mode: forwards; /* Asegura que se mantenga en la posición final */
-}
-
-/* Animación de deslizamiento */
-@keyframes slideIn {
-    from {
-        right: -300px; /* Comienza fuera de la pantalla */
-    }
-    to {
-        right: 20px; /* Llega a la posición final */
-    }
-}
-
-/* Animación de desvanecimiento */
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
 
 /* Contenedor de la página de login */
 .login-container {
@@ -55,18 +17,22 @@ body {
 
 /* Estilo general para el login */
 .login {
-
     padding: 40px;
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9; /* Fondo del contenedor */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: center;
+    display: flex;
+    flex-direction: column; /* Alineación de los elementos en columna */
+    align-items: stretch; /* Los elementos ocupan todo el ancho del contenedor */
+    justify-content: center;
 }
 
 /* Título del login */
 .login h3 {
-    color: #003392;
+    color: #2c3e50; /* Color del título */
     font-size: 1.8rem;
     margin-bottom: 20px;
 }
@@ -75,19 +41,28 @@ body {
 .square_login input {
     width: 100%;
     padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #2c3e50; /* Bordes oscuros para un buen contraste */
+    margin: 10px 0; /* Asegura margen uniforme arriba y abajo */
+    border: 1px solid #2c3e50; /* Bordes oscuros */
     border-radius: 5px;
     font-size: 1rem;
-   
-    color: #000000; /* Texto oscuro */
+    color: #2c3e50; /* Texto oscuro */
+    background-color: #ecf0f1; /* Fondo claro */
     transition: all 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del campo */
+}
+
+/* Ajustes para los campos de entrada dentro de un contenedor */
+.square_login {
+    display: flex;
+    flex-direction: column; /* Asegura que los inputs estén alineados verticalmente */
+    align-items: stretch; /* Los campos ocuparán todo el ancho disponible */
+    justify-content: center;
 }
 
 /* Efecto de enfoque (focus) en los campos de entrada */
 .square_login input:focus {
-    border-color: #003392; /* Bordes turquesa al hacer foco */
-    background-color: #eeeded; /* Fondo blanco al hacer foco */
+    border-color: #39C5BB; /* Bordes cian al hacer foco */
+    background-color: #ffffff; /* Fondo blanco al hacer foco */
     outline: none;
 }
 
@@ -95,25 +70,19 @@ body {
 .login button {
     width: 100%;
     padding: 12px;
-    background-color: #003392; /* Botón con el color de fondo */
+    background-color: #39C5BB; /* Fondo cian */
     border: none;
-    border-radius: 5px;
-    color: rgb(0, 0, 0);
+    border-radius: 4px;
+    color: white; /* Texto blanco */
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del botón */
 }
 
 /* Efecto de hover en el botón */
 .login button:hover {
-    background-color: #003392; /* Cambia el verde a un tono más oscuro al pasar el ratón */
-}
-
-/* Estilo para los párrafos dentro del formulario */
-.square_login p {
-    color: #000000;
-    font-size: 1rem;
-    margin: 10px 0;
+    background-color: #16A085; /* Fondo verde oscuro al pasar el cursor */
 }
 
 /* Media queries para dispositivos móviles */
