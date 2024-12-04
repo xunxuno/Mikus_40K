@@ -19,6 +19,7 @@ import TrackOrder from "../components/User/TrackOrder";
 import Login from "../components/Login/login";
 import Register from "../components/Login/register";
 import SearchResults from '../components/Catalog/SearchResults';
+import UserDetails from '../components/User/userDetails';
 
 function Router() {
     return (
@@ -45,6 +46,7 @@ function Router() {
                 <Route path="*" element={<Navigate to="/" />} />
                 <Route path="/search-results" element={<SearchResults />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/user-deatails" element={<UserDetails />} />
             </Routes>
         </div>
     );

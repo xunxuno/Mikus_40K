@@ -14,6 +14,18 @@ export interface LoginResponse {
   userEmail: string;
 }
 
+export interface UserDetails {
+  user_id: number;
+  first_name: string;
+  last_name: string;
+  phone_number?: string;
+  country: string;
+  city: string;
+  zip_code: string;
+  street?: string;
+  house_number?: string;
+}
+
 export const registrarUsuario = async (user: Omit<User, 'id'>): Promise<{ mensaje: string }> => {
   try {
       const response = await axiosInstance.post('/api/singIn', {
@@ -64,3 +76,17 @@ export async function logearUsuario(email: string, password: string): Promise<Lo
     throw error;
   }
 }
+
+export const createUserDetails = async (details: UserDetails): Promise<void> => {
+  try {
+    const response = await axiosInstance.post('/api/user-details', details);
+    console.log('Detalles de usuario creados:', response.data);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error al crear detalles de usuario:', error.message);
+    } else {
+      console.error('Error desconocido:', error);
+    }
+    throw error;
+  }
+};
