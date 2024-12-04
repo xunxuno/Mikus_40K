@@ -26,12 +26,11 @@ const UserDetailsForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userId = localStorage.getItem('userId');
-    const userIdNumber = Number(userId);
+    const userId = 1; // Este ID debe provenir de tu autenticación o contexto
 
     try {
       await createUserDetails({
-        user_id: userIdNumber,
+        user_id: userId,
         ...formData,
       });
 

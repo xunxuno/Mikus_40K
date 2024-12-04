@@ -18,11 +18,11 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
         if (userDetails) {
           setDetails(userDetails);
         } else {
-          navigate('/user-details'); // Redirigir si no existen detalles
+          navigate('/user-details');
         }
       } catch (error) {
         console.error('Error fetching user details:', error);
-        navigate('/user-deatails'); // Redirigir si ocurre un error
+        navigate('/user-details');
       }
     };
     loadUserDetails();
@@ -34,13 +34,13 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
     }
   };
 
-  // Asegurarnos de prevenir el envío automático de formularios
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevenir el envío del formulario de manera predeterminada
+    e.preventDefault();
     if (details) {
       try {
+        setIsEditing(true);
         await updateUserDetails(details);
-        setIsEditing(true); // Desactivar el modo de edición después de guardar
+        navigate('/user-details'); // Desactivar el modo de edición después de guardar
         //alert('User details updated successfully!');
       } catch (error) {
         console.error('Error updating user details:', error);
@@ -66,35 +66,20 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
                 name={key}
                 value={details[key as keyof UserDetails] || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} // Solo es editable si está en modo edición
+                readOnly={!isEditing} // Si no está en modo edición, el campo es solo lectura
               />
             </div>
           ) : null
         )}
-        
-        {/* Separación de botones para editar y guardar */}
         <div>
           {!isEditing ? (
-            <button
-              type="button"
-              onClick={() => setIsEditing(true)} // Cambia el estado para editar
-              className="edit-button"
-            >
+            <button type="button" onClick={() => setIsEditing(true)} className="edit-button">
               Edit
             </button>
           ) : (
             <>
-              <button
-                type="submit"
-                className="save-button"
-              >
-                Save Changes
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsEditing(false)} // Cambia el estado para cancelar la edición
-                className="cancel-button"
-              >
+              <button type="submit" className="save-button">Save Changes</button>
+              <button type="button" onClick={() => setIsEditing(false)} className="cancel-button">
                 Cancel
               </button>
             </>

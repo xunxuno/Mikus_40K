@@ -47,7 +47,7 @@ const UserDetailsForm: React.FC = () => {
         street: '',
         house_number: '',
       });
-      navigate('/'); // Redirige a la página de perfil o donde desees
+      navigate('/profile'); // Redirige a la página de perfil o donde desees
     } catch (error) {
       console.error('Error al guardar los detalles del usuario:', error);
       setMessage('Hubo un error al guardar los detalles. Inténtalo nuevamente.');

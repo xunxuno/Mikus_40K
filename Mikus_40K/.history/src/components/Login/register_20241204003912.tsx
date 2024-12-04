@@ -35,7 +35,7 @@ const Register: React.FC = () => {
         setMessage(response.mensaje); // Usa el mensaje que devuelve tu backend
         setMessageType('success');
         setFormData({ username: '', email: '', password: '', confirmPassword: '' });
-        navigate('/login'); 
+        navigate('/'); 
     } catch (error: unknown) {
       setMessage('Hubo un error al registrar el usuario. Inténtalo de nuevo.');
       setMessageType('error');

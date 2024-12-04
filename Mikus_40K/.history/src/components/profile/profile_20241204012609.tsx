@@ -22,7 +22,7 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
         }
       } catch (error) {
         console.error('Error fetching user details:', error);
-        navigate('/user-deatails'); // Redirigir si ocurre un error
+        navigate('/user-details'); // Redirigir si ocurre un error
       }
     };
     loadUserDetails();
@@ -41,7 +41,7 @@ const Profile: React.FC<UserDetailsFormProps> = ({ userId }) => {
       try {
         await updateUserDetails(details);
         setIsEditing(true); // Desactivar el modo de edición después de guardar
-        //alert('User details updated successfully!');
+        alert('User details updated successfully!');
       } catch (error) {
         console.error('Error updating user details:', error);
       }
