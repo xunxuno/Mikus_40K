@@ -14,7 +14,6 @@ import { RootState } from '../../redux/store';
 import { CartItem } from '../../redux/cartSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom'; 
 
 const Cart: React.FC = () => {
   const [isRemoving, setIsRemoving] = useState<number | null>(null);
@@ -22,7 +21,6 @@ const Cart: React.FC = () => {
   const userId = useSelector((state: RootState) => state.auth.userId);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -111,7 +109,8 @@ const Cart: React.FC = () => {
       const order = await createOrder({ userId, cartId });
       console.log('Orden creada:', order);
       alert('Compra realizada exitosamente.');
-      navigate('/'); 
+      //dispatch(clearCart());
+      await clearPendingCart(userId);
     } catch (error) {
       console.error('Error durante el checkout:', error);
     }
@@ -134,16 +133,17 @@ const Cart: React.FC = () => {
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
               <td>{item.product_name}</td>
               <td>
-                <button 
-                  onClick={() => handleUpdateQuantity(item.productId, -1)} 
-                  disabled={item.quantity <= 1}
-                >
-                  -
-                </button>
-                {item.quantity}
-                <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
-                  +
-                </button>
+              <button 
+              onClick={() => handleUpdateQuantity(item.productId, -1)} 
+              disabled={item.quantity <= 1}
+            >
+              -
+            </button>
+            {item.quantity}
+            <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
+              +
+            </button>
+
               </td>
               <td>${item.price.toFixed(2)}</td>
               <td>

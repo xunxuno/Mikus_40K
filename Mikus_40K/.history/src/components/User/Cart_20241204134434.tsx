@@ -134,16 +134,17 @@ const Cart: React.FC = () => {
             <tr key={item.productId} className={isRemoving === item.productId ? 'removing' : ''}>
               <td>{item.product_name}</td>
               <td>
-                <button 
-                  onClick={() => handleUpdateQuantity(item.productId, -1)} 
-                  disabled={item.quantity <= 1}
-                >
-                  -
-                </button>
-                {item.quantity}
-                <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
-                  +
-                </button>
+              <button 
+              onClick={() => handleUpdateQuantity(item.productId, -1)} 
+              disabled={item.quantity <= 1}
+            >
+              -
+            </button>
+            {item.quantity}
+            <button onClick={() => handleUpdateQuantity(item.productId, 1)}>
+              +
+            </button>
+
               </td>
               <td>${item.price.toFixed(2)}</td>
               <td>
