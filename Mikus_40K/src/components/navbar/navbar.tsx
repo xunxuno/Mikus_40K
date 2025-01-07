@@ -5,7 +5,7 @@ import { MaterialSymbolsMenu } from '../icons/MaterialSymbolsMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../redux/sidebarSlice';
 import { RootState } from '../../redux/store';
-import backgroundImage from '../../images/logo_temporal.jpg';
+import backgroundImage from '../../../public/images/logo_temporal.jpg';
 import {buscarProductos} from '../../models/ProductModel';
 
 const Navbar: React.FC = () => {
