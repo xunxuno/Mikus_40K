@@ -17,13 +17,12 @@ function SidebarUser() {
   const handleOverlayClick = () => dispatch(toggleSidebar());
   const handleLogout = () => dispatch(logout());
 
-  const goToHelpCenter = () => navigate('/help-center');
+  const goToAboutUs = () => navigate('/about-us');
   const goToContactSupport = () => navigate('/contact-support');
   const goToProfile = () => navigate('/profile');
   const goToHistory = () => navigate('/purchase-history');
   const goToCart = () => navigate('/cart');
   const goToWishList = () => navigate('/wishlist');
-  const goToOrders = () => navigate('/orders');
   const goToLogin = () => navigate('/login');
   const goToRegister = () => navigate('/register');
 
@@ -60,7 +59,7 @@ function SidebarUser() {
         <div className="sidebar-section">
           <h3>Soporte y ayuda</h3>
           <ul>
-            <li><button onClick={goToHelpCenter}>Centro de ayuda</button></li>
+            <li><button onClick={goToAboutUs}>Sobre nosotros</button></li>
             <li><button onClick={goToContactSupport}>Contactar con soporte</button></li>
           </ul>
         </div>

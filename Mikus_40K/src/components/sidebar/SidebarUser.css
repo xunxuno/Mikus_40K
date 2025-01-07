@@ -130,3 +130,19 @@
   }
 }
 
+@media (min-aspect-ratio: 21/9) {
+  .sidebar-user {
+    position: fixed;
+    left: -700px; /* Inicia fuera de la pantalla */
+    top: 0;
+    height: 100%; /* Ocupa toda la altura */
+    background-color: #1c1c1c; /* Fondo oscuro */
+    color: #00d7d7; /* Texto cian vibrante */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 2001;
+    overflow-y: auto;
+    transition: left 0.5s ease, width 0.3s ease, padding 0.3s ease; /* Transiciones suaves para la animación */
+    width: 18vw; /* Ancho basado en el 20% del ancho de la ventana */
+  }
+}
