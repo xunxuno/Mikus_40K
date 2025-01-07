@@ -3,7 +3,6 @@
   color: #fff;
   padding: 20px 10px;
   font-size: 14px;
-  
   z-index: 1110;
   position: relative;
 }
@@ -60,6 +59,43 @@ html, body {
 
 .App {
   flex: 1; /* Asegura que el contenido principal ocupe el espacio disponible */
-
 }
 
+@media (min-aspect-ratio: 21/9) {
+  .footer {
+    background-color: #333 !important;
+    color: #fff !important;
+    padding: 40px 20px !important; /* Aumentamos el padding para que el footer sea más grande */
+    font-size: 18px !important; /* Aumentamos el tamaño de la fuente */
+    z-index: 1110 !important;
+    position: relative !important;
+  }
+
+  .footer-content {
+    max-width: 1400px !important; /* Aumentamos el ancho máximo del contenido */
+    margin: 0 auto !important;
+  }
+
+  .footer-links {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 20px 0 0 !important; /* Aumentamos el margen superior */
+    display: flex !important;
+    justify-content: center !important;
+    gap: 30px !important; /* Aumentamos el espacio entre los enlaces */
+  }
+
+  .footer-links li {
+    margin: 0 !important;
+  }
+
+  .footer-links a {
+    color: #1e90ff !important;
+    text-decoration: none !important;
+    font-size: 16px !important; /* Aumentamos el tamaño de la fuente de los enlaces */
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline !important;
+  }
+}

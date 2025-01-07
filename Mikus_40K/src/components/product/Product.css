@@ -3,14 +3,12 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center; /* Centra horizontalmente */
-
 }
 
 @media (min-width: 769px) {
   .products-container {
     width: calc(100% - 250px);
     justify-content: center; /* Centra horizontalmente */
-
   }
 
   .product-card img {
@@ -24,7 +22,6 @@
   .products-container {
     width: 100%;
     justify-content: center; /* Centra horizontalmente */
-    /* Alinea los elementos al inicio */
     padding: 0 10px; /* Agrega un poco de espacio a los lados */
   }
 
@@ -60,6 +57,57 @@
   }
 }
 
+/* Nueva regla para pantallas ultra anchas con relación de aspecto 21:9 u 8K, por ejemplo */
+@media (min-aspect-ratio: 21/9) {
+  .products-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important; /* Aumentamos el espacio entre productos */
+    justify-content: center !important; /* Centra los productos */
+    padding: 0 20px !important; /* Aumentamos un poco el padding */
+        
+  }
+
+  .product-card {
+    width: 300px !important; /* Aumentamos el tamaño de las tarjetas */
+    height: 600px !important; /* Aumentamos la altura de las tarjetas */
+    padding: 20px !important; /* Aumentamos el padding para que se vea más espacioso */
+    font-size: 1.2rem !important; /* Aumentamos el tamaño de la fuente */
+    transition: transform 0.3s ease !important;
+    box-shadow: 0.3s ease !important;
+    margin-bottom: 250px;
+  }
+
+  .product-card img {
+    width: 80% !important; /* Hacemos que la imagen sea mucho más grande */
+    max-height: 250px !important; /* Aumentamos la altura máxima de las imágenes */
+  }
+
+  .product-card h3 {
+    font-size: 1.5rem !important; /* Aumentamos el tamaño del título */
+    margin: 10px 0 !important;
+  }
+
+  .product-card .price {
+    font-size: 1.8rem !important; /* Aumentamos el tamaño del precio */
+    font-weight: bold !important;
+  }
+
+  .product-card .shipping {
+    font-size: 1.4rem !important; /* Aumentamos el tamaño del texto de envío */
+  }
+
+  .product-card .description {
+    font-size: 1.2rem !important; /* Aumentamos el tamaño de la descripción */
+  }
+
+  .product-card:hover {
+    transform: translateY(-15px) !important; /* Mayor efecto al hacer hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important; /* Mayor sombra */
+  }
+}
+
+
 .product-card {
   border: 1px solid #ddd;
   padding: 15px;
@@ -70,7 +118,6 @@
   width: 200px;
   color: #333;
   position: relative; /* Necesario para posicionar el botón de favorito */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card img {

@@ -74,3 +74,36 @@
     opacity: 1;
   }
 }
+
+@media (min-aspect-ratio: 21/9) {
+  .catalog-container {
+    max-width: 90vh !important; /* Aumentamos el ancho del contenedor */
+    margin-top: 160px !important; /* Aumentamos el margen superior */
+    padding: 40px 20px !important; /* Aumentamos el padding para que se vea más grande */
+  }
+
+  .catalog-item {
+    padding: 30px !important; /* Aumentamos el padding para un mejor espaciado */
+    max-width: 1200px !important; /* Aumentamos el ancho máximo del item */
+  }
+
+  .item-image {
+    width: 35% !important; /* Aumentamos el tamaño de la imagen */
+    height: 30vh !important; /* Aumentamos la altura de la imagen */
+  }
+
+  .item-title {
+    font-size: 1.3rem !important; /* Aumentamos el tamaño del título */
+    margin-left: 15vh !important; /* Aumentamos el margen izquierdo */
+    margin-right: 10vh !important; /* Aumentamos el margen derecho */
+  }
+
+  .item-price {
+    font-size: 1.4rem !important; /* Aumentamos el tamaño del precio */
+    margin-right: 5vh !important; /* Aumentamos el margen derecho */
+  }
+
+  .item-shipping {
+    font-size: 1.1rem !important; /* Aumentamos el tamaño de la información de envío */
+  }
+}
